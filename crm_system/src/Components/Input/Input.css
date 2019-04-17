@@ -1,0 +1,11 @@
+input{
+    border: 1px solid grey;
+    outline: none;
+    width: 60%;
+    height: 40px;
+    border-radius: 20px;
+    padding-left: 2%;
+  }
+  .w3-rest{
+      margin: 5px 0;
+  }

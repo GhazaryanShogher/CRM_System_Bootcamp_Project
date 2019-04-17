@@ -1,0 +1,9 @@
+.btn-standart{
+    padding: 10px;
+    outline: none;
+    border: none;
+    border: 1px solid RoyalBlue;
+    background: CornflowerBlue;
+    border-radius: 4px;
+    margin: 10px;
+}

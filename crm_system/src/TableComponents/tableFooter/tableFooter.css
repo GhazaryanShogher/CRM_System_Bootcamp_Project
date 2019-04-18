@@ -1,0 +1,34 @@
+.btnBox{
+	padding-bottom: 1%;
+    padding-top: 4%;
+    display: flex;
+    position: fixed;
+    bottom: 26%;
+    box-sizing: border-box;
+}
+.tableButtons{
+	box-sizing:border-box;
+    margin: 0 6
+    px;
+	color: #4b474b;
+	padding: 10px;
+	/* margin-left:5px; */
+	background-color:transparent;
+	border:0;
+}
+.tableButtons i {
+    font-size: 20px;
+    padding: 5px;
+
+}
+.inputMail {
+    margin-left: 1.5vw;
+    margin-top: 3.3vh;
+    padding: 3px;
+}
+
+#templateSelectBox {
+    display: flex;
+    padding: 5px;
+	align-items: center;
+}

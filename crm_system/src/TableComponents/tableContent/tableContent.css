@@ -1,0 +1,12 @@
+th {
+    padding: 3px;
+    width: 10vw;
+    color: gray;
+    border-right: 1px solid lightgrey
+}
+.test {
+    width: 80%;
+    min-height: 600px;
+    float:right;
+    left: 20%;
+}

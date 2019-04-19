@@ -12,7 +12,7 @@ class TableContent extends Component{
                     <th>Select</th>
                     <th>FullName</th>
                     <th>CompanyName</th>
-                    <th>Psition</th>
+                    <th>Position</th>
                     <th>Counrty</th>
                     <th>Email</th>
                     <th>Edit</th>

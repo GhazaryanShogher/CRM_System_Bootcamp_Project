@@ -4,6 +4,17 @@ import Menu from './menu/menu';
 import TableContent from './tableContent/tableContent';
 
 class MainTable extends  Component {
+        state = {
+          data: []
+          };
+
+     componentDidMount(){  
+      fetch('http://visual.istclabz.com:2112/api/contacts')
+          .then((resp) => {return resp.json()})
+          .then((results) => { 
+           this.setState({data: results})
+      })
+    }   
     render(){
         return(
             <Fragment>
@@ -11,6 +22,20 @@ class MainTable extends  Component {
                 <div>
                 <Menu/>
                 <TableContent/>
+                {
+          this.state.data.map((v,i) => 
+          <tr>
+              <td><input type = "checkbox"/></td>
+              {/* <td>{v.Full Name}</td>
+              <td>{v.Company Name}</td> */}
+              <td>{v.Position}</td>
+              <td>{v.Counrty}</td>
+              <td>{v.Email}</td>
+              <td><i className="far fa-edit"></i></td>       
+          </tr>
+          )
+        }
+
                 </div>
            
             </Fragment>

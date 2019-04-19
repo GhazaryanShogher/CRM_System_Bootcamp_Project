@@ -21,7 +21,7 @@ class TableFooter extends Component {
                     <i className="fa fa-folder-open" aria-hidden="true"></i><br /> Add to Mailing list
                     </Button>
                     
-                    
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     <button  className="deleteBtn tableButtons">
                     <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
                     </button>

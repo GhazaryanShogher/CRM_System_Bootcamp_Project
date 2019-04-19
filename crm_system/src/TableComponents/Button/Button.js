@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from "react";
 import './Button.css'
+import Icon from '../Icon/Icon'
 
 class Button extends Component{
 
@@ -7,10 +8,10 @@ class Button extends Component{
     render () {
         return (
             <Fragment>
-                <a href="" title="Button slide blue/green" class="button btnSlide btnBlueGreen">
-      <span class="top" data-content="Slide">Slide</span>
-      <button className = "btn-standart" onClick = {this.props.click}>{this.props.name}</button>
-    </a>
+                <div title="Button slide blue/green" class="button btnSlide btnBlueGreen">
+                    <span className="top"> <i className="fa fa-folder-open" aria-hidden="true"></i></span>
+                    <button className = "btn-standart" onClick = {this.props.click}>{this.props.name}</button>
+                </div>
             </Fragment>
         );
 

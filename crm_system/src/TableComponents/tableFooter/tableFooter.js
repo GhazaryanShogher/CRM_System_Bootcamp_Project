@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './tableFooter.css'
 import SelectTemplate from '../Header/selectTemplate/selectTemplate';
 import Button from '../Button/Button'
+import Icon from '../Icon/Icon';
 
 class TableFooter extends Component {
     
@@ -18,10 +19,10 @@ class TableFooter extends Component {
                     </div>
                     
                     <Button name={"Add to Mail List"} >
-                    <i className="fa fa-folder-open" aria-hidden="true"></i><br /> Add to Mailing list
+                    <i className="fa fa-folder-open" aria-hidden="true"></i>
                     </Button>
                     
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
                     <button  className="deleteBtn tableButtons">
                     <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
                     </button>

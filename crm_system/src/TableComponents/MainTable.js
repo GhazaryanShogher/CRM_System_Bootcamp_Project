@@ -16,6 +16,7 @@ class MainTable extends  Component {
           .then((results) => { 
            this.setState({data: results})
       })
+      .catch(error => console.log("error",error))
     }  
     
     editTr = () => {this.setState({editTd:true})
@@ -31,11 +32,8 @@ class MainTable extends  Component {
           this.state.data.map((v,i) => 
           <tr>
               <td><input type = "checkbox"/></td>
-              
-              <td style={{contenteditable:this.state.editTd}}>vgdgh</td>
-              <td style={{contenteditable:true}}>464679978975</td>
-              {/* <td style={{contenteditable:this.state.editTd}}>{v.Full Name}</td> */}
-              {/* <td style={{contenteditable:this.state.editTd}}>{v.Company Name}</td> */}
+              <td style={{contenteditable:this.state.editTd}}>{v["Full Name"]}</td>
+              <td style={{contenteditable:this.state.editTd}}>{v["Company Name"]}</td>
               <td style={{contenteditable:this.state.editTd}}>{v.Position}</td>
               <td style={{contenteditable:this.state.editTd}}>{v.Counrty}</td>
               <td style={{contenteditable:this.state.editTd}}>{v.Email}</td>

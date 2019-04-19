@@ -6,6 +6,7 @@ import './MainTable.css';
 
 class MainTable extends  Component {
         state = {
+          editTd:false,
           data: []
           };
 
@@ -15,7 +16,11 @@ class MainTable extends  Component {
           .then((results) => { 
            this.setState({data: results})
       })
-    }   
+    }  
+    
+    editTr = () => {this.setState({editTd:true})
+    console.log(this.state.editTd)
+    }
     render(){
         return(
             <Fragment>
@@ -27,14 +32,14 @@ class MainTable extends  Component {
           <tr>
               <td><input type = "checkbox"/></td>
               
-              <td>vgdgh</td>
-              <td>vgdgh</td>
-              {/* <td>{v.Full Name}</td> */}
-              {/* <td>{v.Company Name}</td> */}
-              <td>{v.Position}</td>
-              <td>{v.Counrty}</td>
-              <td>{v.Email}</td>
-              <td><i className = "fa fa-pencil-square-o"></i></td>       
+              <td style={{contenteditable:this.state.editTd}}>vgdgh</td>
+              <td style={{contenteditable:true}}>464679978975</td>
+              {/* <td style={{contenteditable:this.state.editTd}}>{v.Full Name}</td> */}
+              {/* <td style={{contenteditable:this.state.editTd}}>{v.Company Name}</td> */}
+              <td style={{contenteditable:this.state.editTd}}>{v.Position}</td>
+              <td style={{contenteditable:this.state.editTd}}>{v.Counrty}</td>
+              <td style={{contenteditable:this.state.editTd}}>{v.Email}</td>
+              <td onClick = {this.editTr}><i className = "fa fa-pencil-square-o"></i></td>       
           </tr>
           )
         }           

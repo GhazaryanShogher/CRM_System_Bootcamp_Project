@@ -6,7 +6,7 @@ class TableContent extends Component{
     render() {
         return (
             <Fragment>
-                <div className="test">
+               
             <thead>
                 <tr>
                     <th>Select</th>
@@ -19,10 +19,7 @@ class TableContent extends Component{
                 </tr>
             
             </thead>
-            <i className="fa fa-spinner fa-spin">Comming Soon..Cant wait...</i>
-            <TableFooter/>
-            </div>
-               
+            <TableFooter/>            
                 
             </Fragment>
         );

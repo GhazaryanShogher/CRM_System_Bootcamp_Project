@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './tableFooter.css'
 import SelectTemplate from '../Header/selectTemplate/selectTemplate';
+import Button from '../Button/Button'
 
 class TableFooter extends Component {
     
@@ -15,9 +16,12 @@ class TableFooter extends Component {
                             <i className="fa fa-envelope" aria-hidden="true"></i><br />Send Email
                         </button>
                     </div>
-                    <button  className="tableButtons">
+                    
+                    <Button name={"Add to Mail List"} >
                     <i className="fa fa-folder-open" aria-hidden="true"></i><br /> Add to Mailing list
-                    </button>
+                    </Button>
+                    
+                    
                     <button  className="deleteBtn tableButtons">
                     <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
                     </button>

@@ -7,7 +7,10 @@ class Button extends Component{
     render () {
         return (
             <Fragment>
-                <button className = "btn-standart" onClick = {this.props.click}>{this.props.name}</button>
+                <a href="" title="Button slide blue/green" class="button btnSlide btnBlueGreen">
+      <span class="top" data-content="Slide">Slide</span>
+      <button className = "btn-standart" onClick = {this.props.click}>{this.props.name}</button>
+    </a>
             </Fragment>
         );
 

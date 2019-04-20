@@ -2,14 +2,24 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 40%;
+    width: 20%;
     transform: translate(-50%,-50%);
     margin: 0 auto;
     color: grey;
     text-align: center;
     z-index: 99;
-    background-color:white;
-    opacity: 0.9;
+    background-color:#e3f5f5ba;
     border-radius: 7px;
     padding-bottom: 10px;
+    box-shadow:  -1px 18px 25px 0px rgba(126,161,137,1);
+    
+  }
+  .close{    
+    color: grey;
+    font-weight: 700;
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    /* border: 1px solid gray; */
+    padding: 1px;
   }

@@ -6,7 +6,6 @@ import './MainTable.css';
 
 class MainTable extends  Component {
 
-
     render(){
         return(
             <Fragment>

@@ -2,14 +2,22 @@ import React, {Component} from 'react';
 import './tableFooter.css'
 import SelectTemplate from '../Header/selectTemplate/selectTemplate';
 import Button from '../Button/Button'
-import Icon from '../Icon/Icon';
+import Form from '../Forms/Form';
 
 class TableFooter extends Component {
+    state = {
+        status: "none"
+    }
+
+    addContact = ()=>{
+        this.setState({status: "block"})
+    }
     
     render() {
         return (
             
                 <div className="btnBox">
+                <Form status = {this.state.status}/>
                     
                         <SelectTemplate/>
                     
@@ -27,7 +35,7 @@ class TableFooter extends Component {
                     <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
                     </Button>
 
-                    <Button name={"Add to Contact"}  className= "CB1">
+                    <Button name={"Add to Contact"}  className= "CB1" click = {this.addContact}>
                     <i className="fa fa-user-plus" aria-hidden="true"></i><br />Add Contact
                     </Button>
 

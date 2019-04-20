@@ -1,45 +1,22 @@
-.btn-standart{
-    position: relative;
-    padding: 10px;
-    outline: none;
+
+  .CB1{
+    background: linear-gradient(to bottom, rgba(250,250,250,1) 0%, rgba(242,242,242,1) 50%, rgba(230,230,230,1) 51%, rgba(255,255,255,1) 100%);
+    border: 0.5px solid grey;
+    border-radius:4px;
+    width:150px;
     border: none;
-    border: 1px solid RoyalBlue;
-    background: CornflowerBlue;
-    border-radius: 4px;
-    margin: 10px;
-}
-.top {
-    position: absolute;
-    
-    width: 125px;
-    height: 50px;
-    background: #00AE68;
-    z-index: 10;
-    transition: all 0.2s ;
-    border-radius: 5px;
+    margin-left: 10px;
+    border-radius: 15px;
+    box-shadow: -2px 17px 27px -6px rgb(12, 19, 14);
+    outline: none;
+    transition-duration: 0.4s;
   }
   
-  .btnSlide.btnBlueGreen .top {
-    background: #00AE68;
+  .CB1:hover{
+    background: linear-gradient(to bottom, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);
   }
   
- 
-  .btnSlide .bottom {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 120px;
-    height: 50px;
-    color: #000;
-    z-index: 5;
-    transition-duration: 2s;
-    transition: .3s;
-    border-radius: 5px;
+  .CB1:active{
+    box-shadow: 0 1px #666;
+    transform: translateY(4px);
   }
-  
-  .btnSlide:hover .top {
-    top: 80px;
-  }
-  
-  
-  

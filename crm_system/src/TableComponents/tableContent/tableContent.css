@@ -2,11 +2,26 @@ th {
     padding: 3px;
     width: 10vw;
     color: gray;
-    border-right: 1px solid lightgrey
+    white-space: nowrap;
+ 
 }
 .test {
     width: 80%;
     min-height: 600px;
     float:right;
     left: 20%;
+}
+td {
+    white-space: nowrap;
+ /* width: 50px; */
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+.ddd {
+    width: 83%;
+    overflow: scroll;
+    float: right;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow:  -1px 18px 25px 0px rgba(126,161,137,1);
 }

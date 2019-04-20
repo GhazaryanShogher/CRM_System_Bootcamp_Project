@@ -1,10 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component,Fragment } from 'react';
 import './header.css';
+import TableFooter from '../tableFooter/tableFooter';
 
 class Header extends Component{
     render() {
         return (
-            <div className="table_header">ISTC BootCamp CRM System  </div>
+            <Fragment>
+                <div  className="header">
+                <div className="header_logo"></div>
+                <div className="header_btn"><TableFooter/></div>
+
+            </div>
+            </Fragment>
         );
     }
 }

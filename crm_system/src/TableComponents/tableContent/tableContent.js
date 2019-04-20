@@ -41,10 +41,8 @@ class TableContent extends Component{
           
           <tr>
             <td><input type = "checkbox"/></td>
-            <td style={{contenteditable:this.state.editTd}}>vgdgh</td>
-            <td style={{contenteditable:true}}>464679978975</td>
-            <td style={{contenteditable:this.state.editTd}}>{"Full Name"}</td>
-            <td style={{contenteditable:this.state.editTd}}>{"Company Name"}</td>
+            <td style={{contenteditable:this.state.editTd}}>{v["Full Name"]}</td>
+            <td style={{contenteditable:this.state.editTd}}>{v["Company Name"]}</td>
             <td style={{contenteditable:this.state.editTd}}>{v.Position}</td>
             <td style={{contenteditable:this.state.editTd}}>{v.Counrty}</td>
             <td style={{contenteditable:this.state.editTd}}>{v.Email}</td>

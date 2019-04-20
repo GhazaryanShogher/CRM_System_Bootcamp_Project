@@ -28,8 +28,8 @@ class TableContent extends Component{
             <thead>
                 <tr>
                     <th>Select</th>
-                    <th>FullName</th>
-                    <th>CompanyName</th>
+                    <th>Full Name</th>
+                    <th>Company Name</th>
                     <th>Position</th>
                     <th>Counrty</th>
                     <th>Email</th>

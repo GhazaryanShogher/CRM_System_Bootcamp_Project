@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './tableFooter.css'
 import SelectTemplate from '../Header/selectTemplate/selectTemplate';
+import Button from '../Button/Button'
+import Icon from '../Icon/Icon';
 
 class TableFooter extends Component {
     
@@ -8,36 +10,34 @@ class TableFooter extends Component {
         return (
             
                 <div className="btnBox">
-                    <div id="templateSelectBox">
+                    
                         <SelectTemplate/>
                     
-                        <button  className="tableButtons">
+                        <Button  name={"Send Email"} className= "CB1">
                             <i className="fa fa-envelope" aria-hidden="true"></i><br />Send Email
-                        </button>
-                    </div>
-                    <button  className="tableButtons">
-                    <i className="fa fa-folder-open" aria-hidden="true"></i><br /> Add to Mailing list
-                    </button>
-                    <button  className="deleteBtn tableButtons">
-                    <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
-                    </button>
-
-                    <button  className="tableButtons">
-                    <i className="fa fa-user-plus" aria-hidden="true"></i><br />Add Contact
-                    </button>
-
-                    <div className="maillist">
-                        <input type="text" ref="createMList" className="inputMail" placeholder="Add a Mailing List Name"/>
-                    </div>
-
-                    <button 
+                        </Button>
                     
-                            className="tableButtons"><i className="fa fa-list-alt" aria-hidden="true"></i><br />Create Mailing list
-                    </button>
+                    
+                    <Button name={"Add to Mail List"}  className= "CB1">
+                    <i className="fa fa-folder-open" aria-hidden="true"></i>
+                    </Button>
+                    
+                    
+                    <Button  name={"Delete Selected"}  className= "CB1">
+                    <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
+                    </Button>
 
-                    <button className="tableButtons" >
+                    <Button name={"Add to Contact"}  className= "CB1">
+                    <i className="fa fa-user-plus" aria-hidden="true"></i><br />Add Contact
+                    </Button>
+
+                    <Button name={"Create Mailing List"}  className= "CB1">
+                    <i className="fa fa-list-alt" aria-hidden="true"></i><br />Create Mailing list
+                    </Button>
+
+                    <Button name={"Upload"} className= "CB1" >
                     <i className="fa fa-cloud-upload" aria-hidden="true"></i><br />Upload
-                    </button>
+                    </Button>
                 </div>
            
         );

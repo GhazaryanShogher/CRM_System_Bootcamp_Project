@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from "react";
 import './Button.css'
+//import Icon from '../Icon/Icon'
 
 class Button extends Component{
 
@@ -7,7 +8,9 @@ class Button extends Component{
     render () {
         return (
             <Fragment>
-                <button className = "btn-standart" onClick = {this.props.click}>{this.props.name}</button>
+                
+                    <button className = {this.props.className} onClick = {this.props.click}>{this.props.name}</button>
+        
             </Fragment>
         );
 

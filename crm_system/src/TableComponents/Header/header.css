@@ -1,8 +1,30 @@
-.table_header{
-    color:grey;
-    padding: 2.5vw;
-    background-color:lightblue;
-    font-size: 18px;
-    font-weight: 600
+
+.header {
+    display: flex;
+    border-radius: 10px;
+    margin: 1%;
+    background: white;
+    
+
+}
+
+.header_logo{
+    background-image: url("../images/crm-logo.png");
+    padding: 2vw;
+    height: 2vh;
+    width: 10%;
+    margin: 1%;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-color:transparent;
+    background-size: contain;
+    text-align-last: center;
+    box-shadow: -1px -1px 20px 0px rgba(126,161,137,1); 
+}
+.header_btn {
+    width: 89%;
+    border-radius: 10px;
+    
+    box-shadow: 1px 3px 27px -6px rgba(126,161,137,1);
     
 }

@@ -12,17 +12,54 @@ th {
     left: 20%;
 } 
 
-td {
-    white-space: nowrap;
- /* width: 50px; */
- overflow: hidden;
- text-overflow: ellipsis;
-}
 .ddd {
-    width: 83%;
-    overflow: scroll;
+    width: 82%;
     float: right;
+    margin: 10px;
+    height: 60vh;
+    border-radius: 10px;
+    overflow-y: scroll;
     background-color: white;
     border-radius: 10px;
-    box-shadow:  -1px 18px 25px 0px rgba(126,161,137,1);
+    box-shadow:  
+    
+    -1px 18px 25px 0px rgba(126,161,137,1);
 }
+.checkbox {
+    width: 5%;
+    text-align: center;
+}
+.editbox{
+    width: 5%;
+    text-align: center;
+}
+tr ,td, th{
+    border-bottom: 1px solid rgb(71, 70, 68);
+}
+tr:nth-child(even){
+    background: rgb(156, 154, 154);
+}
+tr:hover{
+    background:  azure;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(148, 212, 212); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(148, 212, 212);; 
+  }

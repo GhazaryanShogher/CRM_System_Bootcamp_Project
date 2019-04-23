@@ -40,13 +40,13 @@ class TableContent extends Component{
             {this.state.data.map((v,i) =>
           
           <tr>
-            <td><input type = "checkbox"/></td>
+            <td className="checkbox"><input type = "checkbox"/></td>
             <td style={{contenteditable:this.state.editTd}}>{v["Full Name"]}</td>
             <td style={{contenteditable:this.state.editTd}}>{v["Company Name"]}</td>
             <td style={{contenteditable:this.state.editTd}}>{v.Position}</td>
             <td style={{contenteditable:this.state.editTd}}>{v.Counrty}</td>
             <td style={{contenteditable:this.state.editTd}}>{v.Email}</td>
-            <td onClick = {this.editTr}><i className = "fa fa-pencil-square-o"></i></td>       
+            <td onClick = {this.editTr} className="editbox"><i class="fa fa-cogs" aria-hidden="true"></i></td>       
           </tr>
       
         )

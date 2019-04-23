@@ -28,8 +28,8 @@ class TableContent extends Component{
             <thead>
                 <tr>
                     <th>Select</th>
-                    <th>FullName</th>
-                    <th>CompanyName</th>
+                    <th>Full Name</th>
+                    <th>Company Name</th>
                     <th>Position</th>
                     <th>Counrty</th>
                     <th>Email</th>
@@ -44,7 +44,7 @@ class TableContent extends Component{
             <td style={{contenteditable:this.state.editTd}}>{v["Full Name"]}</td>
             <td style={{contenteditable:this.state.editTd}}>{v["Company Name"]}</td>
             <td style={{contenteditable:this.state.editTd}}>{v.Position}</td>
-            <td style={{contenteditable:this.state.editTd}}>{v.Counrty}</td>
+            <td style={{contenteditable:this.state.editTd}}>{v.Country}</td>
             <td style={{contenteditable:this.state.editTd}}>{v.Email}</td>
             <td onClick = {this.editTr} className="editbox"><i class="fa fa-cogs" aria-hidden="true"></i></td>       
           </tr>

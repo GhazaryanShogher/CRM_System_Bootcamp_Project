@@ -3,6 +3,8 @@ import './tableFooter.css'
 import SelectTemplate from '../Header/selectTemplate/selectTemplate';
 import Button from '../Button/Button'
 import Form from '../Forms/Form';
+
+
 class TableFooter extends Component {
     state = {
         status: "none"
@@ -11,12 +13,14 @@ class TableFooter extends Component {
     addContact = ()=>{
         this.setState({status: "block"})
     }
+
+    callback = () => this.props.callback;
     
     render() {
         return (
             
                 <div className="btnBox">
-                <Form status = {this.state.status}/>
+                <Form status = {this.state.status} />
                         <SelectTemplate/>
                     
                         <Button  name={"Send Email"} className= "CB1">

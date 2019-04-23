@@ -1,0 +1,9 @@
+.close{    
+    color: grey;
+    font-weight: 700;
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    cursor: pointer;
+    padding: 1px;
+  }

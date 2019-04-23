@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
+import Close from '../Close/Close';
 import './Form.css';
 
 class Form extends Component {
@@ -9,14 +10,15 @@ class Form extends Component {
     company:"",
     country:"",
     email:"",
-    position:""
+    position:"",
+    visibility:"visible"
   }
   postRequest = () => {
     return fetch('http://visual.istclabz.com:2112/api/contacts', {
       method: 'POST',
       body: JSON.stringify({
-        "Full Name": this.state.name,
-        "Company Name": this.state.company,
+        "FullName": this.state.name,
+        "CompanyName": this.state.company,
         "Position": this.state.position,
         "Country": this.state.country,
         "Email": this.state.email,
@@ -42,7 +44,7 @@ class Form extends Component {
       case "country":
       this.setState({country:e.target.value})
       break;
-      case "email":
+      case "emailaddress":
       this.setState({email:e.target.value})
       break;
       case "position":
@@ -50,18 +52,21 @@ class Form extends Component {
       break;
     }
   }
+
+  close = () => {
+    this.setState({visibility:"hidden"})
+  }
 // Registration popup
   render() {
     return (
-        <div className="form" style={{display:this.props.status}}>
-        
-        <span className= "close">x</span>
+        <div className="form" style={{display:this.props.status, visibility: this.state.visibility}}>
+            <Close callback = {this.close} />
             <h1>Create New Contact</h1>
-            <Input id="full" type="text" placeholder="Full Name"/>          
-            <Input id="company" type="text" placeholder="Company Name"/>
-            <Input id="emailaddress" type="email" placeholder="Email"/>
-            <Input id="country" type="password" placeholder="Country"/>
-            <Input id="position" type="password" placeholder="Position"/>
+            <Input id="full" type="text" placeholder="Full Name" callback = {this.callback}/>          
+            <Input id="company" type="text" placeholder="Company Name" callback = {this.callback}/>
+            <Input id="emailaddress" type="text" placeholder="Email" callback = {this.callback}/>
+            <Input id="country" type="test" placeholder="Country" callback = {this.callback}/>
+            <Input id="position" type="text" placeholder="Position" callback = {this.callback}/>
             <Button name = "Create contact" click = {this.postRequest }/>
         </div>
     );

@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import './tableContent.css';
+import Edit from '../Edit/Edit';
 //import TableFooter from '../tableFooter/tableFooter';
 
 class TableContent extends Component{
     state = {
         editTd:false,
-        data: []
+        data: [],
+        status: "none"
         };
 
    componentDidMount(){  
@@ -17,14 +19,19 @@ class TableContent extends Component{
 
   }  
   
-  editTr = () => {this.setState({editTd:true})
-  console.log(this.state.editTd)
+  editTr = () => {
+    this.setState({
+      editTd:true,
+      status: "block"
+
+    
+    })
   }
 
     render() {
         return (
             <Fragment>
-              <div className="ddd"> 
+              <div className="table_box"> 
             <thead>
                 <tr>
                     <th>Select</th>
@@ -46,13 +53,13 @@ class TableContent extends Component{
             <td style={{contenteditable:this.state.editTd}}>{v.Position}</td>
             <td style={{contenteditable:this.state.editTd}}>{v.Country}</td>
             <td style={{contenteditable:this.state.editTd}}>{v.Email}</td>
-            <td onClick = {this.editTr} className="editbox"><i class="fa fa-cogs" aria-hidden="true"></i></td>       
+            <td onClick = {this.editTr} className="editbox"><i className="fa fa-cogs" aria-hidden="true"></i></td>       
           </tr>
       
         )
       }           
             </div>        
-                
+                <Edit />
             </Fragment>
         );
     }

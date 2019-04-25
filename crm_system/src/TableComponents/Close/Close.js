@@ -7,7 +7,7 @@ class Close extends Component {
 
   render() {
     return (
-        <span  className= "close" onClick = {this.props.callback}><i class="fa fa-times" aria-hidden="true"></i></span>
+        <span  className= "close" onClick = {this.props.callback}><i className="fa fa-times" aria-hidden="true"></i></span>
     );
   }
 }

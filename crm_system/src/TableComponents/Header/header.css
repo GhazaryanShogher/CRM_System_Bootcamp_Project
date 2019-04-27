@@ -3,28 +3,55 @@
     display: flex;
     border-radius: 10px;
     margin: 1%;
-    background: white;
+    /* background: white; */
     
 
 }
 
 .header_logo{
-    background-image: url("../images/crm-logo.png");
-    padding: 2vw;
-    height: 2vh;
-    width: 10%;
-    margin: 1%;
-    border-radius: 10px;
-    background-repeat: no-repeat;
-    background-color:transparent;
-    background-size: contain;
-    text-align-last: center;
-    box-shadow: -1px -1px 20px 0px rgba(126,161,137,1); 
+       /* padding: 5vw; */
+       height: 10vh;
+       width: 6vw;
+       /* text-align: center; */
+       /* margin: 1%; */
+       font-size: 25px;
+       color: white;
+       font-family: serif;
+       border: 3px solid white;
+       border-radius: 50%;
+       transition-duration: 0.4s;
+       box-shadow: -1px -1px 20px 0px rgba(126,161,137,1);
+       display: flex;
+       animation:shadow 1.4s infinite alternate;
+       cursor: pointer;
+   }
+   @keyframes shadow {
+    from {
+        box-shadow: 0 0 10px 10px white;
+    }
+    to {
+        box-shadow: 0 0 25px 10px white;
+        text-shadow: 0 0 25px white;
+    }
+ }
+
+.header_logo span {
+    color:white;
+    margin: auto;
+    transition: 0.3s;
 }
+.header_logo:hover {
+    transform: translateY(4px);
+    box-shadow: 0px -1px 31px 10px rgba(240, 236, 236, 0.75);
+}
+
 .header_btn {
-    width: 89%;
-    border-radius: 10px;
-    
+    width: 90%;
+    display: flex;
+    border: 2px solid white;
+    box-sizing: border-box;
+    border-radius: 38px;
     box-shadow: 1px 3px 27px -6px rgba(126,161,137,1);
-    
 }
+    
+  

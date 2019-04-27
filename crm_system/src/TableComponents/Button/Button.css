@@ -1,17 +1,24 @@
 
   .CB1{
-    background: linear-gradient(to bottom, rgba(250,250,250,1) 0%, rgba(242,242,242,1) 50%, rgba(230,230,230,1) 51%, rgba(255,255,255,1) 100%);
-    border: 0.5px solid grey;
-    width:150px;
-    border: none;
+    border: 2px solid #fbfbfb;
+    width: 12%;
+    color: white;
+    background: #021323;
+    border-radius: 40px;
     margin-left: 10px;
-    box-shadow: 0 4px black;
+    /* box-shadow: 0 4px black; */
     outline: none;
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
   }
-  
+  .popupBtn{
+    padding: 5px;
+    width: 40%;
+  }
   .CB1:hover{
-    background: linear-gradient(to bottom, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);
+    color: black;
+    box-shadow: -3px 2px 31px -7px rgba(248, 248, 248, 0.75);
+    background: linear-gradient(to bottom, rgb(237, 240, 241) 0%, rgba(237, 240, 241) 50%, rgba(237, 240, 241) 51%, rgba(237, 240, 241) 100%);
   }
   
   .CB1:active{

@@ -68,7 +68,7 @@ class Form extends Component {
             <Input id="emailaddress" type="text" placeholder="Email" callback = {this.callback}/>
             <Input id="country" type="test" placeholder="Country" callback = {this.callback}/>
             <Input id="position" type="text" placeholder="Position" callback = {this.callback}/>
-            <Button name = "Create contact" click = {this.postRequest }/>
+            <Button className={ "CB1 popupBtn" } name = "Create contact" click = {this.postRequest }/>
         </div>
     );
   }

@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from "react";
 import './Button.css'
-//import Icon from '../Icon/Icon'
 
 class Button extends Component{
 
@@ -9,7 +8,7 @@ class Button extends Component{
         return (
             <Fragment>
                 
-                    <button className = {this.props.className} onClick = {this.props.click}>{this.props.name}</button>
+                    <button className = {this.props.className} onClick = {this.props.click} style = {{animationName: this.props.move, display: this.props.status}}>{this.props.name}</button>
         
             </Fragment>
         );

@@ -6,6 +6,7 @@ import Form from '../Forms/Form';
 
 
 class HeaderButton extends Component {
+
     state = {
         status: "none"
     }
@@ -13,14 +14,12 @@ class HeaderButton extends Component {
     addContact = ()=>{
         this.setState({status: "block"})
     }
-
-    callback = () => this.props.callback;
     
     render() {
         return (
             
                 <div className="btnBox">
-                <Form status = {this.state.status} />
+                <Form status = {this.state.status}/>
                         <SelectTemplate/>
                     
                         <Button  name={"Send Email"} className= "CB1">

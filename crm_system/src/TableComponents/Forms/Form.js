@@ -56,6 +56,7 @@ class Form extends Component {
   close = () => {
     this.setState({visibility:"hidden"})
   }
+
 // Registration popup
   render() {
     return (

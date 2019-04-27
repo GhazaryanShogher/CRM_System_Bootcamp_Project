@@ -17,11 +17,24 @@ class TableContent extends Component{
         .then((results) => { 
          this.setState({data: results})
     })
-
   }  
+
   
   editTr = () => {
     this.setState({ status: "block", })
+  }
+
+   componentDidUpdate(){
+    fetch('http://visual.istclabz.com:2112/api/contacts')
+        .then((resp) => {return resp.json()})
+        .then((results) => {
+         this.setState({data: results})
+    })
+  
+  }
+  editTr = () => {this.setState({editTd:true})
+  console.log(this.state.editTd)
+
   }
 
     render() {
@@ -35,7 +48,7 @@ class TableContent extends Component{
                     <th>Select</th>
                     <th>Full Name</th>
                     <th>Company Name</th>
-                    <th>Position</th>
+                 <th>Position</th>
                     <th>Counrty</th>
                     <th>Email</th>
                     <th>Edit</th>

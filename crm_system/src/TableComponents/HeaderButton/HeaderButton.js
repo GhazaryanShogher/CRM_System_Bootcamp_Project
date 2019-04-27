@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import './tableFooter.css'
+import './HeaderButton.css'
 import SelectTemplate from '../Header/selectTemplate/selectTemplate';
 import Button from '../Button/Button'
 import Form from '../Forms/Form';
 
 
-class TableFooter extends Component {
+class HeaderButton extends Component {
     state = {
         status: "none"
     }
@@ -54,4 +54,4 @@ class TableFooter extends Component {
     }
 
 }
-export default TableFooter ;
+export default HeaderButton ;

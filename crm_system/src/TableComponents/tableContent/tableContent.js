@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import './tableContent.css';
 import Edit from '../Edit/Edit';
-//import TableFooter from '../tableFooter/tableFooter';
+import HeaderButton from '../HeaderButton/HeaderButton';
+//import Menu from '../menu/menu';
+
 
 class TableContent extends Component{
     state = {
-        editTd:false,
         data: [],
         status: "none"
         };
@@ -20,18 +21,15 @@ class TableContent extends Component{
   }  
   
   editTr = () => {
-    this.setState({
-      editTd:true,
-      status: "block"
-
-    
-    })
+    this.setState({ status: "block", })
   }
 
     render() {
         return (
             <Fragment>
-              <div className="table_box"> 
+            
+              <div className="table_box">
+              <HeaderButton/>
             <thead>
                 <tr>
                     <th>Select</th>
@@ -59,7 +57,7 @@ class TableContent extends Component{
         )
       }           
             </div>        
-                <Edit />
+                <Edit status={this.state.status} />
             </Fragment>
         );
     }

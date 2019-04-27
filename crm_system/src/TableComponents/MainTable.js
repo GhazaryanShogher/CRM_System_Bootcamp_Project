@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-import Header from "./Header/header";
-import Menu from './menu/menu';
+import Header from "./Header/header"; 
+//import Menu from './menu/menu';
 import TableContent from './tableContent/tableContent';
 import './MainTable.css';
 
@@ -10,7 +10,7 @@ class MainTable extends  Component {
         return(
             <Fragment>
                 <Header/> 
-                <Menu/>
+                {/* <Menu/> */}
                 <TableContent/>
             </Fragment>
         )

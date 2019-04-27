@@ -6,11 +6,13 @@ import './Edit.css';
 
 class Edit extends Component {
     state = {
-        status: "none",
         visibility: "show"
 
     }
+
+    callback = () => this.props.callback;
     close = () => {
+        
         this.setState({visibility:"hidden"})
       }
 
@@ -25,7 +27,8 @@ class Edit extends Component {
             <Input id="emailaddress" type="text" placeholder="Email" callback = {this.callback}/>
             <Input id="country" type="test" placeholder="Country" callback = {this.callback}/>
             <Input id="position" type="text" placeholder="Position" callback = {this.callback}/>
-            <Button name = "Create contact" click = {this.postRequest }/>
+            <Button className= {"CB1 popupBtn"} name = "Save"/>
+            <Button className= {"CB1 popupBtn"} name = "Cencel"/>
         </div>
     );
   }

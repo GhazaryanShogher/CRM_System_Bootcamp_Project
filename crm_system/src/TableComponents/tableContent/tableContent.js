@@ -16,8 +16,8 @@ class TableContent extends Component{
         .then((results) => { 
          this.setState({data: results})
     })
-
   }  
+
   
   editTr = () => {
     this.setState({
@@ -26,6 +26,19 @@ class TableContent extends Component{
 
     
     })
+  }
+
+   componentDidUpdate(){
+    fetch('http://visual.istclabz.com:2112/api/contacts')
+        .then((resp) => {return resp.json()})
+        .then((results) => {
+         this.setState({data: results})
+    })
+  
+  }
+  editTr = () => {this.setState({editTd:true})
+  console.log(this.state.editTd)
+
   }
 
     render() {

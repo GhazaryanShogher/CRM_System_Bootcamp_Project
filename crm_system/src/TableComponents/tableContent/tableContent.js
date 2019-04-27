@@ -50,7 +50,7 @@ class TableContent extends Component{
                     <th>Select</th>
                     <th>Full Name</th>
                     <th>Company Name</th>
-                    <th>Position</th>
+                 <th>Position</th>
                     <th>Counrty</th>
                     <th>Email</th>
                     <th>Edit</th>

@@ -6,20 +6,21 @@ import './Edit.css';
 
 class Edit extends Component {
     state = {
-        visibility: "show"
+        display: ""
 
     }
 
     callback = () => this.props.callback;
     close = () => {
         
-        this.setState({visibility:"hidden"})
+        this.setState({display:"none"})
       }
 
 // Edit popup
   render() {
     return (
-        <div className="form" style={{display:this.props.status, visibility: this.state.visibility}}>
+    <div style = {{display:this.state.display}}>
+        <div className="form" style={{display:this.props.status1}}>
             <Close callback = {this.close} />
             <h1>Edit Contacts</h1>
             <Input id="full" type="text" placeholder="Full Name" callback = {this.callback}/>          
@@ -30,6 +31,7 @@ class Edit extends Component {
             <Button className= {"CB1 popupBtn"} name = "Save"/>
             <Button className= {"CB1 popupBtn"} name = "Cencel"/>
         </div>
+    </div>
     );
   }
 }

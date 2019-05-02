@@ -7,7 +7,7 @@ class Icon extends Component{
     render () {
         return (
             <Fragment>
-                <i className = {this.props.className} ></i>
+                <i className = {this.props.className} id = {this.props.id}></i>
             </Fragment>
         );
 

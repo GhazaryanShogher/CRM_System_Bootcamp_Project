@@ -11,7 +11,7 @@ class Form extends Component {
     country:"",
     email:"",
     position:"",
-    visibility:"visible"
+    display:"block"
   }
   postRequest = () => {
     return fetch('http://visual.istclabz.com:2112/api/contacts', {
@@ -54,13 +54,14 @@ class Form extends Component {
   }
 
   close = () => {
-    this.setState({visibility:"hidden"})
+    this.setState({display:"none"})
   }
 
 // Registration popup
   render() {
     return (
-        <div className="form" style={{display:this.props.status, visibility: this.state.visibility}}>
+      <div style = {{display:this.state.display}}>
+        <div className="form" style={{display:this.props.status}}>
             <Close callback = {this.close} />
             <h1>Create New Contact</h1>
             <Input id="full" type="text" placeholder="Full Name" callback = {this.callback}/>          
@@ -70,6 +71,7 @@ class Form extends Component {
             <Input id="position" type="text" placeholder="Position" callback = {this.callback}/>
             <Button className={ "CB1 popupBtn" } name = "Create contact" click = {this.postRequest }/>
         </div>
+      </div>
     );
   }
 }

@@ -32,6 +32,16 @@
     animation-duration: 3s;
     animation-fill-mode: forwards;
 }
+a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+}
+i {
+    margin: auto;
+}
 @keyframes shadow {
     from {
         box-shadow: 0 0 10px 10px white;

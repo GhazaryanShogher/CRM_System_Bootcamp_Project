@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import './menu.css';
 import Button from '../Button/Button';
+import { Link } from 'react-router-dom';
 
 class Menu extends Component{
   render(){
     return(
           <div className="menu">
                   
-                      <Button name = {"Contats"}  className= "CB1 menu_btn" />
+                      <Button name = {<Link to="/Contacts">"Contats"</Link>}  className= "CB1 menu_btn" />
                       
                       
                        
-                       <Button name = {"Mailing List"}  className= "CB1 menu_btn" />
+                       <Button name = {<Link to="Mailinglist">"Mailing List"</Link>}  className= "CB1 menu_btn" />
                       
               
           </div>

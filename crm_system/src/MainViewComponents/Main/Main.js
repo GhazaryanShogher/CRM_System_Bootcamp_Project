@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from '../../TableComponents/Button/Button';
 import Icon from '../../TableComponents/Icon/Icon';
 import "./Main.css";
+import { Link } from 'react-router-dom';
 
 class MainPage extends Component {
     state = {
@@ -17,10 +18,10 @@ class MainPage extends Component {
     render() {
         const buttons = [];
         for (var i = 1; i <= 18; i++) {
-            if (i % 2 == 1) {
-                buttons.push(<Button className ="mailingList" key={i} move={"move"+`${i}`} status = {this.state.status} name = {<Icon className ="fa fa-envelope"/>}></Button>);
+            if (i % 2 === 1) {
+                buttons.push(<Button className ="mailingList" key={i} move={"move"+`${i}`} status = {this.state.status} name = {<Link to="/Mailinglist"><Icon className ="fa fa-envelope"/></Link>}></Button>);
             } else {
-                buttons.push(<Button className ="contacts" key={i} move={"move"+`${i}`} status = {this.state.status} name ={<Icon className ="fa fa-users"/>}></Button>);
+                buttons.push(<Button className ="contacts" key={i} move={"move"+`${i}`} status = {this.state.status} name ={<Link to="/Contacts"><Icon className ="fa fa-users"/></Link>}></Button>);
             }
         }
         return (

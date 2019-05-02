@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import MainPage from "./MainViewComponents/Main/Main";
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Form from "./TableComponents/Forms/Form"
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
         <div className="App">
           <Route path="/" component={ MainPage } exact />
           <Route path="/Contacts" component={ MainTable } />
+          <Route path="/Contacts/AddContact" component={ Form } />
         </div>
       </Router>
     );

@@ -8,11 +8,11 @@ class Menu extends Component{
     return(
           <div className="menu">
                   
-                      <Button name = {<Link to="/Contacts">"Contats"</Link>}  className= "CB1 menu_btn" />
+                      <Button name = {<Link to="/Contacts">Contats</Link>}  className= "CB1 menu_btn" />
                       
                       
                        
-                       <Button name = {<Link to="Mailinglist">"Mailing List"</Link>}  className= "CB1 menu_btn" />
+                       <Button name = {<Link to="Mailinglist">Mailing List</Link>}  className= "CB1 menu_btn" />
                       
               
           </div>

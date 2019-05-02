@@ -3,6 +3,7 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 import Close from '../Close/Close';
 import './Form.css';
+import { Link } from 'react-router-dom';
 
 class Form extends Component {
   state = {

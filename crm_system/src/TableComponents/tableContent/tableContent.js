@@ -9,6 +9,7 @@ import SelectTemplate from '../Header/selectTemplate/selectTemplate';
 import Button from '../Button/Button';
 import Form from '../Forms/Form';
 import Input from '../Input/Input';
+import { Link } from 'react-router-dom';
 // import HeaderButton from '../HeaderButton/HeaderButton';
 //import Menu from '../menu/menu';
 
@@ -27,9 +28,9 @@ class TableContent extends Component{
       }
 
       
-    addContact = ()=>{
-        this.setState({status: "block"})
-    }
+    // addContact = ()=>{
+    //     this.setState({status: "block"})
+    // }
 
    componentDidMount(){  
     fetch('http://visual.istclabz.com:2112/api/contacts')
@@ -92,7 +93,7 @@ class TableContent extends Component{
         return (
             <Fragment>
               <div className="btnBox">
-                <Form status = {this.state.status}/>
+                {/* <Form status = {this.state.status}/> */}
                         <SelectTemplate/>
                     
                         <Button  name={"Send Email"} className= "CB1">
@@ -109,7 +110,7 @@ class TableContent extends Component{
                     <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
                     </Button>
 
-                    <Button name={"Add to Contact"}  className= "CB1" click = {this.addContact}>
+                    <Button name={<Link to="/Contacts/AddContact">Add to Contact</Link>}  className= "CB1" /*click = {this.addContact}*/>
                     <i className="fa fa-user-plus" aria-hidden="true"></i><br />Add Contact
                     </Button>
 

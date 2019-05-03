@@ -5,6 +5,30 @@ th {
     white-space: nowrap;
  
 }
+.btnBox {
+    
+    display: flex;
+    /* border-radius: 20px; */
+    padding: 1.5%;
+    margin: 0 auto;
+
+    box-shadow: 0px -1px 31px -6px rgba(245, 242, 242, 0.75);
+    /* box-sizing: border-box; */
+    /* padding: 30px 20px 0 20px; */
+}
+
+.inputMail {
+    margin-left: 1.5vw;
+    margin-top: 3.3vh;
+    padding: 3px;
+}
+
+#templateSelectBox {
+    display: flex;
+    padding: 5px;
+	align-items: center;
+}
+
 
 .table_box {
     /* width: 82%; */

@@ -3,6 +3,7 @@ import Header from "./Header/header";
 //import Menu from './menu/menu';
 import TableContent from './tableContent/tableContent';
 import './MainTable.css';
+//import MailingList from './MailingList/MailingList';
 
 class MainTable extends  Component {
     
@@ -12,6 +13,7 @@ class MainTable extends  Component {
                 <Header/> 
                 {/* <Menu/> */}
                 <TableContent/>
+                {/* <MailingList/> */}
             </Fragment>
         )
     }

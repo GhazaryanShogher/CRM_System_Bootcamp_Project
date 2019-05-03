@@ -9,7 +9,7 @@ import SelectTemplate from '../Header/selectTemplate/selectTemplate';
 import Button from '../Button/Button';
 import Form from '../Forms/Form';
 import Input from '../Input/Input';
-// import HeaderButton from '../HeaderButton/HeaderButton';
+import MailingListPopup from '../MailingList/MailingListPopup';
 //import Menu from '../menu/menu';
 
 
@@ -162,6 +162,7 @@ class TableContent extends Component{
         </table>
       </div>        
                 <Edit status1={this.state.status1} />
+                <MailingListPopup/>
             </Fragment>
         );
     }

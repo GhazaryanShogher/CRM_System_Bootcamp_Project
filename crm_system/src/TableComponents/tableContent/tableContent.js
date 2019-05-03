@@ -103,6 +103,7 @@ class TableContent extends Component{
    })
    .then(()=>{
     this.setState({
+      status1:"none",
       name:"", 
       company:"", 
       country:"",

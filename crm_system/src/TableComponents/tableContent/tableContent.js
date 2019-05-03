@@ -21,7 +21,7 @@ class TableContent extends Component{
   this.state = {
         data: [],
         del:[],
-        edit:[],
+        GuID:"",
         name:"",
         company:"",
         country:"",
@@ -84,6 +84,35 @@ class TableContent extends Component{
        })
        .then(()=>{this.setState({del: []})})
     }
+
+  //update contact
+  updateContact = ()=>{
+      fetch('http://visual.istclabz.com:2112/api/contacts',{
+     method: 'PUT',
+    body: JSON.stringify({
+        "FullName": this.state.name,
+        "CompanyName": this.state.company,
+        "Position": this.state.position,
+        "Country": this.state.country,
+        "Email": this.state.email,
+        "GuID": this.state.GuID
+      }),
+  headers: {
+   "Content-type": "application/json; charset=UTF-8"
+   }
+   })
+   .then(()=>{
+    this.setState({
+      name:"", 
+      company:"", 
+      country:"",
+      position:"",
+      email:"",
+      GuID:""
+    })
+   })
+  }
+
 //edit contact    
 editContact = (e) =>{
   this.setState({status1: "block"});
@@ -94,7 +123,15 @@ editContact = (e) =>{
   }
   })
   .then((resp)=>{return resp.json()})
-  .then((result)=>{this.setState({edit:result})
+  .then((result)=>{
+    this.setState({
+      name:result["Full Name"], 
+      company:result["Company Name"], 
+      country:result.Country,
+      position:result.Position,
+      email:result.Email,
+      GuID:result.GuID,
+    })
 })
 }
 
@@ -203,13 +240,12 @@ callback = (e) => {
       <div className="form" style={{display:this.state.status1}}>
         <Close callback = {this.close} />
         <h1>Edit Contacts</h1>
-        <Input id="full" type="text" placeholder="Full Name" value = {"htgfygf"} val = {this.state.edit["Full Name"]} callback = {this.callback}/>          
-        <Input id="company" type="text" placeholder="Company Name" val = {this.state.edit["Company Name"]} />
-        <Input id="emailaddress" type="text" placeholder="Email" val = {this.state.edit.Email}/>
-        <Input id="country" type="test" placeholder="Country" val = {this.state.edit.Country}/>
-        <Input id="position" type="text" placeholder="Position" val = {this.state.edit.Position}/>
-        <Button className= {"CB1 popupBtn"} name = "Save"/>
-        <Button className= {"CB1 popupBtn"} name = "Cencel"/>
+        <Input id="full" type="text" placeholder="Full Name" val = {this.state.name} callback = {this.callback}/>          
+        <Input id="company" type="text" placeholder="Company Name" val = {this.state.company} callback = {this.callback}/>
+        <Input id="emailaddress" type="text" placeholder="Email" val = {this.state.email} callback = {this.callback}/>
+        <Input id="country" type="test" placeholder="Country" val = {this.state.country} callback = {this.callback}/>
+        <Input id="position" type="text" placeholder="Position" val = {this.state.position} callback = {this.callback}/>
+        <Button className= {"CB1 popupBtn"} click = {this.updateContact} name = "Save"/>
    </div>       
                 {/* <Edit status1={this.state.status1} /> */}
             </Fragment>

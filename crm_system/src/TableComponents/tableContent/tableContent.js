@@ -9,7 +9,6 @@ import SelectTemplate from '../Header/selectTemplate/selectTemplate';
 import Button from '../Button/Button';
 import Form from '../Forms/Form';
 import Input from '../Input/Input';
-import '../Forms/Form';
 //import HeaderButton from '../HeaderButton/HeaderButton';
 //import Menu from '../menu/menu';
 //import MailingListPopup from '../MailingList/MailingListPopup';
@@ -68,8 +67,7 @@ class TableContent extends Component{
   //select rows
   checked = (e) =>{
     if(e.target.checked){
-
-      this.setState({del: this.state.del.concat(e.target.value)})
+      this.setState({del: this.state.del.concat(e.target.value), disabled: false})
     }
     else { 
       let index = this.state.del.indexOf(e.target.value)
@@ -80,10 +78,10 @@ class TableContent extends Component{
   }
 
   // Delete row
-   deleteRow = (e)=>{
+  deleteRow = (e)=>{
     e.target.id === "delete" ? this.setState({ text: "Delete All Selected Contacts?",func: this.deleteContacts}) : this.setState({ text:"Delete Contact?", func: this.deleteContact});
     this.setState({status2: "block", delete: e.target.id});
-    } 
+  } 
 
   deleteContact = () => {
     fetch(`http://visual.istclabz.com:2112/api/contacts?guid=${this.state.delete}`,{
@@ -106,7 +104,7 @@ class TableContent extends Component{
        "Content-type": "application/json; charset=UTF-8"
       }
     })
-    .then(()=>{this.setState({del: []})})
+    .then(()=>{this.setState({del: [], status2: "none"})})
   }
 
   //update contact

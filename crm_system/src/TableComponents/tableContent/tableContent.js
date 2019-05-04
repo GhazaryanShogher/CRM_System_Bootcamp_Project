@@ -12,7 +12,7 @@ import Input from '../Input/Input';
 import '../Forms/Form';
 //import HeaderButton from '../HeaderButton/HeaderButton';
 //import Menu from '../menu/menu';
-
+//import MailingListPopup from '../MailingList/MailingListPopup';
 
 class TableContent extends Component{
   constructor(props){
@@ -26,6 +26,10 @@ class TableContent extends Component{
         country:"",
         email:"",
         position:"",
+        templateId:"",
+        disabled:true,
+        checked:"",
+        disabled:true,
         status: "none",
         status1: "none",
         status2: "none",
@@ -56,12 +60,15 @@ class TableContent extends Component{
   }  
 
   
-  handleClick = (e) => {
-    this.setState({status1: "block"});
-  }
+  handleClick = (e) => { this.setState({status1: "block"}) }
 
+  //get template id
+  templateId = (e)=>{ this.setState({templateId: e.target.value}) }
+
+  //select rows
   checked = (e) =>{
     if(e.target.checked){
+
       this.setState({del: this.state.del.concat(e.target.value)})
     }
     else { 
@@ -143,16 +150,30 @@ editContact = (e) =>{
   .then((resp)=>{return resp.json()})
   .then((result)=>{
     this.setState({
+      GuID:result.GuID,
       name:result["Full Name"], 
       company:result["Company Name"], 
       country:result.Country,
       position:result.Position,
       email:result.Email,
-      GuID:result.GuID,
     })
 })
 }
 
+// send email
+sendEmail = ()=>{
+  fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.templateId}`,{
+         method: 'POST',
+        body: JSON.stringify(
+            this.state.del
+        ),
+      headers: {
+       "Content-type": "application/json; charset=UTF-8"
+       }
+       })
+       .then(()=>{this.setState({del: []})})
+
+}
 callback = (e) => {
   switch(e.target.id){
     case "full":
@@ -187,19 +208,26 @@ callback = (e) => {
             <Fragment>
               <div className="btnBox">
                 <Form status = {this.state.status}/>
-                        <SelectTemplate/>
+                        {/* <SelectTemplate/> */}
+                        <select onChange = {this.templateId}>
+                    <option value="0" onChange = {this.templateId}>Select a Template</option>
+                    <option value="1" onChange = {this.templateId}>Anniversary</option>
+                    <option value="2" onChange = {this.templateId}>Birthday</option>
+                    <option value="3" onChange = {this.templateId}>Christmas</option>
+                </select>
                     
-                        <Button  name={"Send Email"} className= "CB1">
+                        <Button  name={"Send Email"} className= "CB1" click ={this.sendEmail} disabled={this.state.disabled}>
                             <i className="fa fa-envelope" aria-hidden="true"></i><br />Send Email
                         </Button>
                     
                     
-                    <Button name={"Add to Mail List"}  className= "CB1">
+                    <Button name={"Add to Mail List"}  className= "CB1" disabled={this.state.disabled}>
                     <i className="fa fa-folder-open" aria-hidden="true"></i>
                     </Button>
                     
                     
-                    <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteRow}>
+
+                    <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}>
                     <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
                     </Button>
 
@@ -253,23 +281,32 @@ callback = (e) => {
       }           
             </tbody>
         </table>
-      </div> 
+
+      </div>        
+                {/* <Edit status1={this.state.status1} /> */}
+                {/* <MailingListPopup/> */}
+     
       <div className="form" style={{display:this.state.status1}}>
         <Close callback = {this.close} />
         <h1>Edit Contacts</h1>
+
+
         <Input id="full" type="text" placeholder="Full Name" val = {this.state.name} callback = {this.callback}/>          
         <Input id="company" type="text" placeholder="Company Name" val = {this.state.company} callback = {this.callback}/>
         <Input id="emailaddress" type="text" placeholder="Email" val = {this.state.email} callback = {this.callback}/>
         <Input id="country" type="test" placeholder="Country" val = {this.state.country} callback = {this.callback}/>
         <Input id="position" type="text" placeholder="Position" val = {this.state.position} callback = {this.callback}/>
         <Button className= {"CB1 popupBtn"} click = {this.updateContact} name = "Save"/>
+
    </div>  
       <div className="form" style={{display:this.state.status2}}>
         <h3>{this.state.text} </h3>
         <Button className={"CB1 popupBtn"} click={this.state.func} name = "Delete"/>
         <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
       </div>
+
                 {/* <Edit status1={this.state.status1} /> */}
+
             </Fragment>
         );
     }

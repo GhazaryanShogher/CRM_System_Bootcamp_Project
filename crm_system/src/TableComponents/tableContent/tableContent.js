@@ -3,13 +3,14 @@ import {connect} from 'react-redux';
 import * as actions from '../../Actions/actions';
 import {bindActionCreators} from 'redux';
 import './tableContent.css';
-//import Edit from '../Edit/Edit';
 import Icon from '../Icon/Icon';
 import Close from '../Close/Close';
 import SelectTemplate from '../Header/selectTemplate/selectTemplate';
 import Button from '../Button/Button';
 import Form from '../Forms/Form';
 import Input from '../Input/Input';
+//import HeaderButton from '../HeaderButton/HeaderButton';
+//import Menu from '../menu/menu';
 //import MailingListPopup from '../MailingList/MailingListPopup';
 
 class TableContent extends Component{
@@ -29,22 +30,31 @@ class TableContent extends Component{
         checked:"",
         disabled:true,
         status: "none",
-        status1: "none"
+        status1: "none",
+        status2: "none",
+        func:"",
+        text: "",
+        delete: "",
         };
       }
 
       close = () => {
-        this.setState({status1:"none"})
-      } 
-    addContact = ()=>{
-        this.setState({status: "block"})
-    }
+        if(this.state.status1 === "block"){
+          this.setState({status1:"none"})
+        }
+        if (this.state.status2 === "block") {
+          this.setState({status2: "none"})
+        }
+      }
+      addContact = ()=>{
+          this.setState({status: "block"})
+      }
 
-   componentDidMount(){  
+  componentDidMount(){  
     fetch('http://visual.istclabz.com:2112/api/contacts')
-        .then((resp) => {return resp.json()})
-        .then((results) => { 
-         this.setState({data: results})
+      .then((resp) => {return resp.json()})
+      .then((results) => { 
+      this.setState({data: results})
     })
   }  
 
@@ -57,34 +67,45 @@ class TableContent extends Component{
   //select rows
   checked = (e) =>{
     if(e.target.checked){
-      this.setState({del: this.state.del.concat(e.target.value),disabled:false})      
+      this.setState({del: this.state.del.concat(e.target.value), disabled: false})
+    }
+    else { 
+      let index = this.state.del.indexOf(e.target.value)
+      if (index > -1) {
+        this.state.del.splice(index, 1)
+      }
     }
   }
 
   // Delete row
-   deleteRow = (e)=>{
-      fetch(`http://visual.istclabz.com:2112/api/contacts?guid=${e.target.id}`,{
-        method: 'DELETE',
-     headers: {
+  deleteRow = (e)=>{
+    e.target.id === "delete" ? this.setState({ text: "Delete All Selected Contacts?",func: this.deleteContacts}) : this.setState({ text:"Delete Contact?", func: this.deleteContact});
+    this.setState({status2: "block", delete: e.target.id});
+  } 
+
+  deleteContact = () => {
+    fetch(`http://visual.istclabz.com:2112/api/contacts?guid=${this.state.delete}`,{
+      method: 'DELETE',
+      headers: {
       "Content-type": "application/json; charset=UTF-8"
       }
-      })
-    } 
-  
+    })
+    .then(() =>this.setState({status2: "none"}))
+  }
 
 //delete selected contacts
-  deleteContacts = () =>{
-          fetch('http://visual.istclabz.com:2112/api/contacts',{
-         method: 'DELETE',
-        body: JSON.stringify(
-            this.state.del
-        ),
+  deleteContacts = () => {
+    fetch('http://visual.istclabz.com:2112/api/contacts',{
+      method: 'DELETE',
+      body: JSON.stringify(
+        this.state.del
+      ),
       headers: {
        "Content-type": "application/json; charset=UTF-8"
-       }
-       })
-       .then(()=>{this.setState({del: []})})
-    }
+      }
+    })
+    .then(()=>{this.setState({del: [], status2: "none"})})
+  }
 
   //update contact
   updateContact = ()=>{
@@ -203,7 +224,8 @@ callback = (e) => {
                     </Button>
                     
                     
-                    <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteContacts} disabled={this.state.disabled}>
+
+                    <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}>
                     <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
                     </Button>
 
@@ -222,7 +244,6 @@ callback = (e) => {
            
             
               <div className="table_box">
-              {/* <HeaderButton/> */}
               <div>{this.props.counter}</div>
               <button onClick = {this.props.get}>show</button>
               <button onClick = {this.props.del}>delete</button>
@@ -275,7 +296,13 @@ callback = (e) => {
         <Input id="position" type="text" placeholder="Position" val = {this.state.position} callback = {this.callback}/>
         <Button className= {"CB1 popupBtn"} click = {this.updateContact} name = "Save"/>
 
-   </div>       
+   </div>  
+      <div className="form" style={{display:this.state.status2}}>
+        <h3>{this.state.text} </h3>
+        <Button className={"CB1 popupBtn"} click={this.state.func} name = "Delete"/>
+        <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
+      </div>
+
                 {/* <Edit status1={this.state.status1} /> */}
 
             </Fragment>

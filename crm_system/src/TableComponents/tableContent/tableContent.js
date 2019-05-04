@@ -27,6 +27,8 @@ class TableContent extends Component{
         country:"",
         email:"",
         position:"",
+        templateId:"",
+        disabled:true,
         checked:"",
         status: "none",
         status1: "none"
@@ -49,14 +51,15 @@ class TableContent extends Component{
   }  
 
   
-  handleClick = (e) => {
-    this.setState({status1: "block"});
-  }
+  handleClick = (e) => { this.setState({status1: "block"}) }
 
+  //get template id
+  templateId = (e)=>{ this.setState({templateId: e.target.value}) }
+
+  //select rows
   checked = (e) =>{
     if(e.target.checked){
-      this.setState({del: this.state.del.concat(e.target.value)})
-      
+      this.setState({del: this.state.del.concat(e.target.value),disabled:false})      
     }
   }
 
@@ -126,16 +129,30 @@ editContact = (e) =>{
   .then((resp)=>{return resp.json()})
   .then((result)=>{
     this.setState({
+      GuID:result.GuID,
       name:result["Full Name"], 
       company:result["Company Name"], 
       country:result.Country,
       position:result.Position,
       email:result.Email,
-      GuID:result.GuID,
     })
 })
 }
 
+// send email
+sendEmail = ()=>{
+  fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.templateId}`,{
+         method: 'POST',
+        body: JSON.stringify(
+            this.state.del
+        ),
+      headers: {
+       "Content-type": "application/json; charset=UTF-8"
+       }
+       })
+       .then(()=>{this.setState({del: []})})
+
+}
 callback = (e) => {
   switch(e.target.id){
     case "full":
@@ -170,19 +187,25 @@ callback = (e) => {
             <Fragment>
               <div className="btnBox">
                 <Form status = {this.state.status}/>
-                        <SelectTemplate/>
+                        {/* <SelectTemplate/> */}
+                        <select onChange = {this.templateId}>
+                    <option value="0" onChange = {this.templateId}>Select a Template</option>
+                    <option value="1" onChange = {this.templateId}>Anniversary</option>
+                    <option value="2" onChange = {this.templateId}>Birthday</option>
+                    <option value="3" onChange = {this.templateId}>Christmas</option>
+                </select>
                     
-                        <Button  name={"Send Email"} className= "CB1">
+                        <Button  name={"Send Email"} className= "CB1" click ={this.sendEmail} disabled={this.state.disabled}>
                             <i className="fa fa-envelope" aria-hidden="true"></i><br />Send Email
                         </Button>
                     
                     
-                    <Button name={"Add to Mail List"}  className= "CB1">
+                    <Button name={"Add to Mail List"}  className= "CB1" disabled={this.state.disabled}>
                     <i className="fa fa-folder-open" aria-hidden="true"></i>
                     </Button>
                     
                     
-                    <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteContacts}>
+                    <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteContacts} disabled={this.state.disabled}>
                     <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
                     </Button>
 

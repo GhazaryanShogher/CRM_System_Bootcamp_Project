@@ -8,7 +8,7 @@ class Button extends Component{
         return (
             <Fragment>
                 
-                    <button id={this.props.id} className = {this.props.className} onClick = {this.props.click} style = {{animationName: this.props.move, display: this.props.status}}>{this.props.name}</button>
+                    <button id={this.props.id} className = {this.props.className} onClick = {this.props.click}  disabled = {this.props.disabled} style = {{animationName: this.props.move, display: this.props.status}}>{this.props.name}</button>
         
             </Fragment>
         );

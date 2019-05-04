@@ -244,9 +244,9 @@ callback = (e) => {
            
             
               <div className="table_box">
-              <div>{this.props.counter}</div>
+              {/* <div>{this.props.counter}</div>
               <button onClick = {this.props.get}>show</button>
-              <button onClick = {this.props.del}>delete</button>
+              <button onClick = {this.props.del}>delete</button> */}
               <table>
             <thead>
                 <tr>

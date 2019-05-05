@@ -5,18 +5,12 @@ import {bindActionCreators} from 'redux';
 import './tableContent.css';
 import Icon from '../Icon/Icon';
 import Close from '../Close/Close';
-import SelectTemplate from '../Header/selectTemplate/selectTemplate';
 import Button from '../Button/Button';
 import Form from '../Forms/Form';
 import Input from '../Input/Input';
-//import HeaderButton from '../HeaderButton/HeaderButton';
-//import Menu from '../menu/menu';
-//import MailingListPopup from '../MailingList/MailingListPopup';
 
 class TableContent extends Component{
-  constructor(props){
-    super(props);
-  this.state = {
+    state = {
         data: [],
         del:[],
         GuID:"",
@@ -35,106 +29,102 @@ class TableContent extends Component{
         func:"",
         text: "",
         delete: "",
-        };
-      }
-
-      close = () => {
+    };
+    //Closing popup
+    close = () => {
         if(this.state.status1 === "block"){
           this.setState({status1:"none"})
         }
         if (this.state.status2 === "block") {
           this.setState({status2: "none"})
         }
-      }
-      addContact = ()=>{
-          this.setState({status: "block"})
-      }
-
-  componentDidMount(){  
-    fetch('http://visual.istclabz.com:2112/api/contacts')
-      .then((resp) => {return resp.json()})
-      .then((results) => { 
-      this.setState({data: results})
-    })
-  }  
-
-  
-  handleClick = (e) => { this.setState({status1: "block"}) }
-
-  //get template id
-  templateId = (e)=>{ this.setState({templateId: e.target.value}) }
-
-  //select rows
-  checked = (e) =>{
-    if(e.target.checked){
-      this.setState({del: this.state.del.concat(e.target.value), disabled: false})
     }
-    else { 
-      let index = this.state.del.indexOf(e.target.value)
-      if (index > -1) {
-        this.state.del.splice(index, 1)
+    //Create contact popup
+    addContact = ()=>{
+        this.setState({status: "block"})
+    }
+
+    componentDidMount(){  
+      fetch('http://visual.istclabz.com:2112/api/contacts')
+        .then((resp) => {return resp.json()})
+        .then((results) => { 
+        this.setState({data: results})
+      })
+    }
+    //get template id
+    templateId = (e) => {this.setState({templateId: e.target.value}) }
+
+    //select rows
+    checked = (e) => {
+      if (e.target.checked) {
+        this.setState({del: this.state.del.concat(e.target.value), disabled: false})
+      }
+      else { 
+        let index = this.state.del.indexOf(e.target.value)
+        if (index > -1) {
+          this.state.del.splice(index, 1)
+        }
       }
     }
-  }
 
-  // Delete row
-  deleteRow = (e)=>{
-    e.target.id === "delete" ? this.setState({ text: "Delete All Selected Contacts?",func: this.deleteContacts}) : this.setState({ text:"Delete Contact?", func: this.deleteContact});
-    this.setState({status2: "block", delete: e.target.id});
-  } 
+    // Delete row
+    deleteRow = (e) => {
+      e.target.id === "delete" ? this.setState({text: "Delete All Selected Contacts?", func: this.deleteContacts}) : this.setState({text:"Delete Contact?", func: this.deleteContact});
+      this.setState({status2: "block", delete: e.target.id});
+    } 
 
-  deleteContact = () => {
-    fetch(`http://visual.istclabz.com:2112/api/contacts?guid=${this.state.delete}`,{
-      method: 'DELETE',
-      headers: {
-      "Content-type": "application/json; charset=UTF-8"
-      }
+    deleteContact = () => {
+      fetch(`http://visual.istclabz.com:2112/api/contacts?guid=${this.state.delete}`,{
+        method: 'DELETE',
+        headers: {
+        "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then(() =>this.setState({status2: "none"}))
+    }
+
+    //delete selected contacts
+    deleteContacts = () => {
+      fetch('http://visual.istclabz.com:2112/api/contacts', {
+        method: 'DELETE',
+        body: JSON.stringify(
+          this.state.del
+        ),
+        headers: {
+        "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then(()=>{this.setState({del: [], status2: "none"})})
+    }
+
+    //update contact
+    updateContact = () => {
+        fetch('http://visual.istclabz.com:2112/api/contacts',{
+        method: 'PUT',
+        body: JSON.stringify({
+            "FullName": this.state.name,
+            "CompanyName": this.state.company,
+            "Position": this.state.position,
+            "Country": this.state.country,
+            "Email": this.state.email,
+            "GuID": this.state.GuID
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+        })
+    .then(()=>{
+      this.setState({
+        status1:"none",
+        name:"", 
+        company:"", 
+        country:"",
+        position:"",
+        email:"",
+        GuID:""
+      })
     })
-    .then(() =>this.setState({status2: "none"}))
-  }
-
-//delete selected contacts
-  deleteContacts = () => {
-    fetch('http://visual.istclabz.com:2112/api/contacts',{
-      method: 'DELETE',
-      body: JSON.stringify(
-        this.state.del
-      ),
-      headers: {
-       "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-    .then(()=>{this.setState({del: [], status2: "none"})})
-  }
-
-  //update contact
-  updateContact = ()=>{
-      fetch('http://visual.istclabz.com:2112/api/contacts',{
-     method: 'PUT',
-    body: JSON.stringify({
-        "FullName": this.state.name,
-        "CompanyName": this.state.company,
-        "Position": this.state.position,
-        "Country": this.state.country,
-        "Email": this.state.email,
-        "GuID": this.state.GuID
-      }),
-  headers: {
-   "Content-type": "application/json; charset=UTF-8"
-   }
-   })
-   .then(()=>{
-    this.setState({
-      status1:"none",
-      name:"", 
-      company:"", 
-      country:"",
-      position:"",
-      email:"",
-      GuID:""
-    })
-   })
-  }
+    }
 
 //edit contact    
 editContact = (e) =>{
@@ -206,7 +196,6 @@ callback = (e) => {
             <Fragment>
               <div className="btnBox">
                 <Form status = {this.state.status}/>
-                        {/* <SelectTemplate/> */}
                         <select onChange = {this.templateId}>
                     <option value="0" onChange = {this.templateId}>Select a Template</option>
                     <option value="1" onChange = {this.templateId}>Anniversary</option>

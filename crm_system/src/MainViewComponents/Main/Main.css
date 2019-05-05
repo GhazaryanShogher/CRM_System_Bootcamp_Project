@@ -1,15 +1,15 @@
 .mainDiv {
+    display: flex;
     height: 100vh;
     width: 100%;
     background-color: #021323;
+    align-items: center;
+    justify-content: center;
 }
-.mainButton, .contacts, .mailingList {
+.mainButton, .contacts, .mailingList, .otherBtns {
     padding: 0;
-    margin: 0;
+    margin: auto;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     border-radius: 50%;
     font-size: 250%;
     color: white;
@@ -23,7 +23,7 @@
     z-index: 9999;
     font-family: serif;
 }
-.mailingList, .contacts {
+.mailingList, .contacts, .otherBtns {
     display: none;
     height: 75px;
     width: 75px;
@@ -32,7 +32,7 @@
     animation-duration: 3s;
     animation-fill-mode: forwards;
 }
-a {
+.mainA {
     display: flex;
     height: 100%;
     width: 100%;
@@ -53,127 +53,45 @@ i {
 }
 @keyframes move1 {
     to {
-        transform: translate(170px, -220px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
+        transform: translate(0px, -180px) rotate(360deg);
     }
 }
 @keyframes move2 {
     to {
-        transform: translate(400px, 150px);
+        transform: translate(135px, -135px);
         box-shadow: 0 0 30px 10px white;
         text-shadow: 0 0 25px white;
     }
 }
 @keyframes move3 {
     to {
-        transform: translate(-500px, -400px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
+        transform: translate(180px, 0px) rotate(360deg);
     }
 }
 @keyframes move4 {
     to {
-        transform: translate(500px, 320px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
+        transform: translate(135px, 135px) rotate(360deg);
     }
 }
 @keyframes move5 {
     to {
-        transform: translate(-550px, 220px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
+        transform: translate(0px, 180px) rotate(360deg);
     }
 }
 @keyframes move6 {
     to {
-        transform: translate(-200px, 150px);
+        transform: translate(-135px, 135px);
         box-shadow: 0 0 30px 10px white;
         text-shadow: 0 0 25px white;
     }
 }
 @keyframes move7 {
     to {
-        transform: translate(245px, -400px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
+        transform: translate(-180px, 0px) rotate(360deg);
     }
 }
 @keyframes move8 {
     to {
-        transform: translate(325px, -50px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
-    }
-}
-@keyframes move9 {
-    to {
-        transform: translate(-320px, -250px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
-    }
-}
-@keyframes move10 {
-    to {
-        transform: translate(-400px, -50px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
-    }
-}
-@keyframes move11 {
-    to {
-        transform: translate(555px, -50px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
-    }
-}
-@keyframes move12 {
-    to {
-        transform: translate(-150px, -420px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
-    }
-}
-@keyframes move13 {
-    to {
-        transform: translate(10px, 300px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
-    }
-}
-@keyframes move14 {
-    to {
-        transform: translate(-600px, 0px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
-    }
-}
-@keyframes move15 {
-    to {
-        transform: translate(-700px, -200px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
-    }
-}
-@keyframes move16 {
-    to {
-        transform: translate(400px, -200px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
-    }
-}
-@keyframes move17 {
-    to {
-        transform: translate(-200px, -150px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
-    }
-}
-@keyframes move18 {
-    to {
-        transform: translate(150px, 200px);
-        box-shadow: 0 0 30px 10px white;
-        text-shadow: 0 0 25px white;
+        transform: translate(-135px, -135px) rotate(360deg);
     }
 }

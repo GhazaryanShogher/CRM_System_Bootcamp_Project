@@ -25,6 +25,7 @@ class TableContent extends Component{
         country:"",
         email:"",
         position:"",
+        addTomailList:"",
         templateId:"",
         disabled:true,
         checked:"",
@@ -32,6 +33,7 @@ class TableContent extends Component{
         status: "none",
         status1: "none",
         status2: "none",
+        mailList: "none",
         func:"",
         text: "",
         delete: "",
@@ -45,10 +47,17 @@ class TableContent extends Component{
         if (this.state.status2 === "block") {
           this.setState({status2: "none"})
         }
+        if (this.state.mailList === "block") {
+          this.setState({mailList: "none"})
+        }
       }
       addContact = ()=>{
           this.setState({status: "block"})
       }
+      //add contacts to mail list
+      addtoMailListPopup = ()=>{
+        this.setState({mailList: "block"})
+    }
 
   componentDidMount(){  
     fetch('http://visual.istclabz.com:2112/api/contacts')
@@ -58,7 +67,20 @@ class TableContent extends Component{
     })
   }  
 
-  
+  addToMailList = () => {
+      fetch('http://visual.istclabz.com:2112/api/emaillists',{
+        method: 'POST',
+        body: JSON.stringify({
+          "EmailListName": this.state.addTomailList,
+          "Contacts":  this.state.del
+        }),
+        headers: {
+         "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then(()=>{this.setState({del: [], mailList: "none"})})
+    }
+
   handleClick = (e) => { this.setState({status1: "block"}) }
 
   //get template id
@@ -189,6 +211,10 @@ callback = (e) => {
     case "position":
     this.setState({position:e.target.value})
     break;
+    case "mailList":
+    this.setState({addTomailList:e.target.value})
+    break;
+    
   }
 }
 
@@ -219,7 +245,7 @@ callback = (e) => {
                         </Button>
                     
                     
-                    <Button name={"Add to Mail List"}  className= "CB1" disabled={this.state.disabled}>
+                    <Button name={"Add to Mail List"} click = {this.addtoMailListPopup} className= "CB1" disabled={this.state.disabled}>
                     <i className="fa fa-folder-open" aria-hidden="true"></i>
                     </Button>
                     
@@ -281,14 +307,17 @@ callback = (e) => {
         </table>
 
       </div>        
-                {/* <Edit status1={this.state.status1} /> */}
-                {/* <MailingListPopup/> */}
+        <div className="form" style={{display:this.state.mailList}}>
+        <Close callback = {this.close} />
+        <h1>Add to mail list</h1>
+        <Input id="mailList" type="text" placeholder="Enter mail list name" callback = {this.callback}/>
+        <Button className= {"CB1 popupBtn"} click = {this.addToMailList} name = {"Add To Mail List"}/>
+
+   </div>  
      
       <div className="form" style={{display:this.state.status1}}>
         <Close callback = {this.close} />
         <h1>Edit Contacts</h1>
-
-
         <Input id="full" type="text" placeholder="Full Name" val = {this.state.name} callback = {this.callback}/>          
         <Input id="company" type="text" placeholder="Company Name" val = {this.state.company} callback = {this.callback}/>
         <Input id="emailaddress" type="text" placeholder="Email" val = {this.state.email} callback = {this.callback}/>

@@ -36,7 +36,7 @@ class MailingList extends Component{
           </tr>
         )}           
                 </tbody>
-              </table>          
+              </table>  
             </div>
             <div className="mailing_info"></div>
         </div>

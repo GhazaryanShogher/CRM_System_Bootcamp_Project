@@ -8,6 +8,7 @@ import Close from '../Close/Close';
 import Button from '../Button/Button';
 import Form from '../Forms/Form';
 import Input from '../Input/Input';
+import Div from '../../Div/Div';
 
 class TableContent extends Component{
     state = {
@@ -20,8 +21,11 @@ class TableContent extends Component{
         email:"",
         position:"",
         addTomailList:"",
+        listId:0,
+        createList:"",
         lists:[],
         templateId:"",
+        listName:"",
         disabled:true,
         checked:"",
         disabled:true,
@@ -29,6 +33,7 @@ class TableContent extends Component{
         status1: "none",
         status2: "none",
         mailList: "none",
+        newList:"none",
         func:"",
         text: "",
         delete: "",
@@ -44,16 +49,17 @@ class TableContent extends Component{
         if (this.state.mailList === "block") {
           this.setState({mailList: "none"})
         }
-
+        if (this.state.newList === "block") {
+          this.setState({newList: "none"})
+        }
     }
     //Create contact popup
-     
-      addContact = ()=>{
+     addContact = ()=>{
           this.setState({status: "block"})
       }
       //add contacts to mail list
       createMailListPopup = ()=>{
-        this.setState({mailList: "block"})
+        this.setState({newList: "block"})
     }
 
   componentDidMount(){  
@@ -63,26 +69,46 @@ class TableContent extends Component{
       this.setState({data: results})
     })
   }  
-
+//create new contact
   createMailList = () => {
       fetch('http://visual.istclabz.com:2112/api/emaillists',{
         method: 'POST',
         body: JSON.stringify({
-          "EmailListName": this.state.addTomailList,
+          "EmailListName": this.state.createList,
           "Contacts":  this.state.del
         }),
         headers: {
          "Content-type": "application/json; charset=UTF-8"
         }
       })
-      .then(()=>{this.setState({del: [], mailList: "none"})})
+      .then(()=>{this.setState({del: [], newList: "none",createList:""})})
+    }
+
+    // get mail list Id
+    getListId = (e) => {
+      this.setState({listId: e.target.id,listName:e.target.text})
+
+    }
+
+    //add to existing mail list
+    updateToMailList = () => {
+      fetch(`http://visual.istclabz.com:2112/api/emaillists/update?id=${this.state.listId}&flag=true`,{
+        method: 'PUT',
+        body: JSON.stringify(
+           this.state.del
+        ),
+        headers: {
+         "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then(()=>{this.setState({del: [], mailList: "none",})})
     }
 
     addToMailList = () => {
       fetch('http://visual.istclabz.com:2112/api/emaillists')
         .then((resp) => {return resp.json()})
         .then((results) => {
-         this.setState({lists: results})
+         this.setState({lists: results, mailList: "block"})
     })
     }
 
@@ -228,7 +254,7 @@ callback = (e) => {
     this.setState({position:e.target.value})
     break;
     case "mailList":
-    this.setState({addTomailList:e.target.value})
+    this.setState({createList:e.target.value})
     break;
     
   }
@@ -255,26 +281,20 @@ callback = (e) => {
                     <option value="3" onChange = {this.templateId}>Christmas</option>
                 </select>
                     
-                        <Button  name={"Send Email"} className= "CB1" click ={this.sendEmail} disabled={this.state.disabled}>
-                            <i className="fa fa-envelope" aria-hidden="true"></i><br />Send Email
-                        </Button>
-                    
-                    
-                    <Button name={"Add to Mail List"} className= "CB1" disabled={this.state.disabled}>
+                   <Button  name={"Send Email"} className= "CB1" click ={this.sendEmail} disabled={this.state.disabled}>
+                      <i className="fa fa-envelope" aria-hidden="true"></i><br />Send Email
+                    </Button>
+                    <Button name={"Add to Mail List"} click = {this.addToMailList} className= "CB1" disabled={this.state.disabled}>
                     <i className="fa fa-folder-open" aria-hidden="true"></i>
                     </Button>
-                    
-                    
-
                     <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}>
                     <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
                     </Button>
-
                     <Button name={"Add to Contact"} className= "CB1" click = {this.addContact}>
                     <i className="fa fa-user-plus" aria-hidden="true"></i><br />Add Contact
                     </Button>
 
-                    <Button name={"Create Mailing List"}  className= "CB1"  click = {this.createMailListPopup} >
+                    <Button name={"Create Mailing List"}  className= "CB1"  click = {this.createMailListPopup}  >
                     <i className="fa fa-list-alt" aria-hidden="true"></i><br />Create Mailing list
                     </Button>
 
@@ -321,22 +341,25 @@ callback = (e) => {
             </tbody>
         </table>
 
-      </div>    
+      </div>   
 
       {/* create mailing list popup     */}
-        <div className="form" style={{display:this.state.mailList}}>
+        <div className="form" style={{display:this.state.newList}}>
         <Close callback = {this.close} />
-        <h1>Add to mail list</h1>
+        <h1>Create mail list</h1>
         <Input id="mailList" type="text" placeholder="Enter mail list name" callback = {this.callback}/>
-        <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {"Add To Mail List"}/>
+        <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {"Create Mail List"}/>
         </div> 
 
-         {/*add to existing mailing list popup */}
+      {/*add to existing mailing list popup */}
          <div className="form" style={{display:this.state.mailList}}>
         <Close callback = {this.close} />
         <h1>Add to mail list</h1>
-        <Input id="mailList" type="text" placeholder="Enter mail list name" callback = {this.callback}/>
-        <Button className= {"CB1 popupBtn"} click = {this.addToMailList} name = {"Add To Mail List"}/>
+        {this.state.lists.map((v,i) =>
+        <Div name = {v.EmailListName} id = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
+        )}
+        
+        <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {"Add To Mail List"}/>
         </div>  
      
       <div className="form" style={{display:this.state.status1}}>
@@ -355,9 +378,6 @@ callback = (e) => {
         <Button className={"CB1 popupBtn"} click={this.state.func} name = "Delete"/>
         <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
       </div>
-
-                {/* <Edit status1={this.state.status1} /> */}
-
             </Fragment>
         );
     }

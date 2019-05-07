@@ -11,7 +11,7 @@ class Input extends Component {
   render() {
     return (
           <div className="w3-rest">
-              <input value = {this.props.val} id={this.props.id} type={this.props.type} placeholder={this.props.placeholder} required onChange = {this.props.callback} value={this.props.val}/>
+              <input value = {this.props.val} id={this.props.id} type={this.props.type} placeholder={this.props.placeholder} required onChange = {this.props.callback} value={this.props.val} display = {this.props.display}/>
           </div>
     );
   }

@@ -12,20 +12,23 @@ class MainPage extends Component {
     };
     buttonActive = () => {
         if (this.state.animation === "") {
-            this.setState({animation: "shadow 1.4s infinite alternate", status: "inline-block"});
+            this.setState({status: "inline-block"});
         }
     };
     render() {
         const buttons = [];
         for (let i = 1; i <= 8; i++) {
-            if (i === 2) {
+            if (i === 1) {
                 buttons.push(<Button className ="mailingList" key={i} move={"move"+`${i}`} status = {this.state.status} name = {<Link className="mainA" to="/Mailinglist"><Icon className ="fa fa-envelope"/></Link>}></Button>);
             } 
-            if (i === 6) {
+            else if (i === 5) {
                 buttons.push(<Button className ="contacts" key={i} move={"move"+`${i}`} status = {this.state.status} name ={<Link className="mainA" to="/Contacts"><Icon className ="fa fa-users"/></Link>}></Button>);
             }
-            else if (i !== 2 && i !== 6) {
-                buttons.push(<Button className ="otherBtns" key={i} move={"move"+`${i}`} status = {this.state.status} name ={<Icon className ="fa fa-refresh"/>}></Button>);
+            else if (i < 5) {
+                buttons.push(<Button className ="otherBtns" key={i} move={"move"+`${i}`} status = {this.state.status} name ={<Icon className ="fa fa-envelope"/>}></Button>);
+            }
+            else if (i > 5) {
+                buttons.push(<Button className ="otherBtns" key={i} move={"move"+`${i}`} status = {this.state.status} name ={<Icon className ="fa fa-users"/>}></Button>);
             }
         }
         return (

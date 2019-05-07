@@ -20,6 +20,7 @@ class TableContent extends Component{
         email:"",
         position:"",
         addTomailList:"",
+        lists:[],
         templateId:"",
         disabled:true,
         checked:"",
@@ -51,7 +52,7 @@ class TableContent extends Component{
           this.setState({status: "block"})
       }
       //add contacts to mail list
-      addtoMailListPopup = ()=>{
+      createMailListPopup = ()=>{
         this.setState({mailList: "block"})
     }
 
@@ -63,7 +64,7 @@ class TableContent extends Component{
     })
   }  
 
-  addToMailList = () => {
+  createMailList = () => {
       fetch('http://visual.istclabz.com:2112/api/emaillists',{
         method: 'POST',
         body: JSON.stringify({
@@ -75,6 +76,14 @@ class TableContent extends Component{
         }
       })
       .then(()=>{this.setState({del: [], mailList: "none"})})
+    }
+
+    addToMailList = () => {
+      fetch('http://visual.istclabz.com:2112/api/emaillists')
+        .then((resp) => {return resp.json()})
+        .then((results) => {
+         this.setState({lists: results})
+    })
     }
 
   handleClick = (e) => { this.setState({status1: "block"}) }
@@ -251,7 +260,7 @@ callback = (e) => {
                         </Button>
                     
                     
-                    <Button name={"Add to Mail List"} click = {this.addtoMailListPopup} className= "CB1" disabled={this.state.disabled}>
+                    <Button name={"Add to Mail List"} className= "CB1" disabled={this.state.disabled}>
                     <i className="fa fa-folder-open" aria-hidden="true"></i>
                     </Button>
                     
@@ -261,11 +270,11 @@ callback = (e) => {
                     <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
                     </Button>
 
-                    <Button name={"Add to Contact"}  className= "CB1" click = {this.addContact}>
+                    <Button name={"Add to Contact"} className= "CB1" click = {this.addContact}>
                     <i className="fa fa-user-plus" aria-hidden="true"></i><br />Add Contact
                     </Button>
 
-                    <Button name={"Create Mailing List"}  className= "CB1">
+                    <Button name={"Create Mailing List"}  className= "CB1"  click = {this.createMailListPopup} >
                     <i className="fa fa-list-alt" aria-hidden="true"></i><br />Create Mailing list
                     </Button>
 
@@ -312,14 +321,23 @@ callback = (e) => {
             </tbody>
         </table>
 
-      </div>        
+      </div>    
+
+      {/* create mailing list popup     */}
         <div className="form" style={{display:this.state.mailList}}>
         <Close callback = {this.close} />
         <h1>Add to mail list</h1>
         <Input id="mailList" type="text" placeholder="Enter mail list name" callback = {this.callback}/>
-        <Button className= {"CB1 popupBtn"} click = {this.addToMailList} name = {"Add To Mail List"}/>
+        <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {"Add To Mail List"}/>
+        </div> 
 
-   </div>  
+         {/*add to existing mailing list popup */}
+         <div className="form" style={{display:this.state.mailList}}>
+        <Close callback = {this.close} />
+        <h1>Add to mail list</h1>
+        <Input id="mailList" type="text" placeholder="Enter mail list name" callback = {this.callback}/>
+        <Button className= {"CB1 popupBtn"} click = {this.addToMailList} name = {"Add To Mail List"}/>
+        </div>  
      
       <div className="form" style={{display:this.state.status1}}>
         <Close callback = {this.close} />

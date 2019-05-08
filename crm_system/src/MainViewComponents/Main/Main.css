@@ -11,7 +11,6 @@
     margin: auto;
     position: absolute;
     border-radius: 50%;
-    font-size: 250%;
     color: white;
     outline: none;
 }
@@ -20,8 +19,11 @@
     width: 150px;
     border: 5px solid white;
     background-color: #021323;
+    font-size: 250%;
     z-index: 9999;
     font-family: serif;
+    animation: shadow 1.4s infinite alternate;
+    cursor: pointer;
 }
 .mailingList, .contacts, .otherBtns {
     display: none;
@@ -31,6 +33,12 @@
     background-color: transparent;
     animation-duration: 3s;
     animation-fill-mode: forwards;
+}
+.mailingList, .contacts {
+    font-size: 200%;
+}
+.otherBtns {
+    font-size: 150%;
 }
 .mainA {
     display: flex;
@@ -53,45 +61,45 @@ i {
 }
 @keyframes move1 {
     to {
-        transform: translate(0px, -180px) rotate(360deg);
-    }
-}
-@keyframes move2 {
-    to {
         transform: translate(135px, -135px);
         box-shadow: 0 0 30px 10px white;
         text-shadow: 0 0 25px white;
     }
 }
+@keyframes move2 {
+    to {
+        transform: translate(180px, 0px);
+    }
+}
 @keyframes move3 {
     to {
-        transform: translate(180px, 0px) rotate(360deg);
+        transform: translate(135px, 135px);
     }
 }
 @keyframes move4 {
     to {
-        transform: translate(135px, 135px) rotate(360deg);
+        transform: translate(0px, 180px);
     }
 }
 @keyframes move5 {
-    to {
-        transform: translate(0px, 180px) rotate(360deg);
-    }
-}
-@keyframes move6 {
     to {
         transform: translate(-135px, 135px);
         box-shadow: 0 0 30px 10px white;
         text-shadow: 0 0 25px white;
     }
 }
+@keyframes move6 {
+    to {
+        transform: translate(-180px, 0px);
+    }
+}
 @keyframes move7 {
     to {
-        transform: translate(-180px, 0px) rotate(360deg);
+        transform: translate(-135px, -135px);
     }
 }
 @keyframes move8 {
     to {
-        transform: translate(-135px, -135px) rotate(360deg);
+        transform: translate(0px, -180px);
     }
 }

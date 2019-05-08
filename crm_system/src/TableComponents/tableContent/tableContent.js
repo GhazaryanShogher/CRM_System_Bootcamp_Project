@@ -8,6 +8,7 @@ import Close from '../Close/Close';
 import Button from '../Button/Button';
 import Form from '../Forms/Form';
 import Input from '../Input/Input';
+import Div from '../../Div/Div';
 
 class TableContent extends Component{
     state = {
@@ -20,7 +21,11 @@ class TableContent extends Component{
         email:"",
         position:"",
         addTomailList:"",
+        listId:0,
+        createList:"",
+        lists:[],
         templateId:"",
+        listName:"",
         disabled:true,
         checked:"",
         disabled:true,
@@ -28,6 +33,7 @@ class TableContent extends Component{
         status1: "none",
         status2: "none",
         mailList: "none",
+        newList:"none",
         func:"",
         text: "",
         delete: "",
@@ -43,16 +49,17 @@ class TableContent extends Component{
         if (this.state.mailList === "block") {
           this.setState({mailList: "none"})
         }
-
+        if (this.state.newList === "block") {
+          this.setState({newList: "none"})
+        }
     }
     //Create contact popup
-     
-      addContact = ()=>{
+     addContact = ()=>{
           this.setState({status: "block"})
       }
       //add contacts to mail list
-      addtoMailListPopup = ()=>{
-        this.setState({mailList: "block"})
+      createMailListPopup = ()=>{
+        this.setState({newList: "block"})
     }
 
   componentDidMount(){  
@@ -62,19 +69,47 @@ class TableContent extends Component{
       this.setState({data: results})
     })
   }  
-
-  addToMailList = () => {
+//create new contact
+  createMailList = () => {
       fetch('http://visual.istclabz.com:2112/api/emaillists',{
         method: 'POST',
         body: JSON.stringify({
-          "EmailListName": this.state.addTomailList,
+          "EmailListName": this.state.createList,
           "Contacts":  this.state.del
         }),
         headers: {
          "Content-type": "application/json; charset=UTF-8"
         }
       })
-      .then(()=>{this.setState({del: [], mailList: "none"})})
+      .then(()=>{this.setState({del: [], newList: "none",createList:""})})
+    }
+
+    // get mail list Id
+    getListId = (e) => {
+      this.setState({listId: e.target.id,listName:e.target.text})
+
+    }
+
+    //add to existing mail list
+    updateToMailList = () => {
+      fetch(`http://visual.istclabz.com:2112/api/emaillists/update?id=${this.state.listId}&flag=true`,{
+        method: 'PUT',
+        body: JSON.stringify(
+           this.state.del
+        ),
+        headers: {
+         "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then(()=>{this.setState({del: [], mailList: "none",})})
+    }
+
+    addToMailList = () => {
+      fetch('http://visual.istclabz.com:2112/api/emaillists')
+        .then((resp) => {return resp.json()})
+        .then((results) => {
+         this.setState({lists: results, mailList: "block"})
+    })
     }
 
   handleClick = (e) => { this.setState({status1: "block"}) }
@@ -219,7 +254,7 @@ callback = (e) => {
     this.setState({position:e.target.value})
     break;
     case "mailList":
-    this.setState({addTomailList:e.target.value})
+    this.setState({createList:e.target.value})
     break;
     
   }
@@ -253,10 +288,11 @@ callback = (e) => {
                     <Button name={"Upload"} className= "CB1" ></Button>
               </div>
           <div className="table_box">
+
               {/* <div>{this.props.counter}</div>
               <button onClick = {this.props.get}>show</button>
               <button onClick = {this.props.del}>delete</button> */}
-            <div>
+            
               <div>
                 <div className="table_header">
                     <div className="header_btn1">Select</div>
@@ -268,6 +304,7 @@ callback = (e) => {
                     <div className="header_btn1">Edit</div>
                     <div className="header_btn1">Delete</div>
                 </div>
+              </div>
               </div>
             <div className="overflow_div">
             {this.state.data.map((v,i) =>
@@ -284,11 +321,10 @@ callback = (e) => {
           </div>
       
         )
-      }           
-            </div>
-        </div>
-      {/* // Add to mailList */}
+      }   
       </div>        
+      {/* // Add to mailList */}
+            
         <div className="form" style={{display:this.state.mailList}}>
         <Close callback = {this.close} />
         <h1>Add to mail list</h1>
@@ -319,9 +355,7 @@ callback = (e) => {
         <Button className={"CB1 popupBtn"} click={this.state.func} name = "Delete"/>
         <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
       </div>
-     </div>
-                {/* <Edit status1={this.state.status1} /> */}
-
+      </div>
             </Fragment>
         );
     }

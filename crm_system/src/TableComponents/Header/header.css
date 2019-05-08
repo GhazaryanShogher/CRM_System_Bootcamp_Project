@@ -26,10 +26,14 @@
         text-shadow: 0 0 25px white;
     }
  }
-.header_logo span {
+.logoA {
+    display: flex;
     color:white;
-    margin: auto;
-    transition: 0.3s;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
 }
 .header_logo:hover {
     transform: translateY(4px);

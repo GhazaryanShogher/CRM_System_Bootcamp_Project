@@ -239,105 +239,87 @@ callback = (e) => {
             <Fragment>
               <div className="btnBox">
                 <Form status = {this.state.status}/>
-                        <select onChange = {this.templateId}>
+                  <select onChange = {this.templateId}>
                     <option value="0" onChange = {this.templateId}>Select a Template</option>
                     <option value="1" onChange = {this.templateId}>Anniversary</option>
                     <option value="2" onChange = {this.templateId}>Birthday</option>
                     <option value="3" onChange = {this.templateId}>Christmas</option>
-                </select>
-                    
-                        <Button  name={"Send Email"} className= "CB1" click ={this.sendEmail} disabled={this.state.disabled}>
-                            <i className="fa fa-envelope" aria-hidden="true"></i><br />Send Email
-                        </Button>
-                    
-                    
-                    <Button name={"Add to Mail List"} click = {this.addtoMailListPopup} className= "CB1" disabled={this.state.disabled}>
-                    <i className="fa fa-folder-open" aria-hidden="true"></i>
-                    </Button>
-                    
-                    
-
-                    <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}>
-                    <i className="fa fa-trash-o" aria-hidden="true"></i><br />Delete Selected
-                    </Button>
-
-                    <Button name={"Add to Contact"}  className= "CB1" click = {this.addContact}>
-                    <i className="fa fa-user-plus" aria-hidden="true"></i><br />Add Contact
-                    </Button>
-
-                    <Button name={"Create Mailing List"}  className= "CB1">
-                    <i className="fa fa-list-alt" aria-hidden="true"></i><br />Create Mailing list
-                    </Button>
-
-                    <Button name={"Upload"} className= "CB1" >
-                    <i className="fa fa-cloud-upload" aria-hidden="true"></i><br />Upload
-                    </Button>
-                </div>
-           
-            
-              <div className="table_box">
+                  </select>
+                    <Button  name={"Send Email"} className= "CB1" click ={this.sendEmail} disabled={this.state.disabled}></Button>
+                    <Button name={"Add to Mail List"} click = {this.addtoMailListPopup} className= "CB1" disabled={this.state.disabled}></Button>
+                    <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}></Button>
+                    <Button name={"Add to Contact"}  className= "CB1" click = {this.addContact}></Button>
+                    <Button name={"Create Mailing List"}  className= "CB1"> </Button>
+                    <Button name={"Upload"} className= "CB1" ></Button>
+              </div>
+          <div className="table_box">
               {/* <div>{this.props.counter}</div>
               <button onClick = {this.props.get}>show</button>
               <button onClick = {this.props.del}>delete</button> */}
-              <table>
-            <thead>
-                <tr>
-                    <th>Select</th>
-                    <th>Full Name</th>
-                    <th>Company Name</th>
-                    <th>Position</th>
-                    <th>Counrty</th>
-                    <th>Email</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-            
+            <div>
+              <div>
+                <div className="table_header">
+                    <div className="header_btn1">Select</div>
+                    <div className="header_name">Full Name</div>
+                    <div className="header_name">Company Name</div>
+                    <div className="header_name" >Position</div>
+                    <div className="header_name">Counrty</div>
+                    <div className="header_name">Email</div>
+                    <div className="header_btn1">Edit</div>
+                    <div className="header_btn1">Delete</div>
+                </div>
+              </div>
+            <div className="overflow_div">
             {this.state.data.map((v,i) =>
-          
-          <tr>
-            <td onClick = {this.checked} className="checkbox"><Input val={v.GuID} type = "checkbox"/></td>
-            <td style={{contenteditable:this.state.editTd}}>{v["Full Name"]}</td>
-            <td style={{contenteditable:this.state.editTd}}>{v["Company Name"]}</td>
-            <td style={{contenteditable:this.state.editTd}}>{v.Position}</td>
-            <td style={{contenteditable:this.state.editTd}}>{v.Country}</td>
-            <td style={{contenteditable:this.state.editTd}}>{v.Email}</td>
-            <td onClick = {this.editContact} className="editbox" id = {v.GuID}><Icon  className="fa fa-cogs" aria-hidden="true" id = {v.GuID} ></Icon></td>
-            <td onClick = {this.deleteRow} className="editbox" id = {v.GuID}><Icon  className="fa fa-trash" aria-hidden="true" id = {v.GuID} ></Icon></td>    
-          </tr>
+            
+          <div className="tbl_content">
+            <div onClick = {this.checked} className="checkbox"><Input class="check" val={v.GuID} type = "checkbox"/></div>
+            <div className="td_style" style={{contenteditable:this.state.editTd}}>{v["Full Name"]}</div>
+            <div className="td_style" style={{contenteditable:this.state.editTd}}>{v["Company Name"]}</div>
+            <div className="td_style" style={{contenteditable:this.state.editTd}}>{v.Position}</div>
+            <div  className="td_style" style={{contenteditable:this.state.editTd}}>{v.Country}</div>
+            <div className="td_style" style={{contenteditable:this.state.editTd}}>{v.Email}</div>
+            <div onClick = {this.editContact} className="editbox" id = {v.GuID}><Icon  className="fa fa-cogs" aria-hidden="true" id = {v.GuID} ></Icon></div>
+            <div onClick = {this.deleteRow} className="editbox" id = {v.GuID}><Icon  className="fa fa-trash" aria-hidden="true" id = {v.GuID} ></Icon></div>    
+          </div>
       
         )
       }           
-            </tbody>
-        </table>
-
+            </div>
+        </div>
+      {/* // Add to mailList */}
       </div>        
         <div className="form" style={{display:this.state.mailList}}>
         <Close callback = {this.close} />
         <h1>Add to mail list</h1>
-        <Input id="mailList" type="text" placeholder="Enter mail list name" callback = {this.callback}/>
+        <div className="inp_edit">
+        <Input id="mailList" type="text" text={"Mail List Name"} placeholder="Enter mail list name" callback = {this.callback}/>
+        </div>
         <Button className= {"CB1 popupBtn"} click = {this.addToMailList} name = {"Add To Mail List"}/>
-
-   </div>  
-     
-      <div className="form" style={{display:this.state.status1}}>
+      </div> 
+    {/* Edit Contact */}
+     <div className = "popup" style={{display:this.state.status1}}>
+      <div className="form" >
         <Close callback = {this.close} />
         <h1>Edit Contacts</h1>
-        <Input id="full" type="text" placeholder="Full Name" val = {this.state.name} callback = {this.callback}/>          
-        <Input id="company" type="text" placeholder="Company Name" val = {this.state.company} callback = {this.callback}/>
-        <Input id="emailaddress" type="text" placeholder="Email" val = {this.state.email} callback = {this.callback}/>
-        <Input id="country" type="test" placeholder="Country" val = {this.state.country} callback = {this.callback}/>
-        <Input id="position" type="text" placeholder="Position" val = {this.state.position} callback = {this.callback}/>
-        <Button className= {"CB1 popupBtn"} click = {this.updateContact} name = "Save"/>
-
-   </div>  
-      <div className="form" style={{display:this.state.status2}}>
+        <div className="inp_edit">
+          <Input id="full" type="text" text={"Full Name"} placeholder="Full Name" val = {this.state.name} callback = {this.callback}/>        
+          <Input id="company" type="text"  text={"Company"} placeholder="Company Name" val = {this.state.company} callback = {this.callback}/>
+          <Input id="emailaddress" type="text" text={"E-mail"} placeholder="Email" val = {this.state.email} callback = {this.callback}/>
+          <Input id="country" type="test" text={"Country"} placeholder="Country" val = {this.state.country} callback = {this.callback}/>
+          <Input id="position" type="text" text={"Position"} placeholder="Position" val = {this.state.position} callback = {this.callback}/>
+          <Button className= {"CB1 popupBtn"} click = {this.updateContact} name = "Save"/>
+        </div>
+     </div> 
+     </div> 
+     {/* Delete row */}
+     <div className="popup" style={{display:this.state.status2}}>
+      <div className="form">
         <h3>{this.state.text} </h3>
         <Button className={"CB1 popupBtn"} click={this.state.func} name = "Delete"/>
         <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
       </div>
-
+     </div>
                 {/* <Edit status1={this.state.status1} /> */}
 
             </Fragment>

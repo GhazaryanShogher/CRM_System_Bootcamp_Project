@@ -1,18 +1,49 @@
 .mailing_list{
     padding: 0;
     margin: 0;
-    height: 60px;
     display: flex;
 }
 
 .mailList_section {
     width: 20%;
-   
-    border: 1px solid white
-
+    /* box-shadow: 5px 1px 9px -1px rgba(245, 242, 242, 0.75); */
+    
 }
+.mailList_name {
+    width: 60%;
+    color: white;
+    padding: 10px;
+}
+.mailing_list_arr{
+    width: 10%;
+    display: flex;
+    
+}
+.mailList_section > div {
+    display: flex;
+    width: 85%;  
+    position: relative;
+    /* box-shadow: 1px 3px 27px -6px rgb(211, 216, 213); */
+}
+
+.mailList_section > div:hover{
+   /* width: 40%; */
+   font-size: 25px;
+   color: white;
+   box-shadow: 1px 3px 27px -6px rgb(211, 216, 213);
+}
+
 .mailing_info{
     width: 80%;
-    border: 1px solid white
 }
- 
+
+.mailing_list_del{
+    color: rgb(184, 178, 178);
+    width: 40%;
+    justify-content: center;
+    display: flex;
+    padding: 15px;
+}
+.mailing_list_del{
+    width: 40%;
+}

@@ -25,7 +25,7 @@ class MainPage extends Component {
                 buttons.push(<Button className ="contacts" key={i} move={"move"+`${i}`} status = {this.state.status} name ={<Link className="mainA" to="/Contacts"><Icon className ="fa fa-users"/></Link>}></Button>);
             }
             else if (i !== 2 && i !== 6) {
-                buttons.push(<Button className ="otherBtns" key={i} move={"move"+`${i}`} status = {this.state.status} name ={<Icon className ="fa fa-refresh"/>}></Button>);
+                buttons.push(<Button className ="otherBtns" key={i} move={"move"+`${i}`} status = {this.state.status} ><Icon className ="fa fa-users"/></Button>);
             }
         }
         return (

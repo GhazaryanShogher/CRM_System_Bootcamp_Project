@@ -24,19 +24,14 @@ class MailingList extends Component{
     return(
         <div className="mailing_list">
             <div className= "mailList_section">
-              <table>
-                <tbody>
                 {this.state.mailLists.map((v,i) =>
-          
-          <tr >
-            {/* <td  className="checkbox"><Input val={v.EmailListID} type = "text"/></td> */}
-            <td style={{contenteditable:this.state.editTd}}>{v.EmailListName}</td>
-            <td onClick = {this.editContact} className="editbox" id = {v.GuID}><Icon  className={"fas fa-sort-down"} aria-hidden="true" id = {v.GuID} ></Icon></td>
-            <td onClick = {this.deleteRow} className="editbox" id = {v.GuID}><Icon  className="fa fa-trash" aria-hidden="true" id = {v.GuID} ></Icon></td>    
-          </tr>
-        )}           
-                </tbody>
-              </table>  
+            <div >
+            <div className= "mailList_name" style={{contenteditable:this.state.editTd}}>{v.EmailListName}</div>
+            <div className="mailing_list_del" onClick = {this.deleteRow} id = {v.GuID}><Icon  className={"fa fa-trash" } id = {v.GuID} ></Icon></div>    
+            <div  className="mailing_list_arr" id = {v.GuID}><Icon  className={"fa fa-chevron-right" }id = {v.GuID} ></Icon></div>
+          </div>
+         )}           
+                 
             </div>
             <div className="mailing_info"></div>
         </div>

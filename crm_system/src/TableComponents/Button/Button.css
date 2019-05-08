@@ -1,9 +1,9 @@
 
   .CB1{
-    border: 2px solid #fbfbfb;
+    border: 2px solid #d6cbc1;
     width: 12%;
     /* line-height: 2%; */
-    color: white;
+    color: #eee8e2;
     background: #021323;
     border-radius: 40px;
     margin-left: 10px;
@@ -11,15 +11,17 @@
     outline: none;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+    cursor: pointer;
   }
   .popupBtn{
-    /* padding: 5px; */
+    padding: 5px;
     width: 40%;
+    background: #56595c;
+    margin: 10px auto;
   }
   .CB1:hover{
-    color: black;
     box-shadow: -3px 2px 31px -7px rgba(248, 248, 248, 0.75);
-    background: linear-gradient(to bottom, rgb(237, 240, 241) 0%, rgba(237, 240, 241) 50%, rgba(237, 240, 241) 51%, rgba(237, 240, 241) 100%);
+    
   }
   
   .CB1:active{

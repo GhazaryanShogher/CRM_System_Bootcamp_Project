@@ -104,7 +104,7 @@ class TableContent extends Component{
       .then(()=>{this.setState({del: [], mailList: "none",})})
     }
 
-    addToMailList = () => {
+    addtoMailListPopup = () => {
       fetch('http://visual.istclabz.com:2112/api/emaillists')
         .then((resp) => {return resp.json()})
         .then((results) => {
@@ -284,7 +284,7 @@ callback = (e) => {
                     <Button name={"Add to Mail List"} click = {this.addtoMailListPopup} className= "CB1" disabled={this.state.disabled}></Button>
                     <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}></Button>
                     <Button name={"Add to Contact"}  className= "CB1" click = {this.addContact}></Button>
-                    <Button name={"Create Mailing List"}  className= "CB1"> </Button>
+                    <Button name={"Create Mailing List"}  click = {this.createMailListPopup} className= "CB1"></Button>
                     <Button name={"Upload"} className= "CB1" ></Button>
               </div>
           <div className="table_box">
@@ -322,17 +322,27 @@ callback = (e) => {
       
         )
       }   
-      </div>        
-      {/* // Add to mailList */}
-            
-        <div className="form" style={{display:this.state.mailList}}>
+      </div>   
+       {/* create mailing list popup     */}
+       <div className="form" style={{display:this.state.newList}}>
+       <Close callback = {this.close} />
+       <h1>Create mail list</h1>
+       <Input id="mailList" type="text" placeholder="Enter mail list name" callback = {this.callback}/>
+       <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {"Create Mail List"}/>
+       </div>
+
+      {/*add to existing mailing list popup */}
+         <div className="form" style={{display:this.state.mailList}}>
         <Close callback = {this.close} />
-        <h1>Add to mail list</h1>
-        {/* <div className="inp_edit"> */}
-        <Input id="mailList" type="text" text={"Mail List Name"} placeholder="Enter mail list name" callback = {this.callback}/>
-        {/* </div> */}
-        <Button className= {"CB1 popupBtn"} click = {this.addToMailList} name = {"Add To Mail List"}/>
-      </div> 
+        <h1>Add to mail list</h1>      
+        <div className="inp_edit">
+        {this.state.lists.map((v,i) =>
+        <Div name = {v.EmailListName} id = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
+        )}
+        <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {"Add To Mail List"}/>
+        </div>  
+        </div>
+        
     {/* Edit Contact */}
      <div className = "popup" style={{display:this.state.status1}}>
       <div className="form" >

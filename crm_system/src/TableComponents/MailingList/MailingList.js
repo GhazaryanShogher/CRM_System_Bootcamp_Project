@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './MailingList.css';
 import '../tableContent/tableContent.css';
 import Input from '../Input/Input';
-import Tr from '../../Tr/Tr';
+import Div from '../../Div/Div';
 import Icon from '../Icon/Icon';
 import Close from '../Close/Close';
 import Button from '../Button/Button';
@@ -17,7 +17,15 @@ class MailingList extends Component{
   }
 
   showList = (e) => {
-    console.log(e.target)
+    this.setState({listId:""})
+    
+    fetch(`http://visual.istclabz.com:2112/api/emaillists?id=${this.state.listId}`,{
+      method: 'GET',
+      headers: {
+      "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    .then(() =>this.setState({status: "none",listId:""}))
 
   }
 
@@ -30,14 +38,14 @@ class MailingList extends Component{
     this.setState({listId: e.target.id,status:"block"});
   } 
 
-  deleteContact = () => {
+  deleteList = () => {
     fetch(`http://visual.istclabz.com:2112/api/emaillists?id=${this.state.listId}`,{
       method: 'DELETE',
       headers: {
       "Content-type": "application/json; charset=UTF-8"
       }
     })
-    .then(() =>this.setState({status: "none"}))
+    .then(() =>this.setState({status: "none",listId:""}))
   }
 
     componentDidMount(){
@@ -63,16 +71,16 @@ class MailingList extends Component{
                 {this.state.mailLists.map((v,i) =>
 
             <div >
-            <div className= "mailList_name" style={{contenteditable:this.state.editTd}}>{v.EmailListName}</div>
-            <div className="mailing_list_del" onClick = {this.deleteRow} id = {v.GuID}><Icon  className={"fa fa-trash" } id = {v.GuID} ></Icon></div>    
-            <div  className="mailing_list_arr" id = {v.GuID}><Icon  className={"fa fa-chevron-right" }id = {v.GuID} ></Icon></div>
+                <Div className = {"mailList_name"}  name = {v.EmailListName} id = {v.EmailListID} click = {this.showList}></Div>
+                <Div className = {"mailing_list_del"} click = {this.deleteRow}  name = {<Icon  className={"fa fa-trash" } id = {v.EmailListID}></Icon>} ></Div>    
+                <Div  className = {"mailing_list_arr}"} name = {<Icon  className={"fa fa-chevron-right" }></Icon>} id = {v.EmailListID}></Div>
           </div>
          )}           
                 
             </div>
             <div className="form" style={{display:this.state.status}}>
                 <h3>{this.state.text} </h3>
-                <Button className={"CB1 popupBtn"} click={this.deleteContact} name = "Delete"/>
+                <Button className={"CB1 popupBtn"} click={this.deleteList} name = "Delete"/>
                 <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
             </div>
             <div className="mailing_info"></div>

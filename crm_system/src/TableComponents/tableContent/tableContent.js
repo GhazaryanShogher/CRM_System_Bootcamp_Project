@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import {connect} from 'react-redux';
-import * as actions from '../../Actions/actions';
-import {bindActionCreators} from 'redux';
+// import {connect} from 'react-redux';
+// import * as actions from '../../Actions/actions';
+// import {bindActionCreators} from 'redux';
 import './tableContent.css';
 import Icon from '../Icon/Icon';
 import Close from '../Close/Close';
@@ -26,7 +26,6 @@ class TableContent extends Component{
         lists:[],
         templateId:"",
         listName:"",
-        disabled:true,
         checked:"",
         disabled:true,
         status: "none",
@@ -34,7 +33,7 @@ class TableContent extends Component{
         status2: "none",
         mailList: "none",
         newList:"none",
-        func:"",
+        func: function() {},
         text: "",
         delete: "",
     };
@@ -62,17 +61,10 @@ class TableContent extends Component{
         this.setState({newList: "block"})
     }
 
-  componentDidMount(){  
-    fetch('http://visual.istclabz.com:2112/api/contacts')
-      .then((resp) => {return resp.json()})
-      .then((results) => { 
-      this.setState({data: results})
-    })
-  }  
 //create new contact
   createMailList = () => {
       fetch('http://visual.istclabz.com:2112/api/emaillists',{
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify({
           "EmailListName": this.state.createList,
           "Contacts":  this.state.del
@@ -87,7 +79,6 @@ class TableContent extends Component{
     // get mail list Id
     getListId = (e) => {
       this.setState({listId: e.target.id,listName:e.target.text})
-
     }
 
     //add to existing mail list
@@ -256,7 +247,8 @@ callback = (e) => {
     case "mailList":
     this.setState({createList:e.target.value})
     break;
-    
+    default: 
+    break;
   }
 }
 
@@ -309,7 +301,7 @@ callback = (e) => {
             <div className="overflow_div">
             {this.state.data.map((v,i) =>
             
-          <div className="tbl_content">
+          <div className="tbl_content" key={i}>
             <div onClick = {this.checked} className="checkbox"><Input class="check" val={v.GuID} type = "checkbox"/></div>
             <div className="td_style" style={{contenteditable:this.state.editTd}}>{v["Full Name"]}</div>
             <div className="td_style" style={{contenteditable:this.state.editTd}}>{v["Company Name"]}</div>
@@ -337,7 +329,7 @@ callback = (e) => {
         <h1>Add to mail list</h1>      
         <div className="inp_edit">
         {this.state.lists.map((v,i) =>
-        <Div name = {v.EmailListName} id = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
+        <Div key={i} name = {v.EmailListName} listId = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
         )}
         <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {"Add To Mail List"}/>
         </div>  
@@ -370,16 +362,17 @@ callback = (e) => {
         );
     }
 }
-const mapStateToprops = (state) => {
+// const mapStateToprops = (state) => {
   
-  return {
-    counter:state.result
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  const {get,del} = bindActionCreators(actions,dispatch);
-  return{
-    get,del 
-  }
-}
-export default connect (mapStateToprops, mapDispatchToProps)(TableContent);
+//   return {
+//     counter:state.result
+//   }
+// }
+// const mapDispatchToProps = (dispatch) => {
+//   const {get,del} = bindActionCreators(actions,dispatch);
+//   return{
+//     get,del 
+//   }
+// }
+// export default connect (mapStateToprops, mapDispatchToProps)(TableContent);
+export default TableContent;

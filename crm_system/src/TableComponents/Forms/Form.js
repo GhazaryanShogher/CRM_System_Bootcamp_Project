@@ -50,6 +50,8 @@ class Form extends Component {
       case "position":
       this.setState({position:e.target.value})
       break;
+      default:
+      break;
     }
   }
 

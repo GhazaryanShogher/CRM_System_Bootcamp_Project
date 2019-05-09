@@ -328,9 +328,9 @@ callback = (e) => {
         <div className="form" style={{display:this.state.mailList}}>
         <Close callback = {this.close} />
         <h1>Add to mail list</h1>
-        <div className="inp_edit">
+        {/* <div className="inp_edit"> */}
         <Input id="mailList" type="text" text={"Mail List Name"} placeholder="Enter mail list name" callback = {this.callback}/>
-        </div>
+        {/* </div> */}
         <Button className= {"CB1 popupBtn"} click = {this.addToMailList} name = {"Add To Mail List"}/>
       </div> 
     {/* Edit Contact */}
@@ -356,7 +356,7 @@ callback = (e) => {
         <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
       </div>
       </div>
-            </Fragment>
+  </Fragment>
         );
     }
 }

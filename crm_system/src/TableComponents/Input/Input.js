@@ -10,7 +10,7 @@ class Input extends Component {
     return (
           <div className="w3-rest">
               <label >{this.props.text}</label>
-              <input value = {this.props.val} id={this.props.id} className={this.props.class} type={this.props.type} placeholder={this.props.placeholder} required onChange = {this.props.callback}/>
+              <input value = {this.props.val} id={this.props.id} display = {this.props.display} className={this.props.class} type={this.props.type} placeholder={this.props.placeholder} required onChange = {this.props.callback}/>
           </div>
     );
   }

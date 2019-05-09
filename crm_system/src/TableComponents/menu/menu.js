@@ -22,7 +22,7 @@ class Menu extends Component{
   render(){
     return(
       <div className="menu">
-        <Button disabled={this.state.contactButtonStatus} name = {<Link className={this.state.contactLinkStatus} to="/Contacts">Contats</Link>}  className= {"CB1 menu_btn" }/>          
+        <Button disabled={this.state.contactButtonStatus} name = {<Link className={this.state.contactLinkStatus} to="/Contacts">Contacts</Link>}  className= {"CB1 menu_btn" }/>          
         <Button disabled={this.state.mailButtonStatus} name = {<Link className={this.state.mailLinkStatus} to="Mailinglist">MailingList</Link>}  className= {"CB1 menu_btn"} />        
       </div>
     );

@@ -19,7 +19,7 @@ class Edit extends Component {
 // Edit popup
   render() {
     return (
-    <div style = {{display:this.state.display}}>
+    <div  className="popup" style = {{display:this.state.display}}>
         <div className="form" style={{display:this.props.status1}}>
             <Close callback = {this.close} />
             <h1>Edit Contacts</h1>

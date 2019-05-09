@@ -5,10 +5,41 @@
 }
 
 .mailList_section {
-    width: 20%;
-
+    width: 20%;   
 }
+.mailList_name {
+    width: 60%;
+    color: white;
+    padding: 10px;
+}
+.mailing_list_arr{
+    width: 10%;
+    display: flex;
+    
+}
+.mailList_section > div {
+    display: flex;
+    width: 85%;  
+    position: relative;
+}
+
+.mailList_section > div:hover{
+   font-size: 25px;
+   color: white;
+   box-shadow: 1px 3px 27px -6px rgb(211, 216, 213);
+}
+
 .mailing_info{
     width: 80%;
 }
- 
+
+.mailing_list_del{
+    color: rgb(184, 178, 178);
+    width: 40%;
+    justify-content: center;
+    display: flex;
+    padding: 15px;
+}
+.mailing_list_del{
+    width: 40%;
+}

@@ -64,12 +64,15 @@ class Form extends Component {
         <div className="form" style={{display:this.props.status}}>
             <Close callback = {this.close} />
             <h1>Create New Contact</h1>
-            <Input id="full" type="text" placeholder="Full Name" callback = {this.callback}/>          
-            <Input id="company" type="text" placeholder="Company Name" callback = {this.callback}/>
-            <Input id="emailaddress" type="text" placeholder="Email" callback = {this.callback}/>
-            <Input id="country" type="test" placeholder="Country" callback = {this.callback}/>
-            <Input id="position" type="text" placeholder="Position" callback = {this.callback}/>
-            <Button className={ "CB1 popupBtn" } name = "Create contact" click = {this.postRequest }/>
+            <div className="inp_edit">
+              <Input id="full" type="text" text={"Full Name"} placeholder="Full Name" callback = {this.callback}/>          
+              <Input id="company" type="text" text={"Company"} placeholder="Company Name" callback = {this.callback}/>
+              <Input id="emailaddress" type="text"  text={"E-mail"}placeholder="Email" callback = {this.callback}/>
+              <Input id="country" type="test" text={"Country"} placeholder="Country" callback = {this.callback}/>
+              <Input id="position" type="text" text={"Position"} placeholder="Position" callback = {this.callback}/>
+            </div>
+              <Button className={ "CB1 popupBtn" } name = "Create contact" click = {this.postRequest }/>
+            
         </div>
       </div>
     );

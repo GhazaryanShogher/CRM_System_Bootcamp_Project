@@ -3,7 +3,14 @@ input{
     outline: none;
     border-radius: 10px;
     padding: 2%;
-  }
+    background: #d6d3ce;
+    margin-left: 5px;
+}
   .w3-rest{
-      margin: 5px 0;
+    display: flex;
+    margin: 5px 0;
+    justify-content: flex-end;
   }
+label {
+    font-size: 14px;
+}

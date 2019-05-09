@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import './Input.css';
 
 class Input extends Component {
-    constructor(props){
-        super(props)
-    }
+    
 
     callback = () => this.props.callback;
 
   render() {
     return (
           <div className="w3-rest">
-              <input value = {this.props.val} id={this.props.id} type={this.props.type} placeholder={this.props.placeholder} required onChange = {this.props.callback} value={this.props.val} display = {this.props.display}/>
+              <label >{this.props.text}</label>
+              <input value = {this.props.val} id={this.props.id} display = {this.props.display} className={this.props.class} type={this.props.type} placeholder={this.props.placeholder} required onChange = {this.props.callback}/>
           </div>
     );
   }

@@ -47,8 +47,9 @@
     text-decoration: none;
     color: white;
 }
-i {
-    margin: auto;
+#iconColor {
+    color: white;
+    margin: auto
 }
 @keyframes shadow {
     from {

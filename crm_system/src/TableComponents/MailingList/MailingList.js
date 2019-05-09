@@ -14,7 +14,7 @@ class MailingList extends Component{
     template: "",
     emailId: "",
     contactsList:"none",
-    listId: "",
+    listId: 0,
   }
 
   showList = (e) => {    
@@ -94,7 +94,7 @@ class MailingList extends Component{
                 {this.state.mailLists.map((v,i) => 
             <div key={i}>
                 <Div className = {"mailList_name"}  name = {v.EmailListName} listId = {v.EmailListID} click = {this.showList}></Div>
-                <Div className = {"mailing_list_del"} click = {this.deleteRow}  name = {<Icon  className={"fa fa-trash" } listId = {v.EmailListID}></Icon>} ></Div>    
+                <Div className = {"mailing_list_del"} click = {this.deleteRow}  name = {<Icon  className={"fa fa-trash" } id = {v.EmailListID}></Icon>} ></Div>    
                 <Div  className = {"mailing_list_arr}"} click = {this.popup} name = {<Icon  className={"fa fa-chevron-right" }></Icon>} listId = {v.EmailListID}></Div>
 
           </div>
@@ -102,7 +102,7 @@ class MailingList extends Component{
                 
             </div>
             <div className="form" style={{display:this.state.status}}>
-                <h3>{this.state.text} </h3>
+                <h3>Delete Mailing List?</h3>
                 <Button className={"CB1 popupBtn"} click={this.deleteList} name = "Delete"/>
                 <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
             </div>

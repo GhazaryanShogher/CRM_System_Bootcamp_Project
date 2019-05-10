@@ -16,10 +16,10 @@
        transition-duration: 0.4s;
        box-shadow: -1px -1px 20px 0px rgba(126,161,137,1);
        display: flex;
-       animation: shadow 1.4s infinite alternate;
+       animation: shadow1 1.4s infinite alternate;
        cursor: pointer;
    }
-@keyframes shadow {
+@keyframes shadow1 {
     from {
         box-shadow: 0 0 10px 10px white;
     }

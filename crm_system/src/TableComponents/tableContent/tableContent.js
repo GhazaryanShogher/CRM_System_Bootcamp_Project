@@ -64,7 +64,7 @@ class TableContent extends Component{
 //create new contact
   createMailList = () => {
       fetch('http://visual.istclabz.com:2112/api/emaillists',{
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify({
           "EmailListName": this.state.createList,
           "Contacts":  this.state.del

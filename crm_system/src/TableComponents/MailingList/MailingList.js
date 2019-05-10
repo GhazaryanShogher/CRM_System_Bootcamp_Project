@@ -9,8 +9,12 @@ class MailingList extends Component{
   state = {
     mailLists:[],
     status:"none",
-    contactsList:"none",
+    statusPopup:"none",
     listOfContacts:"",
+    template: "",
+    emailId: "",
+    contactsList:"none",
+    listId: 0,
   }
 
   showList = (e) => {    
@@ -24,9 +28,34 @@ class MailingList extends Component{
   }
 
   close = () => {
+    if (this.state.status === "block") {
       this.setState({status:"none"})
+    }
+    if (this.state.statusPopup === "block") {
+      this.setState({statusPopup:"none"}) 
+    }
+      
 }
-
+  // Send Email
+  popup = (e) => {
+    this.setState({statusPopup:"block", emailId: e.target.id})
+    console.log(e.target.id)
+  }
+  templateClick = (e) => {
+    this.setState({template: e.target.id})
+    console.log(e.target.id)
+  }
+  sendEmail = () => {
+    fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.template}&emaillistId=${this.state.emailId}`, {
+      method: 'Post',
+      headers: {
+      "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    .then(() => this.setState({emailId:"", template:""}))
+    this.setState({statusPopup: "none"})
+  }
+  
   // Delete row
   deleteRow = (e) => {
     this.setState({listId: e.target.id,status:"block"});
@@ -66,16 +95,29 @@ class MailingList extends Component{
             <div key={i}>
                 <Div className = {"mailList_name"}  name = {v.EmailListName} listId = {v.EmailListID} click = {this.showList}></Div>
                 <Div className = {"mailing_list_del"} click = {this.deleteRow}  name = {<Icon  className={"fa fa-trash" } id = {v.EmailListID}></Icon>} ></Div>    
-                <Div className = {"mailing_list_arr}"} name = {<Icon  className={"fa fa-chevron-right" }></Icon>} id = {v.EmailListID}></Div>
+                <Div  className = {"mailing_list_arr}"} click = {this.popup} name = {<Icon  className={"fa fa-chevron-right" }></Icon>} listId = {v.EmailListID}></Div>
+
           </div>
          )}           
                 
             </div>
             <div className="form" style={{display:this.state.status}}>
-                <h3>{this.state.text} </h3>
+                <h3>Delete Mailing List?</h3>
                 <Button className={"CB1 popupBtn"} click={this.deleteList} name = "Delete"/>
                 <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
             </div>
+
+    
+            <div className="popup" style={{display:this.state.statusPopup}}>
+              <div className="form">
+                <h3>Choose Template</h3>
+                <Button className={"CB1 popupBtn"} click={this.templateClick} id ={"1"} name = {"Anniversary"}/>
+                <Button className={"CB1 popupBtn"} click={this.templateClick} id ={"2"} name = {"Birthday"}/>
+                <Button className={"CB1 popupBtn"} click={this.templateClick} id ={"3"} name = {"Christmas"}/>
+                <Button className={"CB1 popupBtn"} click={this.sendEmail} name = "Send Email"/>
+                <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
+              </div>
+                </div>
             <div style={{display:this.state.contactsList}} className="mailing_info">
             <div className="table_box">
 
@@ -109,6 +151,7 @@ class MailingList extends Component{
       
         ): null }   
       </div>   
+
             </div>
         </div>
     ); 

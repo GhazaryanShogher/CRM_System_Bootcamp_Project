@@ -95,7 +95,7 @@ class MailingList extends Component{
             <div key={i}>
                 <Div className = {"mailList_name"}  name = {v.EmailListName} listId = {v.EmailListID} click = {this.showList}></Div>
                 <Div className = {"mailing_list_del"} click = {this.deleteRow}  name = {<Icon  className={"fa fa-trash" } id = {v.EmailListID}></Icon>} ></Div>    
-                <Div  className = {"mailing_list_arr}"} click = {this.popup} name = {<Icon  className={"fa fa-chevron-right" }></Icon>} listId = {v.EmailListID}></Div>
+                <Div  className = {"mailing_list_arr"} click = {this.popup} name = {<Icon  className={"fa fa-envelope-open-o" }></Icon>} listId = {v.EmailListID}></Div>
 
           </div>
          )}           

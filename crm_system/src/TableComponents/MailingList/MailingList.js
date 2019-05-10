@@ -117,7 +117,7 @@ class MailingList extends Component{
                 <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
             </div>
 
-    
+           {/* Choose template */}
             <div className="popup" style={{display:this.state.statusPopup}}>
               <div className="form">
                 <h3>Choose Template</h3>

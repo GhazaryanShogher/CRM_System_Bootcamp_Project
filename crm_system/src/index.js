@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import reducer from './Redusers/reducer';
 import { Provider } from 'react-redux';
+import {addLocaleData} from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import am from 'react-intl/locale-data/am';
 
 import './index.css';
 import App from './App';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import * as serviceWorker from './serviceWorker';
 
+addLocaleData(en);
+addLocaleData(am);
 const store = createStore(reducer);
 
 ReactDOM.render(

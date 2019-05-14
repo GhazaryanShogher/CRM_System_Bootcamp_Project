@@ -15,4 +15,15 @@
     /* box-shadow:  -1px 18px 25px 0px rgb(232, 238, 234); */
     
   }
-  
+  .form div {
+    margin: 5px;
+  }
+  .form span {
+   color: #d6d3ce;
+   margin-left: 5px;
+   cursor: pointer;
+   padding: 5px;
+  }
+  .form span:hover {
+    font-size: 25px;
+  }

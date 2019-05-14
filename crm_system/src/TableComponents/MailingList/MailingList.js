@@ -104,7 +104,7 @@ class MailingList extends Component{
             <div key={i}>
                 <Div className = {"mailList_name"}  name = {v.EmailListName} listId = {v.EmailListID} click = {this.showList}></Div>
                 <Div className = {"mailing_list_del"} click = {this.deleteRow}  name = {<Icon  className={"fa fa-trash" } id = {v.EmailListID}></Icon>} ></Div>    
-                <Div  className = {"mailing_list_arr}"} click = {this.popup} name = {<Icon  className={"fa fa-chevron-right" }></Icon>} listId = {v.EmailListID}></Div>
+                <Div  className = {"mailing_list_arr"} click = {this.popup} name = {<Icon  className={"fa fa-envelope-open-o" }></Icon>} listId = {v.EmailListID}></Div>
 
           </div>
          )}           
@@ -121,9 +121,9 @@ class MailingList extends Component{
             <div className="popup" style={{display:this.state.statusPopup}}>
               <div className="form">
                 <h3>Choose Template</h3>
-                <Icon className={"fa fa-gift"} click={this.templateClick} id ={"1"} />
-                <Icon className={"fa fa-birthday-cake"} click={this.templateClick} id ={"2"} />
-                <Icon className={"fa fa-tree"} click={this.templateClick} id ={"3"}/>
+                <div onClick={this.templateClick}><Icon className={"fa fa-gift"}  id ={"1"}/><span>Happy Anniaversary!</span></div>               
+                <div onClick={this.templateClick} > <Icon className={"fa fa-birthday-cake"}  id ={"2"}/><span>Happy Birthday!</span></div>
+                <div onClick={this.templateClick}><Icon className={"fa fa-tree"}  id ={"3"}/><span>Marry Chtistmas!</span></div>
                 <Button className={"CB1 popupBtn"} click={this.sendEmail} name = "Send Email"/>
                 <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
               </div>

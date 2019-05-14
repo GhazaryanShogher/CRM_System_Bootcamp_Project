@@ -9,7 +9,7 @@ import Button from '../Button/Button';
 import Form from '../Forms/Form';
 import Input from '../Input/Input';
 import Div from '../../Div/Div';
-import Overlay from '../overlay/overlay';
+import Overlay  from '../Overlay/overlay';
 
 class TableContent extends Component{
     state = {

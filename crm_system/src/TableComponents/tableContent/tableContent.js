@@ -9,6 +9,7 @@ import Button from '../Button/Button';
 import Form from '../Forms/Form';
 import Input from '../Input/Input';
 import Div from '../../Div/Div';
+import Overlay from '../overlay/overlay';
 
 class TableContent extends Component{
     state = {
@@ -36,6 +37,7 @@ class TableContent extends Component{
         func: function() {},
         text: "",
         delete: "",
+        loading:true,
     };
     //Closing popup
     close = () => {
@@ -113,7 +115,7 @@ class TableContent extends Component{
       fetch('http://visual.istclabz.com:2112/api/contacts')
         .then((resp) => {return resp.json()})
         .then((results) => { 
-        this.setState({data: results})
+        this.setState({data: results, loading:false})
       })
     }
     //get template id
@@ -256,7 +258,7 @@ callback = (e) => {
     fetch('http://visual.istclabz.com:2112/api/contacts')
         .then((resp) => {return resp.json()})
         .then((results) => {
-         this.setState({data: results})
+         this.setState({data: results,})
     })
   
   }
@@ -264,6 +266,7 @@ callback = (e) => {
     render() {
         return (
             <Fragment>
+              {this.state.loading && <Overlay />}
               <div className="btnBox">
                 <Form status = {this.state.status}/>
                   <select onChange = {this.templateId}>
@@ -277,7 +280,7 @@ callback = (e) => {
                     <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}></Button>
                     <Button name={"Add to Contact"}  className= "CB1" click = {this.addContact}></Button>
                     <Button name={"Create Mailing List"}  click = {this.createMailListPopup} className= "CB1"></Button>
-                    <Button name={"Upload"} className= "CB1" ></Button>
+                    {/* <Button name={"Upload"} className= "CB1" ></Button> */}
               </div>
           <div className="table_box">
 
@@ -319,7 +322,7 @@ callback = (e) => {
        <div className="form" style={{display:this.state.newList}}>
        <Close callback = {this.close} />
        <h1>Create mail list</h1>
-       <Input id="mailList" type="text" placeholder="Enter mail list name" callback = {this.callback}/>
+       <Input id="mailList" text={"Mail List Name"} type="text" placeholder="Enter mail list name" callback = {this.callback}/>
        <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {"Create Mail List"}/>
        </div>
 
@@ -329,7 +332,7 @@ callback = (e) => {
         <h1>Add to mail list</h1>      
         <div className="inp_edit">
         {this.state.lists.map((v,i) =>
-        <Div key={i} name = {v.EmailListName} listId = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
+        <Div key={i} name = {v.EmailListName}  className = {"existing_mailList_name"} listId = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
         )}
         <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {"Add To Mail List"}/>
         </div>  

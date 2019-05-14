@@ -1,6 +1,7 @@
 .table_header {
     display: flex;
     padding: 5px;
+    border-radius: 5px;
     border: 1px solid #9ca290;
 }
 .header_name{
@@ -24,6 +25,7 @@
 }
 .tbl_content{
     display: flex;
+    border: 1px solid #827575
 }
 
 
@@ -49,7 +51,8 @@ div {
     box-shadow:  0px -1px 31px -6px rgba(245, 242, 242, 0.75);
 }
 .overflow_div {
-    /* height: 300px; */
+    min-height: 350px;
+    border-radius: 5px;
     overflow-y: auto;
     box-shadow:  0px -1px 31px -6px rgba(245, 242, 242, 0.75);
 }
@@ -94,12 +97,12 @@ border-radius: 10px;
 }
     /* Handle */
 ::-webkit-scrollbar-thumb {
-background: rgb(148, 212, 212); 
+background:#aca9a9;
 border-radius: 10px;
 }
     /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-background: rgb(148, 212, 212);; 
+background: #aca9a9;
 }
 select {
     border-radius: 20px;
@@ -124,3 +127,6 @@ select {
       width: 80%;
       margin: auto;
   }
+ .fa{
+     font-size: 1px
+ }

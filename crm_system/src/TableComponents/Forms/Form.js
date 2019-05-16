@@ -3,6 +3,7 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 import Close from '../Close/Close';
 import './Form.css';
+import Div from "../../Div/Div";
 
 class Form extends Component {
   state = {
@@ -11,26 +12,47 @@ class Form extends Component {
     country:"",
     email:"",
     position:"",
-    display:"block"
+    display:"block",
+    warningDisplay: "none",
+    warningText: "",
   }
   postRequest = () => {
-    return fetch('http://visual.istclabz.com:2112/api/contacts', {
-      method: 'POST',
-      body: JSON.stringify({
-        "FullName": this.state.name,
-        "CompanyName": this.state.company,
-        "Position": this.state.position,
-        "Country": this.state.country,
-        "Email": this.state.email,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    }).then(response => {
-            return response.json()
-    }).then(json => {
-      console.log(json)
-    })
+    let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (this.state.company === "" || this.state.country === "" || this.state.name === "" || this.state.position === "") {
+      return this.setState({warningDisplay: "block", warningText: "Please Enter Valid Information Text"})
+    } 
+    if (regEmail.test(this.state.email) === false) {
+      return this.setState({warningDisplay: "block", warningText: "Please Enter Valid Email Address"})
+    }
+    else {
+      return fetch('http://visual.istclabz.com:2112/api/contacts', {
+        method: 'POST',
+        body: JSON.stringify({
+          "FullName": this.state.name,
+          "CompanyName": this.state.company,
+          "Position": this.state.position,
+          "Country": this.state.country,
+          "Email": this.state.email,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      }).then(response => {
+              return response.json()
+      }).then(json => {
+        console.log(json)
+      }).then(() => {
+        this.setState({
+          name: "",
+          email: "",
+          company: "",
+          country: "",
+          position: "",
+          warningDisplay: "none",
+          warningText: "",
+        })
+      })
+    }
   }
 
   callback = (e) => {
@@ -73,6 +95,7 @@ class Form extends Component {
               <Input id="country" type="test" text={"Country"} placeholder="Country" callback = {this.callback}/>
               <Input id="position" type="text" text={"Position"} placeholder="Position" callback = {this.callback}/>
             </div>
+              <Div className = "warningText" display = {this.state.warningDisplay} name = {this.state.warningText}/>
               <Button className={ "CB1 popupBtn" } name = "Create contact" click = {this.postRequest }/>
             
         </div>

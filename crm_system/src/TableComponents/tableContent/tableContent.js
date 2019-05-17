@@ -38,6 +38,9 @@ class TableContent extends Component{
         text: "",
         delete: "",
         loading:true,
+        status3: "none",
+        delivery: "",
+        overStatus: "none",
     };
     //Closing popup
     close = () => {
@@ -217,17 +220,18 @@ editContact = (e) =>{
 
 // send email
 sendEmail = ()=>{
-  fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.templateId}`,{
-         method: 'POST',
+  this.setState({status3: "block", overStatus: "block"})
+      fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.templateId}`,{
+        method: 'POST',
         body: JSON.stringify(
-            this.state.del
+          this.state.del
         ),
-      headers: {
-       "Content-type": "application/json; charset=UTF-8"
-       }
-       })
-       .then(()=>{this.setState({del: []})})
-
+        headers: {
+        "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then(()=>{this.setState({del: [], delivery: "Email has been sent", overStatus: "none"})})
+      .then(() =>{setTimeout(()=> {this.setState({delivery: "", status3: "none"})}, 2000)})
 }
 callback = (e) => {
   switch(e.target.id){
@@ -360,6 +364,12 @@ callback = (e) => {
         <Button className={"CB1 popupBtn"} click={this.state.func} name = "Delete"/>
         <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
       </div>
+      </div>
+
+      {/*Loading Popup*/}
+      <div className="popup" style={{display:this.state.status3}}>
+          <Overlay status = {this.state.overStatus}/>
+          <h3 className = "delivery">{this.state.delivery}</h3> 
       </div>
   </Fragment>
         );

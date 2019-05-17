@@ -4,6 +4,7 @@ import '../tableContent/tableContent.css';
 import Div from '../../Div/Div';
 import Icon from '../Icon/Icon';
 import Button from '../Button/Button';
+import Overlay from "../Overlay/overlay";
 
 class MailingList extends Component{
   state = {
@@ -15,6 +16,9 @@ class MailingList extends Component{
     emailId: "",
     contactsList:"none",
     listId: 0,
+    status3: "none",
+    delivery: "",
+    overStatus: "none",
   }
 
   // showing list's contacts 
@@ -35,13 +39,12 @@ class MailingList extends Component{
     }
     if (this.state.statusPopup === "block") {
       this.setState({statusPopup:"none"}) 
-    }      
+    }
 }
 
   // Send Email
   popup = (e) => {
     this.setState({statusPopup:"block", emailId: e.target.id})
-    console.log(e.target.id)
   }
 
 //get template id during click
@@ -51,14 +54,15 @@ class MailingList extends Component{
 
   //send email to 
   sendEmail = () => {
+    this.setState({statusPopup: "none", status3: "block", overStatus: "block"})
     fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.template}&emaillistId=${this.state.emailId}`, {
       method: 'Post',
       headers: {
       "Content-type": "application/json; charset=UTF-8"
       }
     })
-    .then(() => this.setState({emailId:"", template:""}))
-    this.setState({statusPopup: "none"})
+    .then(() => this.setState({emailId:"", template:"", delivery: "Email has been sent", overStatus: "none"}))
+    .then(() =>{setTimeout(()=> {this.setState({delivery: "", status3: "none"})}, 2000)})
   }
   
   // Delete row
@@ -104,7 +108,7 @@ class MailingList extends Component{
             <div key={i}>
                 <Div className = {"mailList_name"}  name = {v.EmailListName} listId = {v.EmailListID} click = {this.showList}></Div>
                 <Div className = {"mailing_list_del"} click = {this.deleteRow}  name = {<Icon  className={"fa fa-trash" } id = {v.EmailListID}></Icon>} ></Div>    
-                <Div  className = {"mailing_list_arr"} click = {this.popup} name = {<Icon  className={"fa fa-envelope-open-o" }></Icon>} listId = {v.EmailListID}></Div>
+                <Div  className = {"mailing_list_arr"} click = {this.popup} name = {<Icon click = {this.popup} className={"fa fa-envelope-open-o"} id = {v.EmailListID}></Icon>} listId = {v.EmailListID}></Div>
 
           </div>
          )}           
@@ -121,9 +125,9 @@ class MailingList extends Component{
             <div className="popup" style={{display:this.state.statusPopup}}>
               <div className="form">
                 <h3>Choose Template</h3>
-                <div onClick={this.templateClick}><Icon className={"fa fa-gift"}  id ={"1"}/><span>Happy Anniaversary!</span></div>               
-                <div onClick={this.templateClick} > <Icon className={"fa fa-birthday-cake"}  id ={"2"}/><span>Happy Birthday!</span></div>
-                <div onClick={this.templateClick}><Icon className={"fa fa-tree"}  id ={"3"}/><span>Marry Chtistmas!</span></div>
+                <div onClick={this.templateClick} id = "1"><Icon click={this.templateClick} className={"fa fa-gift"}  id = "1"/><span onClick={this.templateClick} id = "1">Happy Anniaversary!</span></div>               
+                <div onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2">Happy Birthday!</span></div>
+                <div onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3">Marry Chtistmas!</span></div>
                 <Button className={"CB1 popupBtn"} click={this.sendEmail} name = "Send Email"/>
                 <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
               </div>
@@ -163,6 +167,11 @@ class MailingList extends Component{
       </div>   
 
             </div>
+            {/*Loading Popup*/}
+          <div className="popup" style={{display:this.state.status3}}>
+              <Overlay status = {this.state.overStatus}/>
+              <h3 className = "delivery">{this.state.delivery}</h3> 
+          </div>
         </div>
     ); 
   }

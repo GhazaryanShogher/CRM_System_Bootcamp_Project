@@ -14,8 +14,7 @@ class MailingList extends Component{
     template: "",
     emailId: "",
     contactsList:"none",
-    listId: 0,
-    del:[]
+    listId: 0
   }
 
   //remove from existing mail list
@@ -39,9 +38,8 @@ class MailingList extends Component{
     .then((resp) => {return resp.json()})
     .then((results) => { 
     this.setState({listOfContacts: results})
-  })  
+  })
     .then(() =>this.setState({contactsList: "block"}))
-
   }  
 
 // close icon or cancel
@@ -148,7 +146,7 @@ class MailingList extends Component{
             <div className="table_box">
 
               <div >
-                <div className="table_header" >
+                <div className="table_header">
                     <div className="header_name">Full Name</div>
                     <div className="header_name">Company Name</div>
                     <div className="header_name">Position</div>
@@ -158,7 +156,7 @@ class MailingList extends Component{
                 </div>
               </div>
               </div>
-            <div className="overflow_div" >
+            <div className="overflow_div">
             {this.state.listOfContacts !== "" ? this.state.listOfContacts.Contacts.map((v,i) => {
             
           return <div className="tbl_content" key={i}>

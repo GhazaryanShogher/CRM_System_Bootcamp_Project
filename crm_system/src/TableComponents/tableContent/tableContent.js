@@ -41,6 +41,9 @@ class TableContent extends Component{
     };
     //Closing popup
     close = () => {
+        if(this.state.status === "block"){
+          this.setState({status:"none"})
+        }
         if(this.state.status1 === "block"){
           this.setState({status1:"none"})
         }
@@ -268,7 +271,7 @@ callback = (e) => {
             <Fragment>
               {this.state.loading && <Overlay />}
               <div className="btnBox">
-                <Form status = {this.state.status}/>
+                <Form display = {this.state.status}  close = {this.close}/>
                   <select onChange = {this.templateId}>
                     <option value="0" onChange = {this.templateId}>Select a Template</option>
                     <option value="1" onChange = {this.templateId}>Anniversary</option>

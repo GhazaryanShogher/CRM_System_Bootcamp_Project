@@ -40,9 +40,15 @@ class TableContent extends Component{
         loading:true,
         messageEdit: "",
         warningDisplay: "none",
+        status3: "none",
+        delivery: "",
+        overStatus: "none",
     };
     //Closing popup
     close = () => {
+        if(this.state.status === "block"){
+          this.setState({status:"none"})
+        }
         if(this.state.status1 === "block"){
           this.setState({
             status1:"none",
@@ -234,17 +240,18 @@ editContact = (e) =>{
 
 // send email
 sendEmail = ()=>{
-  fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.templateId}`,{
-         method: 'POST',
+  this.setState({status3: "block", overStatus: "block"})
+      fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.templateId}`,{
+        method: 'POST',
         body: JSON.stringify(
-            this.state.del
+          this.state.del
         ),
-      headers: {
-       "Content-type": "application/json; charset=UTF-8"
-       }
-       })
-       .then(()=>{this.setState({del: []})})
-
+        headers: {
+        "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then(()=>{this.setState({del: [], delivery: "Email has been sent", overStatus: "none"})})
+      .then(() =>{setTimeout(()=> {this.setState({delivery: "", status3: "none"})}, 2000)})
 }
 callback = (e) => {
   switch(e.target.id){
@@ -285,7 +292,7 @@ callback = (e) => {
             <Fragment>
               {this.state.loading && <Overlay />}
               <div className="btnBox">
-                <Form status = {this.state.status}/>
+                <Form display = {this.state.status}  close = {this.close}/>
                   <select onChange = {this.templateId}>
                     <option value="0" onChange = {this.templateId}>Select a Template</option>
                     <option value="1" onChange = {this.templateId}>Anniversary</option>
@@ -300,11 +307,6 @@ callback = (e) => {
                     {/* <Button name={"Upload"} className= "CB1" ></Button> */}
               </div>
           <div className="table_box">
-
-              {/* <div>{this.props.counter}</div>
-              <button onClick = {this.props.get}>show</button>
-              <button onClick = {this.props.del}>delete</button> */}
-            
               <div>
                 <div className="table_header">
                     <div className="header_btn1">Select</div>
@@ -336,15 +338,17 @@ callback = (e) => {
       }   
       </div>   
        {/* create mailing list popup     */}
-       <div className="form" style={{display:this.state.newList}}>
+       <div className = "popup"style={{display:this.state.newList}}>
+       <div className="form" >
        <Close callback = {this.close} />
        <h1>Create mail list</h1>
        <Input id="mailList" text={"Mail List Name"} type="text" placeholder="Enter mail list name" callback = {this.callback}/>
        <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {"Create Mail List"}/>
        </div>
-
+       </div>
       {/*add to existing mailing list popup */}
-         <div className="form" style={{display:this.state.mailList}}>
+      <div className = "popup"style={{display:this.state.mailList}}>
+         <div className="form" >
         <Close callback = {this.close} />
         <h1>Add to mail list</h1>      
         <div className="inp_edit">
@@ -354,7 +358,7 @@ callback = (e) => {
         <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {"Add To Mail List"}/>
         </div>  
         </div>
-        
+        </div>
     {/* Edit Contact */}
      <div className = "popup" style={{display:this.state.status1}}>
       <div className="form" >
@@ -379,21 +383,14 @@ callback = (e) => {
         <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
       </div>
       </div>
+
+      {/*Loading Popup*/}
+      <div className="popup" style={{display:this.state.status3}}>
+          <Overlay status = {this.state.overStatus}/>
+          <h3 className = "delivery">{this.state.delivery}</h3> 
+      </div>
   </Fragment>
         );
     }
 }
-// const mapStateToprops = (state) => {
-  
-//   return {
-//     counter:state.result
-//   }
-// }
-// const mapDispatchToProps = (dispatch) => {
-//   const {get,del} = bindActionCreators(actions,dispatch);
-//   return{
-//     get,del 
-//   }
-// }
-// export default connect (mapStateToprops, mapDispatchToProps)(TableContent);
 export default TableContent;

@@ -3,7 +3,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 23%;
+    width: 25%;
     transform: translate(-50%,-50%);
     margin: 0 auto;
     color: rgb(240, 222, 190);
@@ -43,7 +43,7 @@
       font-size: 13px;
     }
     .popupBtn  {
-      padding: 2px !important;
+      padding: 10px !important;
       width: 45% !important;
     }
       

@@ -5,7 +5,7 @@ class Overlay extends Component{
 	
 	render(){
 		return(
-		<div className="overlay">
+		<div className="overlay" style={{display:this.props.status}}>
 		</div>
 		);
 		

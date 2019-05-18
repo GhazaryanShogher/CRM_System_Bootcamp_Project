@@ -77,21 +77,17 @@ class Form extends Component {
     }
   }
 
-  close = () => {
-    this.setState({display:"none"})
-  }
-
 // Registration popup
   render() {
     return (
-      <div style = {{display:this.state.display}}>
-        <div className="form" style={{display:this.props.status}}>
-            <Close callback = {this.close} />
+      <div style = {{display:this.props.display}}>
+        <div className="form" >
             <h1>Create New Contact</h1>
+            <Close callback = {this.props.close} />
             <div className="inp_edit">
               <Input id="full" type="text" text={"Full Name"} placeholder="Full Name" callback = {this.callback}/>          
               <Input id="company" type="text" text={"Company"} placeholder="Company Name" callback = {this.callback}/>
-              <Input id="emailaddress" type="text"  text={"E-mail"}placeholder="Email" callback = {this.callback}/>
+              <Input id="emailaddress" type="text" text={"E-mail"} placeholder="Email" callback = {this.callback}/>
               <Input id="country" type="test" text={"Country"} placeholder="Country" callback = {this.callback}/>
               <Input id="position" type="text" text={"Position"} placeholder="Position" callback = {this.callback}/>
             </div>

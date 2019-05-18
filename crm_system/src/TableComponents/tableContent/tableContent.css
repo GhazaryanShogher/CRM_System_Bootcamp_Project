@@ -127,4 +127,7 @@ select {
       width: 95%;
       margin: auto;
   }
+  .delivery {
+      color: red;
+  }
  

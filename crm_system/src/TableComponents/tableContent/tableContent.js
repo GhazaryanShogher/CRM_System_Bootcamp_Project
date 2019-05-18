@@ -44,6 +44,9 @@ class TableContent extends Component{
     };
     //Closing popup
     close = () => {
+        if(this.state.status === "block"){
+          this.setState({status:"none"})
+        }
         if(this.state.status1 === "block"){
           this.setState({status1:"none"})
         }
@@ -272,7 +275,7 @@ callback = (e) => {
             <Fragment>
               {this.state.loading && <Overlay />}
               <div className="btnBox">
-                <Form status = {this.state.status}/>
+                <Form display = {this.state.status}  close = {this.close}/>
                   <select onChange = {this.templateId}>
                     <option value="0" onChange = {this.templateId}>Select a Template</option>
                     <option value="1" onChange = {this.templateId}>Anniversary</option>
@@ -323,15 +326,17 @@ callback = (e) => {
       }   
       </div>   
        {/* create mailing list popup     */}
-       <div className="form" style={{display:this.state.newList}}>
+       <div className = "popup"style={{display:this.state.newList}}>
+       <div className="form" >
        <Close callback = {this.close} />
        <h1>Create mail list</h1>
        <Input id="mailList" text={"Mail List Name"} type="text" placeholder="Enter mail list name" callback = {this.callback}/>
        <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {"Create Mail List"}/>
        </div>
-
+       </div>
       {/*add to existing mailing list popup */}
-         <div className="form" style={{display:this.state.mailList}}>
+      <div className = "popup"style={{display:this.state.mailList}}>
+         <div className="form" >
         <Close callback = {this.close} />
         <h1>Add to mail list</h1>      
         <div className="inp_edit">
@@ -341,7 +346,7 @@ callback = (e) => {
         <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {"Add To Mail List"}/>
         </div>  
         </div>
-        
+        </div>
     {/* Edit Contact */}
      <div className = "popup" style={{display:this.state.status1}}>
       <div className="form" >

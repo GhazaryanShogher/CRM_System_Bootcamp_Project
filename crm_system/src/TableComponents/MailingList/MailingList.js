@@ -21,16 +21,30 @@ class MailingList extends Component{
     overStatus: "none",
   }
 
+  //remove from existing mail list
+  removeFromMailList = (e) => {
+    fetch(`http://visual.istclabz.com:2112/api/emaillists/update?id=${this.state.listId}&flag=false`,{
+      method: 'PUT',
+      body: JSON.stringify([`${e.target.id}`]        
+      ),
+      headers: {
+       "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+  }
+
+
   // showing list's contacts 
-  showList = (e) => {    
+  showList = (e) => {
+    this.setState({listId: e.target.id})
+    
     fetch(`http://visual.istclabz.com:2112/api/emaillists?id=${e.target.id}`)
     .then((resp) => {return resp.json()})
     .then((results) => { 
     this.setState({listOfContacts: results})
-  })  
+  })
     .then(() =>this.setState({contactsList: "block"}))
-
-  }
+  }  
 
 // close icon or cancel
   close = () => {
@@ -78,10 +92,10 @@ class MailingList extends Component{
       "Content-type": "application/json; charset=UTF-8"
       }
     })
-    .then(() =>this.setState({status: "none",listId:""}))
+    .then(() =>this.setState({status: "none", listId:"", contactsList:"none"}))
   }
 
-  // get email lists ang show in page
+  // get email lists and show in page
     componentDidMount(){
     fetch('http://visual.istclabz.com:2112/api/emaillists')
         .then((resp) => {return resp.json()})
@@ -135,15 +149,11 @@ class MailingList extends Component{
             <div style={{display:this.state.contactsList}} className="mailing_info">
             <div className="table_box">
 
-              {/* <div>{this.props.counter}</div>
-              <button onClick = {this.props.get}>show</button>
-              <button onClick = {this.props.del}>delete</button> */}
-            
               <div >
                 <div className="table_header">
                     <div className="header_name">Full Name</div>
                     <div className="header_name">Company Name</div>
-                    <div className="header_name" >Position</div>
+                    <div className="header_name">Position</div>
                     <div className="header_name">Counrty</div>
                     <div className="header_name">Email</div>
                     <div className="header_btn1">Delete</div>
@@ -157,9 +167,9 @@ class MailingList extends Component{
             <div className="td_style" style={{contenteditable:this.state.editTd}}>{v["Full Name"]}</div>
             <div className="td_style" style={{contenteditable:this.state.editTd}}>{v["Company Name"]}</div>
             <div className="td_style" style={{contenteditable:this.state.editTd}}>{v.Position}</div>
-            <div  className="td_style" style={{contenteditable:this.state.editTd}}>{v.Country}</div>
+            <div className="td_style" style={{contenteditable:this.state.editTd}}>{v.Country}</div>
             <div className="td_style" style={{contenteditable:this.state.editTd}}>{v.Email}</div>
-            <div  className="del_icon" id = {v.GuID}><Icon  className="fa fa-trash" aria-hidden="true" id = {v.GuID} ></Icon></div>    
+            <div className="del_icon" onClick = {this.removeFromMailList}><Icon  className="fa fa-trash" aria-hidden="true" id = {v.GuID} ></Icon></div>    
           </div>
             }
       

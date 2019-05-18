@@ -1,7 +1,7 @@
 input{
     border: 1px solid grey;
     outline: none;
-    width: 70%;
+    width: 60%;
     border-radius: 10px;
     padding: 2%;
     background: #d6d3ce;
@@ -10,9 +10,10 @@ input{
   .w3-rest{
     width: 80%;
     display: flex;
-    margin: 5px 0;
+    margin: 5px auto;
     justify-content: flex-end;
   }
 label {
-    font-size: 14px;
+    font-size: 16px;
+    padding: 5px;
 }

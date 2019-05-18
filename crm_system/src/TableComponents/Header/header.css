@@ -6,8 +6,9 @@
     box-shadow: 1px 3px 27px -6px rgb(211, 216, 213);
 }
 .header_logo{
-       height: 100px;
-       width: 100px;
+       height: 90px;
+       width: 90px;
+       margin: 15px;
        font-size: 25px;
        color: white;
        font-family: serif;

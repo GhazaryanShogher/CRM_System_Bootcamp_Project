@@ -319,15 +319,17 @@ callback = (e) => {
       }   
       </div>   
        {/* create mailing list popup     */}
-       <div className="form" style={{display:this.state.newList}}>
+       <div className = "popup"style={{display:this.state.newList}}>
+       <div className="form" >
        <Close callback = {this.close} />
        <h1>Create mail list</h1>
        <Input id="mailList" text={"Mail List Name"} type="text" placeholder="Enter mail list name" callback = {this.callback}/>
        <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {"Create Mail List"}/>
        </div>
-
+       </div>
       {/*add to existing mailing list popup */}
-         <div className="form" style={{display:this.state.mailList}}>
+      <div className = "popup"style={{display:this.state.mailList}}>
+         <div className="form" >
         <Close callback = {this.close} />
         <h1>Add to mail list</h1>      
         <div className="inp_edit">
@@ -337,7 +339,7 @@ callback = (e) => {
         <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {"Add To Mail List"}/>
         </div>  
         </div>
-        
+        </div>
     {/* Edit Contact */}
      <div className = "popup" style={{display:this.state.status1}}>
       <div className="form" >

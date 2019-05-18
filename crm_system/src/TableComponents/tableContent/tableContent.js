@@ -38,6 +38,8 @@ class TableContent extends Component{
         text: "",
         delete: "",
         loading:true,
+        messageEdit: "",
+        warningDisplay: "none",
         status3: "none",
         delivery: "",
         overStatus: "none",
@@ -48,7 +50,17 @@ class TableContent extends Component{
           this.setState({status:"none"})
         }
         if(this.state.status1 === "block"){
-          this.setState({status1:"none"})
+          this.setState({
+            status1:"none",
+            name:"", 
+            company:"", 
+            country:"",
+            position:"",
+            email:"",
+            GuID:"",
+            warningDisplay: "none",
+            messageEdit: "",
+          })
         }
         if (this.state.status2 === "block") {
           this.setState({status2: "none"})
@@ -171,7 +183,8 @@ class TableContent extends Component{
     }
 
     //update contact
-    updateContact = () => {
+    updateContact = () => { 
+      if (this.state.name && this.state.company && this.state.country && this.state.email && this.state.position) {
         fetch('http://visual.istclabz.com:2112/api/contacts',{
         method: 'PUT',
         body: JSON.stringify({
@@ -194,14 +207,17 @@ class TableContent extends Component{
         country:"",
         position:"",
         email:"",
-        GuID:""
+        GuID:"",
+        warningDisplay: "none",
+        messageEdit: "",
       })
     })
+      } else this.setState({messageEdit: "Please Enter Valid Text", warningDisplay: "block"})
     }
 
 //edit contact    
 editContact = (e) =>{
-  this.setState({status1: "block"});
+  
   fetch(`http://visual.istclabz.com:2112/api/contacts?guid=${e.target.id}`,{
     method: 'GET',
  headers: {
@@ -219,6 +235,7 @@ editContact = (e) =>{
       email:result.Email,
     })
 })
+  .then(()=>this.setState({status1: "block"}));
 }
 
 // send email
@@ -290,11 +307,6 @@ callback = (e) => {
                     {/* <Button name={"Upload"} className= "CB1" ></Button> */}
               </div>
           <div className="table_box">
-
-              {/* <div>{this.props.counter}</div>
-              <button onClick = {this.props.get}>show</button>
-              <button onClick = {this.props.del}>delete</button> */}
-            
               <div>
                 <div className="table_header">
                     <div className="header_btn1">Select</div>
@@ -358,6 +370,7 @@ callback = (e) => {
           <Input id="emailaddress" type="text" text={"E-mail"} placeholder="Email" val = {this.state.email} callback = {this.callback}/>
           <Input id="country" type="test" text={"Country"} placeholder="Country" val = {this.state.country} callback = {this.callback}/>
           <Input id="position" type="text" text={"Position"} placeholder="Position" val = {this.state.position} callback = {this.callback}/>
+          <Div className = "warningText" display = {this.state.warningDisplay} name = {this.state.messageEdit}/>
           <Button className= {"CB1 popupBtn"} click = {this.updateContact} name = "Save"/>
         </div>
      </div> 
@@ -380,17 +393,4 @@ callback = (e) => {
         );
     }
 }
-// const mapStateToprops = (state) => {
-  
-//   return {
-//     counter:state.result
-//   }
-// }
-// const mapDispatchToProps = (dispatch) => {
-//   const {get,del} = bindActionCreators(actions,dispatch);
-//   return{
-//     get,del 
-//   }
-// }
-// export default connect (mapStateToprops, mapDispatchToProps)(TableContent);
 export default TableContent;

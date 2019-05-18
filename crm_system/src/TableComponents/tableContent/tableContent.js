@@ -43,6 +43,7 @@ class TableContent extends Component{
         status3: "none",
         delivery: "",
         overStatus: "none",
+        warningText: "",
     };
     //Closing popup
     close = () => {
@@ -253,6 +254,45 @@ sendEmail = ()=>{
       .then(()=>{this.setState({del: [], delivery: "Email has been sent", overStatus: "none"})})
       .then(() =>{setTimeout(()=> {this.setState({delivery: "", status3: "none"})}, 2000)})
 }
+
+addNewContact = () => {
+  let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (this.state.company === "" || this.state.country === "" || this.state.name === "" || this.state.position === "") {
+    return this.setState({warningDisplay: "block", warningText: "Please Enter Valid Information Text"})
+  } 
+  if (regEmail.test(this.state.email) === false) {
+    return this.setState({warningDisplay: "block", warningText: "Please Enter Valid Email Address"})
+  }
+  else {
+    return fetch('http://visual.istclabz.com:2112/api/contacts', {
+      method: 'POST',
+      body: JSON.stringify({
+        "FullName": this.state.name,
+        "CompanyName": this.state.company,
+        "Position": this.state.position,
+        "Country": this.state.country,
+        "Email": this.state.email,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    .then(response => { return response.json() })
+    .then(() => {
+      this.setState({
+        name: "",
+        email: "",
+        company: "",
+        country: "",
+        position: "",
+        warningDisplay: "none",
+        warningText: "",
+        status:"none"
+      })
+    })
+  }
+}
+
 callback = (e) => {
   switch(e.target.id){
     case "full":
@@ -292,7 +332,7 @@ callback = (e) => {
             <Fragment>
               {this.state.loading && <Overlay />}
               <div className="btnBox">
-                <Form display = {this.state.status}  close = {this.close}/>
+                <Form display = {this.state.status}  close = {this.close} click = {this.addNewContact} callback={this.callback} warningDisplay = {this.state.warningDisplay} warningText = {this.state.warningText} name = {this.state.name} company = {this.state.company} emailaddress = {this.state.email} country = {this.state.country} position = {this.state.position}/>
                   <select onChange = {this.templateId}>
                     <option value="0" onChange = {this.templateId}>Select a Template</option>
                     <option value="1" onChange = {this.templateId}>Anniversary</option>
@@ -342,7 +382,7 @@ callback = (e) => {
        <div className="form" >
        <Close callback = {this.close} />
        <h1>Create mail list</h1>
-       <Input id="mailList" text={"Mail List Name"} type="text" placeholder="Enter mail list name" callback = {this.callback}/>
+       <Input id="mailList" text={"Mail List Name"} type="text" placeholder="Enter mail list name" callback = {this.callback} val = {this.state.createList}/>
        <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {"Create Mail List"}/>
        </div>
        </div>

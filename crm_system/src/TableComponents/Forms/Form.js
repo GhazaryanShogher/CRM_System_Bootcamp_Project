@@ -25,7 +25,7 @@ class Form extends Component {
               <Div className = "warningText" display = {this.props.warningDisplay} name = {this.props.warningText}/>
               <Button className={ "CB1 popupBtn" } name = "Create contact" click = {this.props.click }/>
             
-        </div>
+        </div> 
       </div>
     );
   }

@@ -72,3 +72,16 @@
     font-size: 25px;
    color:  rgb(184, 178, 178);
 }
+/* @keyframes textShadow {
+    to {
+        text-shadow: 0 0 25px white;
+    }
+} */
+@keyframes glow {
+    from {
+      text-shadow: 0 0 0 #fff, 0 0 0 #fff, 0 0 0 #e60073, 0 0 0 #e60073, 0 0 0 #e60073, 0 0 0 #e60073, 0 0 0 #e60073;
+    }
+    to {
+      text-shadow: 0 0 5px white, 0 0 8px #ff4da6, 0 0 10px #ff4da6, 0 0 12px #ff4da6, 0 0 15px #ff4da6, 0 0 17px #ff4da6, 0 0 20px #ff4da6;
+    }
+  }

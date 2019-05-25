@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './MailingList.css';
 import '../tableContent/tableContent.css';
+import { FormattedMessage } from "react-intl";
 import Div from '../../Div/Div';
 import Icon from '../Icon/Icon';
 import Button from '../Button/Button';
@@ -130,20 +131,20 @@ class MailingList extends Component{
             </div>
             {/* Delete mailing list popup */}
             <div className="form" style={{display:this.state.status}}>
-                <h3>Delete Mailing List?</h3>
-                <Button className={"CB1 popupBtn"} click={this.deleteList} name = "Delete"/>
-                <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
+                <h3><FormattedMessage id="deleteList"/></h3>
+                <Button className={"CB1 popupBtn"} click={this.deleteList} name = {<FormattedMessage id="delete"/>}/>
+                <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
             </div>
 
            {/* Choose template */}
             <div className="popup" style={{display:this.state.statusPopup}}>
               <div className="form">
-                <h3>Choose Template</h3>
-                <div onClick={this.templateClick} id = "1"><Icon click={this.templateClick} className={"fa fa-gift"}  id = "1"/><span onClick={this.templateClick} id = "1">Happy Anniaversary!</span></div>               
-                <div onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2">Happy Birthday!</span></div>
-                <div onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3">Marry Chtistmas!</span></div>
-                <Button className={"CB1 popupBtn"} click={this.sendEmail} name = "Send Email"/>
-                <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
+                <h3><FormattedMessage id="selectTemplate"/></h3>
+                <div onClick={this.templateClick} id = "1"><Icon click={this.templateClick} className={"fa fa-gift"}  id = "1"/><span onClick={this.templateClick} id = "1"><FormattedMessage id="happyA"/></span></div>               
+                <div onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2"><FormattedMessage id="happyBD"/></span></div>
+                <div onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3"><FormattedMessage id="marryChristmas"/></span></div>
+                <Button className={"CB1 popupBtn"} click={this.sendEmail} name = {<FormattedMessage id="sendEmail"/>}/>
+                <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
               </div>
                 </div>
             <div style={{display:this.state.contactsList}} className="mailing_info">
@@ -151,12 +152,12 @@ class MailingList extends Component{
 
               <div >
                 <div className="table_header">
-                    <div className="header_name">Full Name</div>
-                    <div className="header_name">Company Name</div>
-                    <div className="header_name">Position</div>
-                    <div className="header_name">Counrty</div>
-                    <div className="header_name">Email</div>
-                    <div className="header_btn1">Delete</div>
+                    <div className="header_name">{<FormattedMessage id="fullName"/>}</div>
+                    <div className="header_name">{<FormattedMessage id="company"/>}</div>
+                    <div className="header_name">{<FormattedMessage id="position"/>}</div>
+                    <div className="header_name">{<FormattedMessage id="counrty"/>}</div>
+                    <div className="header_name">{<FormattedMessage id="email"/>}</div>
+                    <div className="header_btn1">{<FormattedMessage id="delete"/>}</div>
                 </div>
               </div>
               </div>

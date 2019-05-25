@@ -1,21 +1,26 @@
-// import {get, del}  from '../Actions/actions';
-// import { createStore } from 'redux';
-
+import {english, armenian}  from '../Actions/actions';
 
  const initialState = {
-    result: 11
-    }
+    en: {
+        addContact: "Add to Contact",
+        sendEmail: "Send Email"
+    },
+    am: {
+        addContact: "Ավելացնել կոնտակտ",
+        sendEmail: "Ուղղարկել հաղորդագրություն"
+    },
+    data: ""
+}
 
  export default function reducer (state = initialState, action){
     switch(action.type){
-        case 'GET' :
-    return { result: state.result + 1};
-        case 'DELETE':
-        return { result: state.result - 1}
+        case 'EN' :
+    return {data: state.en};
+        case 'AM':
+        return {data: state.am};
         default:
     return state;
     }
-     
 }
 
 

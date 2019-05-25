@@ -1,7 +1,4 @@
 import React, { Component, Fragment } from 'react';
-// import {connect} from 'react-redux';
-// import * as actions from '../../Actions/actions';
-// import {bindActionCreators} from 'redux';
 import './tableContent.css';
 import Icon from '../Icon/Icon';
 import Close from '../Close/Close';
@@ -9,6 +6,7 @@ import Button from '../Button/Button';
 import Form from '../Forms/Form';
 import Input from '../Input/Input';
 import Div from '../../Div/Div';
+import { FormattedMessage } from "react-intl";
 import Overlay  from '../Overlay/overlay';
 
 class TableContent extends Component{
@@ -44,6 +42,7 @@ class TableContent extends Component{
         delivery: "",
         overStatus: "none",
         warningText: "",
+        statusPopup:"none"
     };
     //Closing popup
     close = () => {
@@ -72,6 +71,9 @@ class TableContent extends Component{
         if (this.state.newList === "block") {
           this.setState({newList: "none"})
         }
+        if (this.state.statusPopup === "block") {
+          this.setState({statusPopup: "none"})
+        }
     }
     //Create contact popup
      addContact = ()=>{
@@ -81,6 +83,14 @@ class TableContent extends Component{
       createMailListPopup = ()=>{
         this.setState({newList: "block"})
     }
+    selectTemplate = ()=>{
+      this.setState({statusPopup: "block"})
+  }
+
+    //get template id during click
+  templateClick = (e) => {
+    this.setState({templateId: e.target.id})
+  }
 
 //create new contact
   createMailList = () => {
@@ -155,7 +165,7 @@ class TableContent extends Component{
 
     // Delete row
     deleteRow = (e) => {
-      e.target.id === "delete" ? this.setState({text: "Delete All Selected Contacts?", func: this.deleteContacts}) : this.setState({text:"Delete Contact?", func: this.deleteContact});
+      e.target.id === "delete" ? this.setState({text: <FormattedMessage id="deleteAll"/>, func: this.deleteContacts}) : this.setState({text:<FormattedMessage id="deleteRow"/>, func: this.deleteContact});
       this.setState({status2: "block", delete: e.target.id});
     } 
 
@@ -331,32 +341,38 @@ callback = (e) => {
         return (
             <Fragment>
               {this.state.loading && <Overlay />}
-              <div className="btnBox">
-                <Form display = {this.state.status}  close = {this.close} click = {this.addNewContact} callback={this.callback} warningDisplay = {this.state.warningDisplay} warningText = {this.state.warningText} name = {this.state.name} company = {this.state.company} emailaddress = {this.state.email} country = {this.state.country} position = {this.state.position}/>
-                  <select onChange = {this.templateId}>
-                    <option value="0" onChange = {this.templateId}>Select a Template</option>
-                    <option value="1" onChange = {this.templateId}>Anniversary</option>
-                    <option value="2" onChange = {this.templateId}>Birthday</option>
-                    <option value="3" onChange = {this.templateId}>Christmas</option>
-                  </select>
-                    <Button  name={"Send Email"} className= "CB1" click ={this.sendEmail} disabled={this.state.disabled}></Button>
-                    <Button name={"Add to Mail List"} click = {this.addtoMailListPopup} className= "CB1" disabled={this.state.disabled}></Button>
-                    <Button  name={"Delete Selected"} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}></Button>
-                    <Button name={"Add to Contact"}  className= "CB1" click = {this.addContact}></Button>
-                    <Button name={"Create Mailing List"}  click = {this.createMailListPopup} className= "CB1"></Button>
+              <div className="btnBox">{/* Choose template */}
+            <div className="popup" style={{display:this.state.statusPopup}}>
+              <div className="form">
+                <h3><FormattedMessage id="selectTemplate"/></h3>
+                <div onClick={this.templateClick} id = "1"><Icon click={this.templateClick} className={"fa fa-gift"}  id = "1"/><span onClick={this.templateClick} id = "1"><FormattedMessage id="happyA"/></span></div>               
+                <div onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2"><FormattedMessage id="happyBD"/></span></div>
+                <div onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3"><FormattedMessage id="marryChristmas"/></span></div>
+                <Button className={"CB1 popupBtn"} click={this.sendEmail} name = {<FormattedMessage id="sendEmail"/>}/>
+                <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
+              </div>
+                </div>
+                    <Button  name={<FormattedMessage id="selectTemplate"/>} className= "CB1" click ={this.selectTemplate} disabled={this.state.disabled}></Button>
+                    <Button  name={<FormattedMessage id="sendEmail"/>} className= "CB1" click ={this.sendEmail} disabled={this.state.disabled}></Button>
+                    <Button name={<FormattedMessage id="addToMailList"/>} click = {this.addtoMailListPopup} className= "CB1" disabled={this.state.disabled}></Button>
+                    <Button  name={<FormattedMessage id="button.delete"/>} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}></Button>
+                    <Button name={<FormattedMessage id="addContact"/>}  className= "CB1" click = {this.addContact}></Button>
+                    <Button name={<FormattedMessage id="createMailingList"/>}  click = {this.createMailListPopup} className= "CB1"></Button>
+                    {/* <button className= "CB1" onClick = {()=>this.props.setLocale('en')}>EN</button>
+                    <button className= "CB1" onClick = {()=>this.props.setLocale('am')}>AM</button> */}
                     {/* <Button name={"Upload"} className= "CB1" ></Button> */}
               </div>
           <div className="table_box">
               <div>
                 <div className="table_header">
-                    <div className="header_btn1">Select</div>
-                    <div className="header_name">Full Name</div>
-                    <div className="header_name">Company Name</div>
-                    <div className="header_name" >Position</div>
-                    <div className="header_name">Counrty</div>
-                    <div className="header_name">Email</div>
-                    <div className="header_btn1">Edit</div>
-                    <div className="header_btn1">Delete</div>
+                    <div className="header_btn1">{<FormattedMessage id="select"/>}</div>
+                    <div className="header_name">{<FormattedMessage id="fullName"/>}</div>
+                    <div className="header_name">{<FormattedMessage id="company"/>}</div>
+                    <div className="header_name">{<FormattedMessage id="position"/>}</div>
+                    <div className="header_name">{<FormattedMessage id="counrty"/>}</div>
+                    <div className="header_name">{<FormattedMessage id="email"/>}</div>
+                    <div className="header_btn1">{<FormattedMessage id="edit"/>}</div>
+                    <div className="header_btn1">{<FormattedMessage id="delete"/>}</div>
                 </div>
               </div>
               </div>
@@ -382,20 +398,20 @@ callback = (e) => {
        <div className="form" >
        <Close callback = {this.close} />
        <h1>Create mail list</h1>
-       <Input id="mailList" text={"Mail List Name"} type="text" placeholder="Enter mail list name" callback = {this.callback} val = {this.state.createList}/>
-       <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {"Create Mail List"}/>
+       <Input id="mailList" text={<FormattedMessage id="mailListName"/>} type="text" placeholder="Enter mail list name" callback = {this.callback} val = {this.state.createList}/>
+       <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {<FormattedMessage id="createMailingList"/>}/>
        </div>
        </div>
       {/*add to existing mailing list popup */}
       <div className = "popup"style={{display:this.state.mailList}}>
          <div className="form" >
         <Close callback = {this.close} />
-        <h1>Add to mail list</h1>      
+        <h1><FormattedMessage id="addToMailList"/></h1>      
         <div className="inp_edit">
         {this.state.lists.map((v,i) =>
         <Div key={i} name = {v.EmailListName}  className = {"existing_mailList_name"} listId = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
         )}
-        <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {"Add To Mail List"}/>
+        <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {<FormattedMessage id="addToMailList"/>}/>
         </div>  
         </div>
         </div>
@@ -405,13 +421,13 @@ callback = (e) => {
         <Close callback = {this.close} />
         <h1>Edit Contacts</h1>
         <div className="inp_edit">
-          <Input id="full" type="text" text={"Full Name"} placeholder="Full Name" val = {this.state.name} callback = {this.callback}/>        
-          <Input id="company" type="text"  text={"Company"} placeholder="Company Name" val = {this.state.company} callback = {this.callback}/>
-          <Input id="emailaddress" type="text" text={"E-mail"} placeholder="Email" val = {this.state.email} callback = {this.callback}/>
-          <Input id="country" type="test" text={"Country"} placeholder="Country" val = {this.state.country} callback = {this.callback}/>
-          <Input id="position" type="text" text={"Position"} placeholder="Position" val = {this.state.position} callback = {this.callback}/>
+          <Input id="full" type="text" text={<FormattedMessage id="fullName"/>} placeholder={"Full Name"} val = {this.state.name} callback = {this.callback}/>        
+          <Input id="company" type="text"  text={<FormattedMessage id="company"/>} placeholder="Company Name" val = {this.state.company} callback = {this.callback}/>
+          <Input id="emailaddress" type="text" text={<FormattedMessage id="email"/>} placeholder="Email" val = {this.state.email} callback = {this.callback}/>
+          <Input id="country" type="test" text={<FormattedMessage id="counrty"/>} placeholder="Country" val = {this.state.country} callback = {this.callback}/>
+          <Input id="position" type="text" text={<FormattedMessage id="position"/>} placeholder="Position" val = {this.state.position} callback = {this.callback}/>
           <Div className = "warningText" display = {this.state.warningDisplay} name = {this.state.messageEdit}/>
-          <Button className= {"CB1 popupBtn"} click = {this.updateContact} name = "Save"/>
+          <Button className= {"CB1 popupBtn"} click = {this.updateContact} name = {<FormattedMessage id="save"/>}/>
         </div>
      </div> 
      </div> 
@@ -419,8 +435,8 @@ callback = (e) => {
      <div className="popup" style={{display:this.state.status2}}>
       <div className="form">
         <h3>{this.state.text} </h3>
-        <Button className={"CB1 popupBtn"} click={this.state.func} name = "Delete"/>
-        <Button className={"CB1 popupBtn"} click={this.close} name = "Cancel"/>
+        <Button className={"CB1 popupBtn"} click={this.state.func} name = {<FormattedMessage id="delete"/>}/>
+        <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
       </div>
       </div>
 
@@ -429,8 +445,13 @@ callback = (e) => {
           <Overlay status = {this.state.overStatus}/>
           <h3 className = "delivery">{this.state.delivery}</h3> 
       </div>
+      {/* {add new contact} */}
+    <div className="popup" style={{display:this.state.status}}>
+      <Form  close = {this.close} click = {this.addNewContact} callback={this.callback} warningDisplay = {this.state.warningDisplay} warningText = {this.state.warningText} name = {this.state.name} company = {this.state.company} emailaddress = {this.state.email} country = {this.state.country} position = {this.state.position}/>
+      </div>           
   </Fragment>
         );
     }
 }
+
 export default TableContent;

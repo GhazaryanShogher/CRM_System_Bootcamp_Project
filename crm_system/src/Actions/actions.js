@@ -1,7 +1,7 @@
-export const get =  () => {
-    return { type: 'GET'}
+export const english =  () => {
+    return { type: 'EN'}
 }
 
-export const del =  () => {
-    return { type: 'DELETE'}
+export const armenian =  () => {
+    return { type: 'AM'}
 }

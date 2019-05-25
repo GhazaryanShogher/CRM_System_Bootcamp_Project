@@ -42,7 +42,13 @@
 .disabled-link {
     pointer-events: none;
 }
-
+.language {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 5px 15px;
+    cursor: pointer;
+}
 /* @media (max-width:866px) {
 
     .menu{

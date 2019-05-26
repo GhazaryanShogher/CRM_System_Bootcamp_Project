@@ -109,7 +109,7 @@ class TableContent extends Component{
 
     // get mail list Id
     getListId = (e) => {
-      this.setState({listId: e.target.id,listName:e.target.text})
+      this.setState({listId: e.target.id,listName:e.target.text, disabled: !this.state.disabled})
     }
 
     //add to existing mail list
@@ -147,8 +147,6 @@ class TableContent extends Component{
         this.setState({data: results, loading:false})
       })
     }
-    //get template id
-    templateId = (e) => {this.setState({templateId: e.target.value}) }
 
     //select rows
     checked = (e) => {
@@ -251,7 +249,7 @@ editContact = (e) =>{
 
 // send email
 sendEmail = ()=>{
-  this.setState({status3: "block", overStatus: "block"})
+  this.setState({status3: "block", overStatus: "block",  statusPopup: "none"})
       fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.templateId}`,{
         method: 'POST',
         body: JSON.stringify(
@@ -266,7 +264,7 @@ sendEmail = ()=>{
 }
 
 addNewContact = () => {
-  let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  let regEmail = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (this.state.company === "" || this.state.country === "" || this.state.name === "" || this.state.position === "") {
     return this.setState({warningDisplay: "block", warningText: <FormattedMessage id="messageEdit"/>})
   } 
@@ -332,11 +330,11 @@ callback = (e) => {
     fetch('http://visual.istclabz.com:2112/api/contacts')
         .then((resp) => {return resp.json()})
         .then((results) => {
-         this.setState({data: results,})
+         this.setState({data: results})
     })
   
   }
-
+  
     render() {
         return (
             <Fragment>
@@ -353,7 +351,6 @@ callback = (e) => {
               </div>
                 </div>
                     <Button  name={<FormattedMessage id="selectTemplate"/>} className= "CB1" click ={this.selectTemplate} disabled={this.state.disabled}></Button>
-                    <Button  name={<FormattedMessage id="sendEmail"/>} className= "CB1" click ={this.sendEmail} disabled={this.state.disabled}></Button>
                     <Button name={<FormattedMessage id="addToMailList"/>} click = {this.addtoMailListPopup} className= "CB1" disabled={this.state.disabled}></Button>
                     <Button  name={<FormattedMessage id="button.delete"/>} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}></Button>
                     <Button name={<FormattedMessage id="addContact"/>}  className= "CB1" click = {this.addContact}></Button>
@@ -406,12 +403,12 @@ callback = (e) => {
       <div className = "popup"style={{display:this.state.mailList}}>
          <div className="form" >
         <Close callback = {this.close} />
-        <h1><FormattedMessage id="addToMailList"/></h1>      
+        <h2><FormattedMessage id="addToMailList"/></h2>      
         <div className="inp_edit">
         {this.state.lists.map((v,i) =>
         <Div key={i} name = {v.EmailListName}  className = {"existing_mailList_name"} listId = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
         )}
-        <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {<FormattedMessage id="addToMailList"/>}/>
+        <Button className= {"CB1 popupBtn"} disabled = {!this.state.disabled} click = {this.updateToMailList} name = {<FormattedMessage id="addToMailList"/>}/>
         </div>  
         </div>
         </div>

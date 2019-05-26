@@ -109,7 +109,7 @@ class TableContent extends Component{
 
     // get mail list Id
     getListId = (e) => {
-      this.setState({listId: e.target.id,listName:e.target.text})
+      this.setState({listId: e.target.id,listName:e.target.text, disabled: !this.state.disabled})
     }
 
     //add to existing mail list
@@ -330,14 +330,11 @@ callback = (e) => {
     fetch('http://visual.istclabz.com:2112/api/contacts')
         .then((resp) => {return resp.json()})
         .then((results) => {
-         this.setState({data: results,})
+         this.setState({data: results})
     })
   
   }
   
-  componentWillUnmount() {
-    this.mounted = false
-  }
     render() {
         return (
             <Fragment>
@@ -406,12 +403,12 @@ callback = (e) => {
       <div className = "popup"style={{display:this.state.mailList}}>
          <div className="form" >
         <Close callback = {this.close} />
-        <h1><FormattedMessage id="addToMailList"/></h1>      
+        <h2><FormattedMessage id="addToMailList"/></h2>      
         <div className="inp_edit">
         {this.state.lists.map((v,i) =>
         <Div key={i} name = {v.EmailListName}  className = {"existing_mailList_name"} listId = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
         )}
-        <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {<FormattedMessage id="addToMailList"/>}/>
+        <Button className= {"CB1 popupBtn"} disabled = {!this.state.disabled} click = {this.updateToMailList} name = {<FormattedMessage id="addToMailList"/>}/>
         </div>  
         </div>
         </div>

@@ -15,6 +15,7 @@ export default {
         "counrty":"Counrty",
         "email":"Email",
         "edit":"Edit",
+        "editContact":"Edit contact",
         "delete":"Delete",
         "selectTemplate":"Select Template",
         "cancel":"Cancel",
@@ -25,7 +26,10 @@ export default {
         "deleteList":"Delete Mailing List?",
         "happyA":"Happy Anniversary!",
         "happyBD":"Happy Birthday!",
-        "marryChristmas":"Merry Christmas!"
+        "marryChristmas":"Merry Christmas!",
+        "messageEdit":"Please Enter Valid Text",
+        "emailSent": "Email has been sent",
+        "validEmail":"Please Enter Valid Email Address"
     },
     am: {
         "contacts":"Կոնտակտներ",
@@ -42,7 +46,8 @@ export default {
         "position":"Պաշտոն",
         "counrty":"Երկիր",
         "email":"էլփոստ",
-        "edit":"Խմբագրել",
+        "edit":"Խմբագրել",        
+        "editContact":"Խմբագրել կոնտակտը",
         "delete":"Ջնջել",
         "selectTemplate":"Ընտրել տեսակը",
         "cancel":"Չեղարկել",
@@ -53,7 +58,10 @@ export default {
         "deleteList":"Ջնջել ցուցակը?",
         "happyA":"Ուրախ տարեդարձ",
         "happyBD":"Ծնունդդ շնորհավոր",
-        "marryChristmas":"Շնորհավոր Սուրբ Ծնունդ"
+        "marryChristmas":"Շնորհավոր Սուրբ Ծնունդ",
+        "messageEdit":"Խնդրում ենք մուտքագրել վավեր տեքստ",
+        "emailSent": "էլ-նամակ ուղարկվել է",
+        "validEmail":"Մուտքագրեք վավեր էլ-փոստ"
 
 
     }

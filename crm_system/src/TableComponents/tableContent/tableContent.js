@@ -223,7 +223,7 @@ class TableContent extends Component{
         messageEdit: "",
       })
     })
-      } else this.setState({messageEdit: "Please Enter Valid Text", warningDisplay: "block"})
+      } else this.setState({messageEdit: <FormattedMessage id="messageEdit"/>, warningDisplay: "block"})
     }
 
 //edit contact    
@@ -261,17 +261,17 @@ sendEmail = ()=>{
         "Content-type": "application/json; charset=UTF-8"
         }
       })
-      .then(()=>{this.setState({del: [], delivery: "Email has been sent", overStatus: "none"})})
+      .then(()=>{this.setState({del: [], delivery: <FormattedMessage id="emailSent"/>, overStatus: "none"})})
       .then(() =>{setTimeout(()=> {this.setState({delivery: "", status3: "none"})}, 2000)})
 }
 
 addNewContact = () => {
   let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (this.state.company === "" || this.state.country === "" || this.state.name === "" || this.state.position === "") {
-    return this.setState({warningDisplay: "block", warningText: "Please Enter Valid Information Text"})
+    return this.setState({warningDisplay: "block", warningText: <FormattedMessage id="messageEdit"/>})
   } 
   if (regEmail.test(this.state.email) === false) {
-    return this.setState({warningDisplay: "block", warningText: "Please Enter Valid Email Address"})
+    return this.setState({warningDisplay: "block", warningText: <FormattedMessage id="validEmail"/>})
   }
   else {
     return fetch('http://visual.istclabz.com:2112/api/contacts', {
@@ -397,7 +397,7 @@ callback = (e) => {
        <div className = "popup"style={{display:this.state.newList}}>
        <div className="form" >
        <Close callback = {this.close} />
-       <h1>Create mail list</h1>
+       <h2><FormattedMessage id="createMailingList"/></h2>
        <Input id="mailList" text={<FormattedMessage id="mailListName"/>} type="text" placeholder="Enter mail list name" callback = {this.callback} val = {this.state.createList}/>
        <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {<FormattedMessage id="createMailingList"/>}/>
        </div>
@@ -419,7 +419,7 @@ callback = (e) => {
      <div className = "popup" style={{display:this.state.status1}}>
       <div className="form" >
         <Close callback = {this.close} />
-        <h1>Edit Contacts</h1>
+        <h2><FormattedMessage id="editContact"/></h2>
         <div className="inp_edit">
           <Input id="full" type="text" text={<FormattedMessage id="fullName"/>} placeholder={"Full Name"} val = {this.state.name} callback = {this.callback}/>        
           <Input id="company" type="text"  text={<FormattedMessage id="company"/>} placeholder="Company Name" val = {this.state.company} callback = {this.callback}/>

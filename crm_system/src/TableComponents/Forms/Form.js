@@ -13,7 +13,7 @@ class Form extends Component {
     return (
       <div style = {{display:this.props.display}}>
         <div className="form" >
-            <h1>Create New Contact</h1>
+            <h2>{<FormattedMessage id="addContact"/>}</h2>
             <Close callback = {this.props.close} />
             <div className="inp_edit">
               <Input id="full" type="text" text={<FormattedMessage id="fullName"/>} placeholder="Full Name" callback = {this.props.callback} val = {this.props.name}/>          

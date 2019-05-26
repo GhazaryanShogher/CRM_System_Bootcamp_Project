@@ -20,31 +20,40 @@ class MailingList extends Component{
     status3: "none",
     delivery: "",
     overStatus: "none",
+    status2: "none",
+    deleteId: "",
   }
 
   //remove from existing mail list
-  removeFromMailList = (e) => {
+  showDeletePopup = (e) => {
+    this.setState({status2: "block", deleteId: e.target.id})
+  }
+
+  removeFromMailList = () => {
     fetch(`http://visual.istclabz.com:2112/api/emaillists/update?id=${this.state.listId}&flag=false`,{
       method: 'PUT',
-      body: JSON.stringify([`${e.target.id}`]        
+      body: JSON.stringify([`${this.state.deleteId}`]        
       ),
       headers: {
        "Content-type": "application/json; charset=UTF-8"
       }
     })
+    .then(() => this.setState({status2: "none", deleteId: ""}, () => this.getListData() ))
   }
 
-
-  // showing list's contacts 
-  showList = (e) => {
-    this.setState({listId: e.target.id})
-    
-    fetch(`http://visual.istclabz.com:2112/api/emaillists?id=${e.target.id}`)
+  // Get List Data
+  getListData = () => {
+    fetch(`http://visual.istclabz.com:2112/api/emaillists?id=${this.state.listId}`)
     .then((resp) => {return resp.json()})
     .then((results) => { 
     this.setState({listOfContacts: results})
   })
     .then(() =>this.setState({contactsList: "block"}))
+  }
+
+  // showing list's contacts 
+  showList = (e) => {
+    this.setState({listId: e.target.id},() => this.getListData() )
   }  
 
 // close icon or cancel
@@ -54,6 +63,9 @@ class MailingList extends Component{
     }
     if (this.state.statusPopup === "block") {
       this.setState({statusPopup:"none"}) 
+    }
+    if (this.state.status2 === "block"){
+      this.setState({status2: "none", deleteId: ""})
     }
 }
 
@@ -170,7 +182,7 @@ class MailingList extends Component{
             <div className="td_style" style={{contenteditable:this.state.editTd}}>{v.Position}</div>
             <div className="td_style" style={{contenteditable:this.state.editTd}}>{v.Country}</div>
             <div className="td_style" style={{contenteditable:this.state.editTd}}>{v.Email}</div>
-            <div className="del_icon" onClick = {this.removeFromMailList}><Icon  className="fa fa-trash" aria-hidden="true" id = {v.GuID} ></Icon></div>    
+            <div className="del_icon" onClick = {this.showDeletePopup}><Icon  className="fa fa-trash" aria-hidden="true" id = {v.GuID} ></Icon></div>    
           </div>
             }
       
@@ -182,6 +194,15 @@ class MailingList extends Component{
           <div className="popup" style={{display:this.state.status3}}>
               <Overlay status = {this.state.overStatus}/>
               <h3 className = "delivery">{this.state.delivery}</h3> 
+          </div>
+
+            {/* Delete Popup */}
+          <div className="popup" style={{display:this.state.status2}}>
+            <div className="form">
+              <h3>{<FormattedMessage id="deleteRow"/>}</h3>
+              <Button className={"CB1 popupBtn"} click={this.removeFromMailList} name = {<FormattedMessage id="delete"/>}/>
+              <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
+            </div>
           </div>
         </div>
     ); 

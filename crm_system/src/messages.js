@@ -32,7 +32,7 @@ export default {
         "button.delete":"Ջնջել նշվածը",
         "addToMailList":"Ավելացնել ցանկում",
         "addContact": "Ավելացնել կոնտակտ",
-        "sendEmail": "Ուղղարկել հաղորդագրություն",
+        "sendEmail": "Ուղղարկել նամակ",
         "createMailingList":"Ստեղծել ցուցակ",
         "selectTemplate":"Ընտրել իրադարձությունը",
         "mailinglist": "Փոստերի ցանկ",

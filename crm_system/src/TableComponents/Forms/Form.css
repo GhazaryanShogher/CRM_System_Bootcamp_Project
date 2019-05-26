@@ -21,9 +21,9 @@
    cursor: pointer;
    padding: 5px;
   }
-  .form span:hover {
+  /* .form span:hover {
     font-size: 25px;
-  }
+  } */
   @media screen and (max-width: 1200px) {
     .form {
       width: 30%;

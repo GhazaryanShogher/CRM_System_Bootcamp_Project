@@ -3,7 +3,7 @@ export default {
         "contacts":"Contacts",
         "button.delete":"Delete Selected",
         "addToMailList":"Add to Mail List",
-        "addContact": "Add to Contact",
+        "addContact": "Add Contact",
         "sendEmail": "Send Email",
         "createMailingList":"Create Mailing List",
         "mailinglist": "Mailing List",
@@ -28,7 +28,8 @@ export default {
         "marryChristmas":"Merry Christmas!",
         "messageEdit":"Please Enter Valid Text",
         "emailSent": "Email has been sent",
-        "validEmail":"Please Enter Valid Email Address"
+        "validEmail":"Please Enter Valid Email Address",
+        "template":"Please select template"
     },
     am: {
         "contacts":"Կոնտակտներ",
@@ -57,10 +58,9 @@ export default {
         "happyA":"Ուրախ տարեդարձ",
         "happyBD":"Ծնունդդ շնորհավոր",
         "marryChristmas":"Շնորհավոր Սուրբ Ծնունդ",
-        "messageEdit":"Խնդրում ենք մուտքագրել վավեր տեքստ",
+        "messageEdit":"Մուտքագրեք վավեր տեքստ",
         "emailSent": "էլ-նամակ ուղարկվել է",
-        "validEmail":"Մուտքագրեք վավեր էլ-փոստ"
-
-
+        "validEmail":"Մուտքագրեք վավեր էլ-փոստ",
+        "template":"Ընտրեք իրադարձությունը"
     }
 }

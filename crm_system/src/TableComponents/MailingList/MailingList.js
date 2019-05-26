@@ -22,6 +22,11 @@ class MailingList extends Component{
     overStatus: "none",
     status2: "none",
     deleteId: "",
+    warningDisplay: "none",
+    warningText: "",
+    animation1: "none",
+    animation2: "none",
+    animation3: "none",
   }
 
   //remove from existing mail list
@@ -62,7 +67,7 @@ class MailingList extends Component{
       this.setState({status:"none"})
     }
     if (this.state.statusPopup === "block") {
-      this.setState({statusPopup:"none"}) 
+      this.setState({statusPopup:"none", template: "", warningDisplay: "none", warningText: "", animation1: "none", animation2: "none", animation3: "none"}) 
     }
     if (this.state.status2 === "block"){
       this.setState({status2: "none", deleteId: ""})
@@ -76,20 +81,35 @@ class MailingList extends Component{
 
 //get template id during click
   templateClick = (e) => {
-    this.setState({template: e.target.id})
+    switch (e.target.id) {
+      case "1":
+        this.setState({template: e.target.id, animation1: "glow 1.4s infinite alternate", animation2: "none", animation3: "none", warningDisplay: "none", warningText: ""})
+        break;
+      case "2":
+        this.setState({template: e.target.id, animation2: "glow 1.4s infinite alternate", animation1: "none", animation3: "none", warningDisplay: "none", warningText: ""})
+        break;
+      case "3":
+        this.setState({template: e.target.id, animation3: "glow 1.4s infinite alternate", animation1: "none", animation2: "none", warningDisplay: "none", warningText: ""})
+        break;
+      default:
+        break
+    }
   }
 
   //send email to 
   sendEmail = () => {
-    this.setState({statusPopup: "none", status3: "block", overStatus: "block"})
-    fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.template}&emaillistId=${this.state.emailId}`, {
-      method: 'Post',
-      headers: {
-      "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-    .then(() => this.setState({emailId:"", template:"", delivery: "Email has been sent", overStatus: "none"}))
-    .then(() =>{setTimeout(()=> {this.setState({delivery: "", status3: "none"})}, 2000)})
+    if (this.state.template) {
+      this.setState({statusPopup: "none", status3: "block", overStatus: "block"})
+      fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.template}&emaillistId=${this.state.emailId}`, {
+        method: 'Post',
+        headers: {
+        "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then(() => this.setState({emailId:"", template:"", delivery: "Email has been sent", overStatus: "none", warningDisplay: "none", warningText: "", animation1: "none", animation2: "none", animation3: "none"}))
+      .then(() =>{setTimeout(()=> {this.setState({delivery: "", status3: "none",})}, 2000)})
+    }
+    else this.setState({warningDisplay: "block", warningText: <FormattedMessage id="template"/>})
   }
   
   // Delete row
@@ -152,9 +172,10 @@ class MailingList extends Component{
             <div className="popup" style={{display:this.state.statusPopup}}>
               <div className="form">
                 <h3><FormattedMessage id="selectTemplate"/></h3>
-                <div onClick={this.templateClick} id = "1"><Icon click={this.templateClick} className={"fa fa-gift"}  id = "1"/><span onClick={this.templateClick} id = "1"><FormattedMessage id="happyA"/></span></div>               
-                <div onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2"><FormattedMessage id="happyBD"/></span></div>
-                <div onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3"><FormattedMessage id="marryChristmas"/></span></div>
+                <div className="event" style = {{animation: this.state.animation1}} onClick={this.templateClick} id = "1"><Icon click={this.templateClick} className={"fa fa-gift"}  id = "1"/><span onClick={this.templateClick} id = "1"><FormattedMessage id="happyA"/></span></div>               
+                <div className="event" style = {{animation: this.state.animation2}} onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2"><FormattedMessage id="happyBD"/></span></div>
+                <div className="event" style = {{animation: this.state.animation3}} onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3"><FormattedMessage id="marryChristmas"/></span></div>
+                <Div className = "warningText" display = {this.state.warningDisplay} name = {this.state.warningText}/>
                 <Button className={"CB1 popupBtn"} click={this.sendEmail} name = {<FormattedMessage id="sendEmail"/>}/>
                 <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
               </div>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-// import MainTable  from './TableComponents/MainTable';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
-import { createStore } from 'redux';
 import {bindActionCreators} from 'redux';
 import MainPage from "./MainViewComponents/Main/Main";
 import './App.css';
@@ -33,16 +31,14 @@ class App extends Component {
 
 const mapStateToprops = (state) => {
   return {
-      // name: state.data,
       lang: state.locale.lang
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  const setLocale = bindActionCreators({setLocale},dispatch);
+  const setLocale = bindActionCreators({setLocale},dispatch)
   return{
-    /*english,armenian,*/setLocale
+    setLocale
   }
 }
 export default connect (mapStateToprops, mapDispatchToProps)(App);
-//export default App;

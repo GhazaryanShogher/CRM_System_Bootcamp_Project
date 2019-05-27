@@ -12,7 +12,7 @@ import App from './App';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import * as serviceWorker from './serviceWorker';
 import rootReducer from "./Redusers/rootReducer";
-import { localeSet, setLocale } from "./Actions/locale";
+import { localeSet } from "./Actions/locale";
 
 addLocaleData(en);
 addLocaleData(am);

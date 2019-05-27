@@ -423,8 +423,8 @@ callback = (e) => {
      <div className="popup" style={{display:this.state.status2}}>
       <div className="form">
         <h3>{this.state.text} </h3>
-        <Button className={"CB1 popupBtn"} click={this.state.func} name = {<FormattedMessage id="delete"/>}/>
-        <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
+        <Button className={"CB1 popupBtn1"} click={this.state.func} name = {<FormattedMessage id="delete"/>}/>
+        <Button className={"CB1 popupBtn1"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
       </div>
       </div>
 
@@ -445,8 +445,8 @@ callback = (e) => {
             <div onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2"><FormattedMessage id="happyBD"/></span></div>
             <div onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3"><FormattedMessage id="marryChristmas"/></span></div>
             <Div className = "warningText" display = {this.state.warningDisplay} name = {this.state.warningText}/>
-            <Button className={"CB1 popupBtn"} click={this.sendEmail} name = {<FormattedMessage id="sendEmail"/>}/>
-            <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
+            <Button className={"CB1 popupBtn1"} click={this.sendEmail} name = {<FormattedMessage id="sendEmail"/>}/>
+            <Button className={"CB1 popupBtn1"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
           </div>
       </div>
   </Fragment>

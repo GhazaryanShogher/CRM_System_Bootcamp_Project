@@ -20,6 +20,12 @@
     background: #56595c;
     margin: 15px auto;
   }
+  .popupBtn1{
+    padding: 5px;
+    width: 40%;
+    background: #56595c;
+    margin: 10px ;
+  }
   .CB1:hover{
     box-shadow: -3px 2px 31px -7px rgba(248, 248, 248, 0.75);
     

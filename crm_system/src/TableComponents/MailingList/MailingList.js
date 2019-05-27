@@ -164,8 +164,8 @@ class MailingList extends Component{
             {/* Delete mailing list popup */}
             <div className="form" style={{display:this.state.status}}>
                 <h3><FormattedMessage id="deleteList"/></h3>
-                <Button className={"CB1 popupBtn"} click={this.deleteList} name = {<FormattedMessage id="delete"/>}/>
-                <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
+                <Button className={"CB1 popupBtn1"} click={this.deleteList} name = {<FormattedMessage id="delete"/>}/>
+                <Button className={"CB1 popupBtn1"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
             </div>
 
            {/* Choose template */}
@@ -176,8 +176,8 @@ class MailingList extends Component{
                 <div className="event" style = {{animation: this.state.animation2}} onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2"><FormattedMessage id="happyBD"/></span></div>
                 <div className="event" style = {{animation: this.state.animation3}} onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3"><FormattedMessage id="marryChristmas"/></span></div>
                 <Div className = "warningText" display = {this.state.warningDisplay} name = {this.state.warningText}/>
-                <Button className={"CB1 popupBtn"} click={this.sendEmail} name = {<FormattedMessage id="sendEmail"/>}/>
-                <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
+                <Button className={"CB1 popupBtn1"} click={this.sendEmail} name = {<FormattedMessage id="sendEmail"/>}/>
+                <Button className={"CB1 popupBtn1"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
               </div>
                 </div>
             <div style={{display:this.state.contactsList}} className="mailing_info">
@@ -198,11 +198,11 @@ class MailingList extends Component{
             {this.state.listOfContacts !== "" ? this.state.listOfContacts.Contacts.map((v,i) => {
             
           return <div className="tbl_content" key={i}>
-            <div className="td_style" style={{contenteditable:this.state.editTd}}>{v["Full Name"]}</div>
-            <div className="td_style" style={{contenteditable:this.state.editTd}}>{v["Company Name"]}</div>
-            <div className="td_style" style={{contenteditable:this.state.editTd}}>{v.Position}</div>
-            <div className="td_style" style={{contenteditable:this.state.editTd}}>{v.Country}</div>
-            <div className="td_style" style={{contenteditable:this.state.editTd}}>{v.Email}</div>
+            <div className="td_style_mail" style={{contenteditable:this.state.editTd}}>{v["Full Name"]}</div>
+            <div className="td_style_mail" style={{contenteditable:this.state.editTd}}>{v["Company Name"]}</div>
+            <div className="td_style_mail" style={{contenteditable:this.state.editTd}}>{v.Position}</div>
+            <div className="td_style_mail" style={{contenteditable:this.state.editTd}}>{v.Country}</div>
+            <div className="td_style_mail" style={{contenteditable:this.state.editTd}}>{v.Email}</div>
             <div className="del_icon" onClick = {this.showDeletePopup}><Icon  className="fa fa-trash" aria-hidden="true" id = {v.GuID} ></Icon></div>    
           </div>
             }

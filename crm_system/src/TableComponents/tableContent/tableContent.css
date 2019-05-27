@@ -59,7 +59,7 @@ div {
 	align-items: center;
 }
 .check {
-    margin: auto;
+    margin: auto !important;
 }
 .table_box {
     margin: 10px;
@@ -84,7 +84,7 @@ div {
 }
 .del_icon {
     width: 6%;
-    border: 1px solid #827575;
+    border-left: 1px solid #827575;
     text-align: center;
 }
 .td_style{

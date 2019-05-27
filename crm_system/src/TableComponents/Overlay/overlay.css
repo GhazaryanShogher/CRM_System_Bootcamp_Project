@@ -5,5 +5,5 @@
 	top:0;
 	left:0;
 	z-index:999;
-	background: url('../images/load.gif') no-repeat center;
+	background: url("../images/loading.gif") no-repeat center;
 }

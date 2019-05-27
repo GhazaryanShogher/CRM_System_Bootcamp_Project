@@ -26,7 +26,6 @@ class TableContent extends Component{
         templateId:"",
         listName:"",
         checked:"",
-        disabled:true,
         status: "none",
         status1: "none",
         status2: "none",
@@ -46,6 +45,7 @@ class TableContent extends Component{
         animation1: "none",
         animation2: "none",
         animation3: "none",
+        template: "",
     };
     //Closing popup
     close = () => {
@@ -72,7 +72,7 @@ class TableContent extends Component{
           this.setState({mailList: "none"})
         }
         if (this.state.newList === "block") {
-          this.setState({newList: "none"})
+          this.setState({newList: "none", warningDisplay: "none", warningText: ""})
         }
         if (this.state.statusPopup === "block") {
           this.setState({statusPopup:"none", template: "", warningDisplay: "none", warningText: "", animation1: "none", animation2: "none", animation3: "none"}) 
@@ -82,13 +82,15 @@ class TableContent extends Component{
      addContact = ()=>{
           this.setState({status: "block"})
       }
-      //add contacts to mail list
-      createMailListPopup = ()=>{
-        this.setState({newList: "block"})
+      //Create Mail List Popup
+      createMailListPopup = () => {
+          this.setState({newList: "block"})
     }
     selectTemplate = ()=>{
-      this.setState({statusPopup: "block"})
-  }
+      if (this.state.del.length > 0) {
+        this.setState({statusPopup: "block"})
+      }
+    }
 
     //get template id during click
     templateClick = (e) => {
@@ -107,8 +109,9 @@ class TableContent extends Component{
       }
     }
 
-//create new contact
+//Create Mail List
   createMailList = () => {
+    if (this.state.createList) {
       fetch('http://visual.istclabz.com:2112/api/emaillists',{
         method: 'POST',
         body: JSON.stringify({
@@ -119,18 +122,20 @@ class TableContent extends Component{
          "Content-type": "application/json; charset=UTF-8"
         }
       })
-      .then(()=>{this.setState({del: [], newList: "none",createList:""})})
-    }
+      .then(()=>{this.setState({del: [], newList: "none",createList:"", warningDisplay: "none", warningText: ""})})
+    } 
+    else this.setState({warningDisplay: "block", warningText: <FormattedMessage id="messageEdit"/>})  
+  }
 
     // get mail list Id
     getListId = (e) => {
-      this.setState({listId: e.target.id,listName:e.target.text, disabled: !this.state.disabled})
-      console.log(e.target.key)
+      this.setState({listId: e.target.id,listName:e.target.text})
     }
 
     //add to existing mail list
     updateToMailList = () => {
-      fetch(`http://visual.istclabz.com:2112/api/emaillists/update?id=${this.state.listId}&flag=true`,{
+      if (this.state.listId) {
+        fetch(`http://visual.istclabz.com:2112/api/emaillists/update?id=${this.state.listId}&flag=true`,{
         method: 'PUT',
         body: JSON.stringify(
            this.state.del
@@ -140,14 +145,17 @@ class TableContent extends Component{
         }
       })
       .then(()=>{this.setState({del: [], mailList: "none",})})
+      }
     }
 
     addtoMailListPopup = () => {
-      fetch('http://visual.istclabz.com:2112/api/emaillists')
-        .then((resp) => {return resp.json()})
-        .then((results) => {
-         this.setState({lists: results, mailList: "block"})
-    })
+      if (this.state.del.length > 0) {
+        fetch('http://visual.istclabz.com:2112/api/emaillists')
+          .then((resp) => {return resp.json()})
+          .then((results) => {
+          this.setState({lists: results, mailList: "block"})
+        })
+      }
     }
 
   handleClick = (e) => { this.setState({status1: "block"}) }
@@ -167,9 +175,9 @@ class TableContent extends Component{
     //select rows
     checked = (e) => {
       if (e.target.checked) {
-        this.setState({del: this.state.del.concat(e.target.value), disabled: false})
+        this.setState({del: this.state.del.concat(e.target.value)})
       }
-      else { 
+      else {
         let index = this.state.del.indexOf(e.target.value)
         if (index > -1) {
           this.state.del.splice(index, 1)
@@ -179,9 +187,11 @@ class TableContent extends Component{
 
     // Delete row
     deleteRow = (e) => {
-      e.target.id === "delete" ? this.setState({text: <FormattedMessage id="deleteAll"/>, func: this.deleteContacts}) : this.setState({text:<FormattedMessage id="deleteRow"/>, func: this.deleteContact});
-      this.setState({status2: "block", delete: e.target.id});
-    } 
+      if (this.state.del.length > 0 && e.target.id === "delete") {
+          this.setState({text: <FormattedMessage id="deleteAll"/>, func: this.deleteContacts, status2: "block", delete: e.target.id})
+      }
+      else if (e.target.id !== "delete") {this.setState({text:<FormattedMessage id="deleteRow"/>, func: this.deleteContact, status2: "block", delete: e.target.id})}
+    }
 
     deleteContact = () => {
       fetch(`http://visual.istclabz.com:2112/api/contacts?guid=${this.state.delete}`,{
@@ -265,8 +275,9 @@ editContact = (e) =>{
 
 // send email
 sendEmail = ()=>{
-  this.setState({status3: "block", overStatus: "block",  statusPopup: "none"})
-      fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.templateId}`,{
+  if (this.state.template) {
+    this.setState({status3: "block", overStatus: "block",  statusPopup: "none"})
+      fetch(`http://visual.istclabz.com:2112/api/sendemails?template=${this.state.template}`,{
         method: 'POST',
         body: JSON.stringify(
           this.state.del
@@ -275,8 +286,10 @@ sendEmail = ()=>{
         "Content-type": "application/json; charset=UTF-8"
         }
       })
-      .then(()=>{this.setState({del: [], delivery: <FormattedMessage id="emailSent"/>, overStatus: "none"})})
+      .then(()=>{this.setState({del: [], delivery: <FormattedMessage id="emailSent"/>, overStatus: "none", template: "", animation1: "none", animation2: "none", animation3: "none"})})
       .then(() =>{setTimeout(()=> {this.setState({delivery: "", status3: "none"})}, 2000)})
+  }
+  else this.setState({warningDisplay: "block", warningText: <FormattedMessage id="template"/>})
 }
 
 addNewContact = () => {
@@ -288,6 +301,7 @@ addNewContact = () => {
     return this.setState({warningDisplay: "block", warningText: <FormattedMessage id="validEmail"/>})
   }
   else {
+    this.setState({status: "none"})
     return fetch('http://visual.istclabz.com:2112/api/contacts', {
       method: 'POST',
       body: JSON.stringify({
@@ -311,7 +325,6 @@ addNewContact = () => {
         position: "",
         warningDisplay: "none",
         warningText: "",
-        status:"none"
       })
     })
   }
@@ -356,9 +369,9 @@ callback = (e) => {
             <Fragment>
               {this.state.loading && <Overlay />}
               <div className="btnBox">{/* Choose template */}
-                    <Button  name={<FormattedMessage id="selectTemplate"/>} className= "CB1" click ={this.selectTemplate} disabled={this.state.disabled}></Button>
-                    <Button name={<FormattedMessage id="addToMailList"/>} click = {this.addtoMailListPopup} className= "CB1" disabled={this.state.disabled}></Button>
-                    <Button  name={<FormattedMessage id="button.delete"/>} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}></Button>
+                    <Button  name={<FormattedMessage id="selectTemplate"/>} className= "CB1" click ={this.selectTemplate}></Button>
+                    <Button name={<FormattedMessage id="addToMailList"/>} click = {this.addtoMailListPopup} className= "CB1" ></Button>
+                    <Button  name={<FormattedMessage id="button.delete"/>} id={"delete"}  className= "CB1" click={this.deleteRow}></Button>
                     <Button name={<FormattedMessage id="addContact"/>}  className= "CB1" click = {this.addContact}></Button>
                     <Button name={<FormattedMessage id="createMailingList"/>}  click = {this.createMailListPopup} className= "CB1"></Button>
                     {/* <button className= "CB1" onClick = {()=>this.props.setLocale('en')}>EN</button>
@@ -402,6 +415,7 @@ callback = (e) => {
        <Close callback = {this.close} />
        <h2><FormattedMessage id="createMailingList"/></h2>
        <Input id="mailList" text={<FormattedMessage id="mailListName"/>} type="text" placeholder="Enter mail list name" callback = {this.callback} val = {this.state.createList}/>
+       <Div className = "warningText" display = {this.state.warningDisplay} name = {this.state.warningText}/>
        <Button className= {"CB1 popupBtn"} click = {this.createMailList} name = {<FormattedMessage id="createMailingList"/>}/>
        </div>
        </div>
@@ -412,10 +426,9 @@ callback = (e) => {
         <h2><FormattedMessage id="addToMailList"/></h2>      
         <div className="inp_edit">
         {this.state.lists.map((v,i) => {
-        {this.state[`animation${i}`] = "none"}
         return <Div key={i} name = {v.EmailListName} className = {"existing_mailList_name"} listId = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
         })}
-        <Button className= {"CB1 popupBtn"} disabled = {!this.state.disabled} click = {this.updateToMailList} name = {<FormattedMessage id="addToMailList"/>}/>
+        <Button className= {"CB1 popupBtn"} click = {this.updateToMailList} name = {<FormattedMessage id="addToMailList"/>}/>
         </div>  
         </div>
         </div>

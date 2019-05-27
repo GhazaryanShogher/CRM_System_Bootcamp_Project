@@ -28,6 +28,7 @@
     border-bottom: 1px solid #827575
 }
 .delivery {
+    font-size: 25px;
     padding: 10px;
     position: absolute;
     top: 50%;
@@ -39,9 +40,9 @@
     color: rgb(240, 222, 190);
     text-align: center;
     z-index: 99;
-    background-color:rgb(80, 94, 102);
+    /* background-color:rgb(80, 94, 102);
     border-radius: 7px;
-    border: 2px solid rgb(182, 174, 169);
+    border: 2px solid rgb(182, 174, 169); */
     padding-bottom: 10px;  
 }
 
@@ -144,7 +145,7 @@ select {
       margin: auto;
   }
   .delivery {
-      color: red;
+      color: white;
   }
 
 span {

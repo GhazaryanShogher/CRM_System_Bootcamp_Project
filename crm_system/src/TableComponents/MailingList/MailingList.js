@@ -106,7 +106,7 @@ class MailingList extends Component{
         "Content-type": "application/json; charset=UTF-8"
         }
       })
-      .then(() => this.setState({emailId:"", template:"", delivery: "Email has been sent", overStatus: "none", warningDisplay: "none", warningText: "", animation1: "none", animation2: "none", animation3: "none"}))
+      .then(() => this.setState({emailId:"", template:"", delivery: <FormattedMessage id="emailSent"/>, overStatus: "none", warningDisplay: "none", warningText: "", animation1: "none", animation2: "none", animation3: "none"}))
       .then(() =>{setTimeout(()=> {this.setState({delivery: "", status3: "none",})}, 2000)})
     }
     else this.setState({warningDisplay: "block", warningText: <FormattedMessage id="template"/>})

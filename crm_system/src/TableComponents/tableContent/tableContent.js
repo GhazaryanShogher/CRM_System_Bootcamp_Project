@@ -42,7 +42,10 @@ class TableContent extends Component{
         delivery: "",
         overStatus: "none",
         warningText: "",
-        statusPopup:"none"
+        statusPopup:"none",        
+        animation1: "none",
+        animation2: "none",
+        animation3: "none",
     };
     //Closing popup
     close = () => {
@@ -72,7 +75,7 @@ class TableContent extends Component{
           this.setState({newList: "none"})
         }
         if (this.state.statusPopup === "block") {
-          this.setState({statusPopup: "none"})
+          this.setState({statusPopup:"none", template: "", warningDisplay: "none", warningText: "", animation1: "none", animation2: "none", animation3: "none"}) 
         }
     }
     //Create contact popup
@@ -88,9 +91,21 @@ class TableContent extends Component{
   }
 
     //get template id during click
-  templateClick = (e) => {
-    this.setState({templateId: e.target.id})
-  }
+    templateClick = (e) => {
+      switch (e.target.id) {
+        case "1":
+          this.setState({template: e.target.id, animation1: "glow 1.4s infinite alternate", animation2: "none", animation3: "none", warningDisplay: "none", warningText: ""})
+          break;
+        case "2":
+          this.setState({template: e.target.id, animation2: "glow 1.4s infinite alternate", animation1: "none", animation3: "none", warningDisplay: "none", warningText: ""})
+          break;
+        case "3":
+          this.setState({template: e.target.id, animation3: "glow 1.4s infinite alternate", animation1: "none", animation2: "none", warningDisplay: "none", warningText: ""})
+          break;
+        default:
+          break
+      }
+    }
 
 //create new contact
   createMailList = () => {
@@ -110,6 +125,7 @@ class TableContent extends Component{
     // get mail list Id
     getListId = (e) => {
       this.setState({listId: e.target.id,listName:e.target.text, disabled: !this.state.disabled})
+      console.log(e.target.key)
     }
 
     //add to existing mail list
@@ -441,9 +457,9 @@ callback = (e) => {
       <div className="popup" style={{display:this.state.statusPopup}}>
           <div className="form">
             <h3><FormattedMessage id="selectTemplate"/></h3>
-            <div onClick={this.templateClick} id = "1"><Icon click={this.templateClick} className={"fa fa-gift"}  id = "1"/><span onClick={this.templateClick} id = "1"><FormattedMessage id="happyA"/></span></div>               
-            <div onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2"><FormattedMessage id="happyBD"/></span></div>
-            <div onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3"><FormattedMessage id="marryChristmas"/></span></div>
+            <div className="event" style = {{animation: this.state.animation1}} onClick={this.templateClick} id = "1"><Icon click={this.templateClick} className={"fa fa-gift"}  id = "1"/><span onClick={this.templateClick} id = "1"><FormattedMessage id="happyA"/></span></div>               
+            <div className="event" style = {{animation: this.state.animation2}} onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2"><FormattedMessage id="happyBD"/></span></div>
+            <div className="event" style = {{animation: this.state.animation3}} onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3"><FormattedMessage id="marryChristmas"/></span></div>
             <Div className = "warningText" display = {this.state.warningDisplay} name = {this.state.warningText}/>
             <Button className={"CB1 popupBtn"} click={this.sendEmail} name = {<FormattedMessage id="sendEmail"/>}/>
             <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>

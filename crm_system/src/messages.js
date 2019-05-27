@@ -3,7 +3,7 @@ export default {
         "contacts":"Contacts",
         "button.delete":"Delete Selected",
         "addToMailList":"Add to Mail List",
-        "addContact": "Add to Contact",
+        "addContact": "Add Contact",
         "sendEmail": "Send Email",
         "createMailingList":"Create Mailing List",
         "mailinglist": "Mailing List",
@@ -16,7 +16,7 @@ export default {
         "edit":"Edit",
         "editContact":"Edit contact",
         "delete":"Delete",
-        "selectTemplate":"Select Template",
+        "selectTemplate":"Send Email",
         "cancel":"Cancel",
         "save":"Save",
         "mailListName":"Name",
@@ -28,14 +28,15 @@ export default {
         "marryChristmas":"Merry Christmas!",
         "messageEdit":"Please Enter Valid Text",
         "emailSent": "Email has been sent",
-        "validEmail":"Please Enter Valid Email Address"
+        "validEmail":"Please Enter Valid Email Address",
+        "template":"Please select template"
     },
     am: {
         "contacts":"Կոնտակտներ",
         "button.delete":"Ջնջել նշվածը",
         "addToMailList":"Ավելացնել ցանկում",
         "addContact": "Ավելացնել կոնտակտ",
-        "sendEmail": "Ուղղարկել նամակ",
+        "sendEmail": "Ուղղարկել",
         "createMailingList":"Ստեղծել ցուցակ",
         "mailinglist": "Փոստերի ցանկ",
         "select": "Ընտրել",
@@ -47,7 +48,7 @@ export default {
         "edit":"Խմբագրել",        
         "editContact":"Խմբագրել կոնտակտը",
         "delete":"Ջնջել",
-        "selectTemplate":"Ընտրել տեսակը",
+        "selectTemplate":"Ուղարկել Էլ-նամակ",
         "cancel":"Չեղարկել",
         "save":"Պահպանել",
         "mailListName":"Անվանումը",
@@ -57,10 +58,9 @@ export default {
         "happyA":"Ուրախ տարեդարձ",
         "happyBD":"Ծնունդդ շնորհավոր",
         "marryChristmas":"Շնորհավոր Սուրբ Ծնունդ",
-        "messageEdit":"Խնդրում ենք մուտքագրել վավեր տեքստ",
+        "messageEdit":"Մուտքագրեք վավեր տեքստ",
         "emailSent": "էլ-նամակ ուղարկվել է",
-        "validEmail":"Մուտքագրեք վավեր էլ-փոստ"
-
-
+        "validEmail":"Մուտքագրեք վավեր էլ-փոստ",
+        "template":"Ընտրեք իրադարձությունը"
     }
 }

@@ -42,7 +42,10 @@ class TableContent extends Component{
         delivery: "",
         overStatus: "none",
         warningText: "",
-        statusPopup:"none"
+        statusPopup:"none",        
+        animation1: "none",
+        animation2: "none",
+        animation3: "none",
     };
     //Closing popup
     close = () => {
@@ -72,7 +75,7 @@ class TableContent extends Component{
           this.setState({newList: "none"})
         }
         if (this.state.statusPopup === "block") {
-          this.setState({statusPopup: "none"})
+          this.setState({statusPopup:"none", template: "", warningDisplay: "none", warningText: "", animation1: "none", animation2: "none", animation3: "none"}) 
         }
     }
     //Create contact popup
@@ -88,9 +91,21 @@ class TableContent extends Component{
   }
 
     //get template id during click
-  templateClick = (e) => {
-    this.setState({templateId: e.target.id})
-  }
+    templateClick = (e) => {
+      switch (e.target.id) {
+        case "1":
+          this.setState({template: e.target.id, animation1: "glow 1.4s infinite alternate", animation2: "none", animation3: "none", warningDisplay: "none", warningText: ""})
+          break;
+        case "2":
+          this.setState({template: e.target.id, animation2: "glow 1.4s infinite alternate", animation1: "none", animation3: "none", warningDisplay: "none", warningText: ""})
+          break;
+        case "3":
+          this.setState({template: e.target.id, animation3: "glow 1.4s infinite alternate", animation1: "none", animation2: "none", warningDisplay: "none", warningText: ""})
+          break;
+        default:
+          break
+      }
+    }
 
 //create new contact
   createMailList = () => {
@@ -110,6 +125,7 @@ class TableContent extends Component{
     // get mail list Id
     getListId = (e) => {
       this.setState({listId: e.target.id,listName:e.target.text, disabled: !this.state.disabled})
+      console.log(e.target.key)
     }
 
     //add to existing mail list
@@ -340,16 +356,6 @@ callback = (e) => {
             <Fragment>
               {this.state.loading && <Overlay />}
               <div className="btnBox">{/* Choose template */}
-            <div className="popup" style={{display:this.state.statusPopup}}>
-              <div className="form">
-                <h3><FormattedMessage id="selectTemplate"/></h3>
-                <div onClick={this.templateClick} id = "1"><Icon click={this.templateClick} className={"fa fa-gift"}  id = "1"/><span onClick={this.templateClick} id = "1"><FormattedMessage id="happyA"/></span></div>               
-                <div onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2"><FormattedMessage id="happyBD"/></span></div>
-                <div onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3"><FormattedMessage id="marryChristmas"/></span></div>
-                <Button className={"CB1 popupBtn"} click={this.sendEmail} name = {<FormattedMessage id="sendEmail"/>}/>
-                <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
-              </div>
-                </div>
                     <Button  name={<FormattedMessage id="selectTemplate"/>} className= "CB1" click ={this.selectTemplate} disabled={this.state.disabled}></Button>
                     <Button name={<FormattedMessage id="addToMailList"/>} click = {this.addtoMailListPopup} className= "CB1" disabled={this.state.disabled}></Button>
                     <Button  name={<FormattedMessage id="button.delete"/>} id={"delete"}  className= "CB1" click={this.deleteRow} disabled={this.state.disabled}></Button>
@@ -405,9 +411,10 @@ callback = (e) => {
         <Close callback = {this.close} />
         <h2><FormattedMessage id="addToMailList"/></h2>      
         <div className="inp_edit">
-        {this.state.lists.map((v,i) =>
-        <Div key={i} name = {v.EmailListName}  className = {"existing_mailList_name"} listId = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
-        )}
+        {this.state.lists.map((v,i) => {
+        {this.state[`animation${i}`] = "none"}
+        return <Div key={i} name = {v.EmailListName} className = {"existing_mailList_name"} listId = {v.EmailListID} click = {this.getListId} text = {v.EmailListName}></Div>
+        })}
         <Button className= {"CB1 popupBtn"} disabled = {!this.state.disabled} click = {this.updateToMailList} name = {<FormattedMessage id="addToMailList"/>}/>
         </div>  
         </div>
@@ -432,8 +439,8 @@ callback = (e) => {
      <div className="popup" style={{display:this.state.status2}}>
       <div className="form">
         <h3>{this.state.text} </h3>
-        <Button className={"CB1 popupBtn"} click={this.state.func} name = {<FormattedMessage id="delete"/>}/>
-        <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
+        <Button className={"CB1 popupBtn1"} click={this.state.func} name = {<FormattedMessage id="delete"/>}/>
+        <Button className={"CB1 popupBtn1"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
       </div>
       </div>
 
@@ -445,7 +452,19 @@ callback = (e) => {
       {/* {add new contact} */}
     <div className="popup" style={{display:this.state.status}}>
       <Form  close = {this.close} click = {this.addNewContact} callback={this.callback} warningDisplay = {this.state.warningDisplay} warningText = {this.state.warningText} name = {this.state.name} company = {this.state.company} emailaddress = {this.state.email} country = {this.state.country} position = {this.state.position}/>
-      </div>           
+      </div>
+      {/* Select template  */}
+      <div className="popup" style={{display:this.state.statusPopup}}>
+          <div className="form">
+            <h3><FormattedMessage id="selectTemplate"/></h3>
+            <div className="event" style = {{animation: this.state.animation1}} onClick={this.templateClick} id = "1"><Icon click={this.templateClick} className={"fa fa-gift"}  id = "1"/><span onClick={this.templateClick} id = "1"><FormattedMessage id="happyA"/></span></div>               
+            <div className="event" style = {{animation: this.state.animation2}} onClick={this.templateClick} id = "2"><Icon click={this.templateClick} className={"fa fa-birthday-cake"}  id = "2"/><span onClick={this.templateClick} id = "2"><FormattedMessage id="happyBD"/></span></div>
+            <div className="event" style = {{animation: this.state.animation3}} onClick={this.templateClick} id = "3"><Icon click={this.templateClick} className={"fa fa-tree"}  id = "3"/><span onClick={this.templateClick} id = "3"><FormattedMessage id="marryChristmas"/></span></div>
+            <Div className = "warningText" display = {this.state.warningDisplay} name = {this.state.warningText}/>
+            <Button className={"CB1 popupBtn1"} click={this.sendEmail} name = {<FormattedMessage id="sendEmail"/>}/>
+            <Button className={"CB1 popupBtn1"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
+          </div>
+      </div>
   </Fragment>
         );
     }

@@ -27,10 +27,18 @@ class Menu extends Component{
   render(){
     return(
       <div className="menu">
+        <div className="lang_div">
+          <Div className = "language" click = {()=>this.props.setLocale('am')} name = "Am"/>
+          <Div className = "language" click = {()=>this.props.setLocale('en')} name = "Eng"/>
+        </div>
+        <div>
         <Button disabled={this.state.contactButtonStatus} name = {<Link className={this.state.contactLinkStatus} to="/Contacts"><FormattedMessage id="contacts"/></Link>}  className= {"CB1 menu_btn" }/>          
         <Button disabled={this.state.mailButtonStatus} name = {<Link className={this.state.mailLinkStatus} to="Mailinglist"><FormattedMessage id="mailinglist"/></Link>}  className= {"CB1 menu_btn"} />   
-        <Div className = "language" click = {()=>this.props.setLocale('am')} name = "Am"/>
-        <Div className = "language" click = {()=>this.props.setLocale('en')} name = "Eng"/>
+
+        </div>
+        
+        {/* <Div className = "language" click = {()=>this.props.setLocale('am')} name = "Am"/>
+        <Div className = "language" click = {()=>this.props.setLocale('en')} name = "Eng"/> */}
       </div>
     );
   }

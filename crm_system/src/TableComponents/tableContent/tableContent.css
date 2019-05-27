@@ -147,6 +147,17 @@ select {
       color: red;
   }
 span {
-
     pointer-events: none;
 }
+.event{
+    padding: 5px;
+    cursor: pointer;
+}
+.event i {
+    margin-right:10px;
+}
+
+@keyframes glow {
+    from {color:  rgb(184, 178, 178);}
+    to {color: rgb(214, 212, 98);}
+ }

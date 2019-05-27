@@ -146,6 +146,7 @@ select {
   .delivery {
       color: red;
   }
-  span {
+
+span {
     pointer-events: none;
 }

@@ -50,7 +50,16 @@ class TableContent extends Component{
     //Closing popup
     close = () => {
         if(this.state.status === "block"){
-          this.setState({status:"none"})
+          this.setState({
+            status:"none",
+            warningDisplay: "none",
+            warningText: "",
+            name: "",
+            company: "",
+            country: "",
+            position: "",
+            email: "",
+          })
         }
         if(this.state.status1 === "block"){
           this.setState({
@@ -72,10 +81,22 @@ class TableContent extends Component{
           this.setState({mailList: "none"})
         }
         if (this.state.newList === "block") {
-          this.setState({newList: "none", warningDisplay: "none", warningText: ""})
+          this.setState({
+            newList: "none",
+            warningDisplay: "none",
+            warningText: ""
+          })
         }
         if (this.state.statusPopup === "block") {
-          this.setState({statusPopup:"none", template: "", warningDisplay: "none", warningText: "", animation1: "none", animation2: "none", animation3: "none"}) 
+          this.setState({
+            statusPopup:"none",
+            template: "",
+            warningDisplay: "none",
+            warningText: "",
+            animation1: "none",
+            animation2: "none",
+            animation3: "none"
+          }) 
         }
     }
     //Create contact popup

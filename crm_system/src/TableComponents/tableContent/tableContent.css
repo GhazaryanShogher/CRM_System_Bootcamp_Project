@@ -12,9 +12,11 @@
 }
 
 .header_btn1{
-    width: 6%;
-    /* border-right: 1px solid white; */
+    width: 5%;
     text-align: center;
+    /* border-right: 1px solid white; */
+    
+    
 }
 .btnBox {    
     display: flex;
@@ -74,8 +76,8 @@ div {
     box-shadow:  0px -1px 31px -6px rgba(245, 242, 242, 0.75);
 }
 .checkbox {
-    margin: auto;
-    width: 5%;
+    margin: auto 0;
+    width: 4%;
     text-align: center;
 }
 .editbox{
@@ -89,7 +91,7 @@ div {
     text-align: center;
 }
 .td_style{
-    width: 16%;
+    width: 18%;
     /* text-align: center; */
     border-left: 1px solid #827575;
     overflow: hidden;

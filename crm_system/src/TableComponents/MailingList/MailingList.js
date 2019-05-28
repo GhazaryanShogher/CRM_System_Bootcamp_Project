@@ -221,8 +221,8 @@ class MailingList extends Component{
           <div className="popup" style={{display:this.state.status2}}>
             <div className="form">
               <h3>{<FormattedMessage id="deleteRow"/>}</h3>
-              <Button className={"CB1 popupBtn"} click={this.removeFromMailList} name = {<FormattedMessage id="delete"/>}/>
-              <Button className={"CB1 popupBtn"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
+              <Button className={"CB1 popupBtn1"} click={this.removeFromMailList} name = {<FormattedMessage id="delete"/>}/>
+              <Button className={"CB1 popupBtn1"} click={this.close} name = {<FormattedMessage id="cancel"/>}/>
             </div>
           </div>
         </div>
